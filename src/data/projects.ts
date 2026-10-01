@@ -13,30 +13,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "data-factory-agent",
-    title: "Data Factory Agent",
-    slug: "data-factory-agent",
+    id: "dbt-job",
+    title: "dbt Job",
+    slug: "dbt-job",
+    category: "Shipped Product",
+    tags: ["Enterprise UX", "Data Engineering", "Microsoft Fabric"],
+    summary:
+      "Bringing dbt transformations into Data Factory so data teams can build, schedule, and monitor dbt workflows in one place.",
+    role: "Product Designer",
+    timeline: "2025 - 2026",
+    thumbnail: "/images/projects/dbt-job-thumb.png",
+    href: "/projects/dbt-job",
+  },
+  {
+    id: "copilot-in-data-factory",
+    title: "Copilot in Data Factory",
+    slug: "copilot-in-data-factory",
     category: "Shipped Product",
     tags: ["AI/ML", "Enterprise UX", "Conversational Design"],
     summary:
       "An intelligent copilot agent for Azure Data Factory that diagnoses pipeline failures and optimizes configurations.",
     role: "Product Designer",
     timeline: "2025 - 2026",
-    thumbnail: "/images/projects/data-factory-agent-thumb.png",
-    href: "/projects/data-factory-agent",
-  },
-  {
-    id: "unified-fabric-copilot",
-    title: "Unified Fabric Copilot",
-    slug: "unified-fabric-copilot",
-    category: "Hackathon 2025",
-    tags: ["AI/ML", "Copilot", "Developer Experience", "Microsoft Fabric"],
-    summary:
-      "A cross-platform AI experience designed to help developers build, configure, and operate end-to-end solutions in Microsoft Fabric.",
-    role: "Senior Product Designer",
-    timeline: "2025",
-    thumbnail: "/images/projects/unified-fabric-copilot-thumb.png",
-    href: "/projects/unified-fabric-copilot",
+    thumbnail: "/images/projects/copilot-in-data-factory-thumb.png",
+    href: "/projects/copilot-in-data-factory",
   },
   {
     id: "clover-designer",

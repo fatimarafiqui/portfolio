@@ -1,4 +1,4 @@
-# Fatima Rafiqui — Portfolio (Redesign)
+# Fatima Rafiqui - Portfolio (Redesign)
 
 A redesigned personal portfolio with a new design language and visuals.
 
@@ -9,10 +9,10 @@ A redesigned personal portfolio with a new design language and visuals.
 | Page | Route | Description |
 |------|-------|-------------|
 | Home | `/` | Hero, Work showcase, About intro, Testimonials, Contact |
-| Project: Clover Designer | `/projects/clover-designer` | Shipped product — Web UX, Interaction Design |
-| Project: AR Anchor Cards | `/projects/ar-anchor-cards` | Passion project — AR, Concept, Mobile UX |
-| Project: ViLearn | `/projects/vilearn` | Startup incubator — Web UX, Visual Design, Branding |
-| Project: Equal Voice | `/projects/equal-voice` | Academic project — Voice UX, Concept |
+| Project: Clover Designer | `/projects/clover-designer` | Shipped product - Web UX, Interaction Design |
+| Project: AR Anchor Cards | `/projects/ar-anchor-cards` | Passion project - AR, Concept, Mobile UX |
+| Project: ViLearn | `/projects/vilearn` | Startup incubator - Web UX, Visual Design, Branding |
+| Project: Equal Voice | `/projects/equal-voice` | Academic project - Voice UX, Concept |
 | About | `/about` | Speaking, Writing, Personal interests |
 
 ### Folder Structure
@@ -53,11 +53,11 @@ portfolio/
 ## Content Sections (from existing site)
 
 ### Home Page Sections
-1. **Hero** — Intro headline, subtitle, CTA
-2. **Work** — Project cards grid (4 projects)
-3. **About Intro** — Short bio with link to full About
-4. **Testimonials** — Carousel/grid of quotes
-5. **Contact** — Email CTA, footer
+1. **Hero** - Intro headline, subtitle, CTA
+2. **Work** - Project cards grid (4 projects)
+3. **About Intro** - Short bio with link to full About
+4. **Testimonials** - Carousel/grid of quotes
+5. **Contact** - Email CTA, footer
 
 ### Case Study Template
 Each project page follows this structure:
