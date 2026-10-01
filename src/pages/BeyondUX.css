@@ -1,0 +1,603 @@
+/* === Beyond UX — Redesigned with Micro Animations === */
+
+/* --- Animation Base --- */
+.bux-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bux-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Hero: Editorial Split --- */
+.bux-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 75vh;
+  padding: var(--space-32) var(--space-10) var(--space-20);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  gap: var(--space-12);
+}
+
+.bux-hero-content {
+  flex: 1;
+  max-width: 580px;
+}
+
+.bux-hero-label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(122, 158, 126, 0.1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--border-radius-full);
+  margin-bottom: var(--space-6);
+}
+
+.bux-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, var(--text-5xl));
+  font-weight: var(--weight-extrabold);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--color-primary);
+}
+
+.bux-hero-accent {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-warm) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Floating cards */
+.bux-hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.bux-hero-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-primary);
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+.bux-hero-card--1 { animation-delay: 0s; }
+.bux-hero-card--2 { animation-delay: 1.3s; transform: translateX(32px); }
+.bux-hero-card--3 { animation-delay: 2.6s; transform: translateX(12px); }
+
+.bux-hero-emoji {
+  font-size: var(--text-xl);
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.bux-hero-card--2 {
+  animation: floatCard2 4s ease-in-out infinite;
+  animation-delay: 1.3s;
+}
+
+@keyframes floatCard2 {
+  0%, 100% { transform: translateX(32px) translateY(0); }
+  50% { transform: translateX(32px) translateY(-8px); }
+}
+
+.bux-hero-card--3 {
+  animation: floatCard3 4s ease-in-out infinite;
+  animation-delay: 2.6s;
+}
+
+@keyframes floatCard3 {
+  0%, 100% { transform: translateX(12px) translateY(0); }
+  50% { transform: translateX(12px) translateY(-8px); }
+}
+
+/* --- Stats Bar --- */
+.bux-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-16);
+  padding: var(--space-10) var(--space-10);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.bux-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.bux-stat-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.bux-stat-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+}
+
+/* --- Section Intro (shared) --- */
+.bux-section-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.bux-section-number--light {
+  color: var(--color-accent-light);
+}
+
+.bux-section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, var(--text-3xl));
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.025em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.bux-section-body {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* --- Speaking: Timeline --- */
+.bux-speaking {
+  padding: var(--space-24) var(--space-10);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.bux-section-intro {
+  margin-bottom: var(--space-12);
+}
+
+.bux-talks-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--color-border);
+  margin-left: var(--space-4);
+}
+
+.bux-talk {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  margin-left: calc(-1px);
+  border-left: 2px solid transparent;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.bux-talk::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.bux-talk:hover {
+  border-left-color: var(--color-accent);
+  background: var(--color-surface-alt);
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+}
+
+.bux-talk:hover::before {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-50%) scale(1.2);
+}
+
+.bux-talk:hover .bux-talk-arrow {
+  transform: translate(3px, -3px);
+  color: var(--color-primary);
+}
+
+.bux-talk-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  min-width: 40px;
+  padding-top: 2px;
+}
+
+.bux-talk-content {
+  flex: 1;
+}
+
+.bux-talk-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.bux-talk-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.bux-talk-arrow {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* --- Pull Quote --- */
+.bux-pullquote {
+  padding: var(--space-20) var(--space-10);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.bux-pullquote p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, var(--text-2xl));
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.bux-pullquote p em {
+  font-style: italic;
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+}
+
+/* --- Writing: Magazine Cards --- */
+.bux-writing {
+  padding: var(--space-24) var(--space-10);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.bux-writing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.bux-article {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-6);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bux-article::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-warm));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bux-article:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.bux-article:hover::after {
+  transform: scaleX(1);
+}
+
+.bux-article:hover .bux-article-arrow {
+  transform: translate(2px, -2px);
+}
+
+.bux-article-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.bux-article-tag {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  background: rgba(122, 158, 126, 0.1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-sm);
+}
+
+.bux-article-arrow {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+}
+
+.bux-article-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  line-height: 1.4;
+  margin-bottom: auto;
+  flex: 1;
+}
+
+.bux-article-cta {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+
+/* --- Star Wars: Dark Immersive --- */
+.bux-starwars {
+  position: relative;
+  padding: var(--space-32) var(--space-10);
+  background: var(--color-primary);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.bux-starwars-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bux-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.bux-star--1 { top: 15%; left: 20%; animation-delay: 0s; }
+.bux-star--2 { top: 30%; right: 25%; animation-delay: 0.8s; }
+.bux-star--3 { bottom: 20%; left: 35%; animation-delay: 1.6s; }
+.bux-star--4 { top: 50%; right: 15%; animation-delay: 2.2s; }
+.bux-star--5 { bottom: 35%; right: 40%; animation-delay: 0.4s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.8); }
+}
+
+.bux-starwars-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bux-starwars-content {
+  flex: 1;
+  max-width: 520px;
+  text-align: left;
+}
+
+.bux-section-number--light {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: var(--space-4);
+}
+
+.bux-starwars-bb8 {
+  flex: 0 0 340px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.bb8-artwork {
+  width: 100%;
+  height: 100%;
+}
+
+.bux-starwars-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, var(--text-4xl));
+  font-weight: var(--weight-bold);
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: var(--space-6);
+}
+
+.bux-starwars-text {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: var(--space-8);
+}
+
+.bux-starwars-quote {
+  padding: var(--space-6) var(--space-8);
+  border-left: 3px solid var(--color-accent);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+}
+
+.bux-starwars-quote p {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  font-style: italic;
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-2);
+}
+
+.bux-starwars-quote cite {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: normal;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .bux-hero {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+    padding: var(--space-24) var(--space-8) var(--space-16);
+    gap: var(--space-10);
+  }
+
+  .bux-hero-visual {
+    flex-direction: row;
+  }
+
+  .bux-hero-card--2,
+  .bux-hero-card--3 {
+    transform: none;
+  }
+
+  .bux-writing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bux-stats {
+    gap: var(--space-8);
+  }
+
+  .bux-starwars-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-10);
+  }
+
+  .bux-starwars-content {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .bux-starwars-quote {
+    border-left: none;
+    border-top: 3px solid var(--color-accent);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  }
+
+  .bux-starwars-bb8 {
+    flex: 0 0 280px;
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bux-hero {
+    padding: var(--space-20) var(--space-6) var(--space-12);
+  }
+
+  .bux-hero-visual {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bux-speaking,
+  .bux-writing {
+    padding: var(--space-16) var(--space-6);
+  }
+
+  .bux-stats {
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .bux-starwars {
+    padding: var(--space-20) var(--space-6);
+    min-height: auto;
+  }
+
+  .bux-starwars-bb8 {
+    flex: 0 0 220px;
+    width: 220px;
+    height: 220px;
+  }
+
+  .bux-talk {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .bux-talk-year {
+    min-width: auto;
+  }
+}
