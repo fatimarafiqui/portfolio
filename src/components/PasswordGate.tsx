@@ -18,7 +18,7 @@ export default function PasswordGate({ projectTitle, projectCategory, children }
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // SHA-256 would be better but for a portfolio gate, simple comparison to env var is fine
-    // The password is checked client-side — this is a deterrent, not true security
+    // The password is checked client-side - this is a deterrent, not true security
     if (password === import.meta.env.VITE_PROJECT_PASSWORD) {
       sessionStorage.setItem(STORED_KEY, 'true')
       setGranted(true)

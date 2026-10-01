@@ -78,7 +78,7 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero — Dark cinematic section */}
+      {/* Hero - Dark cinematic section */}
       <section className="hero" ref={heroRef}>
         <div className="hero-topo"></div>
         <div className="hero-aurora">

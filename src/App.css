@@ -1,5 +1,5 @@
 /* ==========================================================
-   Portfolio — Cinematic Editorial Theme
+   Portfolio - Cinematic Editorial Theme
    Inspired by Microsoft Work Trend Index 2026
    ========================================================== */
 
@@ -84,7 +84,7 @@
   overflow: hidden;
 }
 
-/* Layer 1: Mesh gradient orbs — soft floating blobs */
+/* Layer 1: Mesh gradient orbs - soft floating blobs */
 .hero::before {
   content: '';
   position: absolute;
@@ -130,7 +130,7 @@
   100% { transform: translate(4%, -4%) scale(0.98) rotate(1deg); }
 }
 
-/* Layer 2: Particle field — sparse drifting dots */
+/* Layer 2: Particle field - sparse drifting dots */
 .hero-topo {
   position: absolute;
   inset: 0;
@@ -202,7 +202,7 @@
   100% { transform: translate(0, 0); }
 }
 
-/* Aurora blobs — disabled */
+/* Aurora blobs - disabled */
 .hero-aurora {
   display: none;
 }
