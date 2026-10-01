@@ -8,6 +8,8 @@ export interface Project {
   role: string;
   timeline: string;
   thumbnail: string;
+  video?: string;
+  poster?: string;
   href: string;
 }
 
@@ -61,6 +63,8 @@ export const projects: Project[] = [
     role: "UX Research • UX Design • Interaction Design • Usability Testing",
     timeline: "June - August 2020",
     thumbnail: "/images/projects/ar-anchor-cards-thumb.png",
+    video: "/images/projects/ar-anchor-cards/card.mp4",
+    poster: "/images/projects/ar-anchor-cards/card-poster.webp",
     href: "/projects/ar-anchor-cards",
   },
 ];
