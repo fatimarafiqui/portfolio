@@ -59,32 +59,75 @@
   background-clip: text;
 }
 
-/* Floating cards */
+/* Photo panel with floating cards on top */
 .bux-hero-visual {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
   position: relative;
+  flex: 0 0 min(42%, 480px);
+  margin-right: 56px;
+  aspect-ratio: 1 / 1;
+}
+
+/* Soft ring behind the circular photo */
+.bux-hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, var(--color-accent) 0%, var(--color-accent-light) 35%, var(--color-warm) 65%, var(--color-accent) 100%);
+  opacity: 0.55;
+  filter: blur(0.5px);
+}
+
+.bux-hero-photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid var(--color-surface);
+  box-shadow: 0 30px 70px rgba(44, 62, 45, 0.22);
+  background: var(--color-surface-warm);
+}
+
+.bux-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+}
+
+.bux-hero-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(44, 62, 45, 0) 45%, rgba(44, 62, 45, 0.45) 100%),
+    linear-gradient(135deg, rgba(122, 158, 126, 0.18) 0%, rgba(200, 219, 201, 0) 60%);
 }
 
 .bux-hero-card {
+  position: absolute;
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-6);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-md);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--border-radius-full);
+  box-shadow: 0 14px 34px rgba(30, 50, 32, 0.22);
   font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   color: var(--color-primary);
+  white-space: nowrap;
+  translate: -50% -50%;
   animation: floatCard 4s ease-in-out infinite;
 }
 
-.bux-hero-card--1 { animation-delay: 0s; }
-.bux-hero-card--2 { animation-delay: 1.3s; transform: translateX(32px); }
-.bux-hero-card--3 { animation-delay: 2.6s; transform: translateX(12px); }
+.bux-hero-card--1 { top: 14.6%; left: 14.6%; animation-delay: 0s; }
+.bux-hero-card--2 { top: 50%; left: 100%; animation-delay: 1.3s; }
+.bux-hero-card--3 { top: 85.4%; left: 14.6%; animation-delay: 2.6s; }
 
 .bux-hero-emoji {
   font-size: var(--text-xl);
@@ -93,26 +136,6 @@
 @keyframes floatCard {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
-}
-
-.bux-hero-card--2 {
-  animation: floatCard2 4s ease-in-out infinite;
-  animation-delay: 1.3s;
-}
-
-@keyframes floatCard2 {
-  0%, 100% { transform: translateX(32px) translateY(0); }
-  50% { transform: translateX(32px) translateY(-8px); }
-}
-
-.bux-hero-card--3 {
-  animation: floatCard3 4s ease-in-out infinite;
-  animation-delay: 2.6s;
-}
-
-@keyframes floatCard3 {
-  0%, 100% { transform: translateX(12px) translateY(0); }
-  50% { transform: translateX(12px) translateY(-8px); }
 }
 
 /* --- Stats Bar --- */
@@ -548,12 +571,9 @@
   }
 
   .bux-hero-visual {
-    flex-direction: row;
-  }
-
-  .bux-hero-card--2,
-  .bux-hero-card--3 {
-    transform: none;
+    flex: none;
+    width: min(68%, 340px);
+    margin-right: 0;
   }
 
   .bux-writing-grid {
@@ -593,10 +613,14 @@
     padding: var(--space-20) var(--space-6) var(--space-12);
   }
 
-  .bux-hero-visual {
-    flex-direction: column;
-    align-items: center;
+  .bux-hero-card {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+    font-size: var(--text-xs);
   }
+
+  .bux-hero-card .bux-hero-emoji { font-size: var(--text-base); }
+
 
   .bux-speaking,
   .bux-writing {
@@ -623,4 +647,8 @@
   .bux-talks-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bux-hero-card { animation: none; }
 }
