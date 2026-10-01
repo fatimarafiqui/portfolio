@@ -8,8 +8,12 @@ export interface Project {
   role: string;
   timeline: string;
   thumbnail: string;
-  video?: string;
-  poster?: string;
+  image?: string;
+  imageBg?: string;
+  logo?: string;
+  imagePosition?: string;
+  custom?: "copilot" | "dbt";
+  imageFit?: "cover" | "contain";
   href: string;
 }
 
@@ -25,6 +29,7 @@ export const projects: Project[] = [
     role: "Product Designer",
     timeline: "2025 - 2026",
     thumbnail: "/images/projects/dbt-job-thumb.png",
+    custom: "dbt",
     href: "/projects/dbt-job",
   },
   {
@@ -38,6 +43,7 @@ export const projects: Project[] = [
     role: "Product Designer",
     timeline: "2025 - 2026",
     thumbnail: "/images/projects/copilot-in-data-factory-thumb.png",
+    custom: "copilot",
     href: "/projects/copilot-in-data-factory",
   },
   {
@@ -50,6 +56,9 @@ export const projects: Project[] = [
     role: "Product Designer",
     timeline: "",
     thumbnail: "/images/projects/clover-designer-thumb.png",
+    image: "/images/projects/clover-designer/card.webp",
+    imageBg: "#f1f2f5",
+
     href: "/projects/clover-designer",
   },
   {
@@ -63,8 +72,9 @@ export const projects: Project[] = [
     role: "UX Research • UX Design • Interaction Design • Usability Testing",
     timeline: "June - August 2020",
     thumbnail: "/images/projects/ar-anchor-cards-thumb.png",
-    video: "/images/projects/ar-anchor-cards/card.mp4",
-    poster: "/images/projects/ar-anchor-cards/card-poster.webp",
+    image: "/images/projects/ar-anchor-cards/card.webp",
+    imageBg: "#ecf8ff",
+    logo: "/images/projects/ar-anchor-cards/google.svg",
     href: "/projects/ar-anchor-cards",
   },
 ];
