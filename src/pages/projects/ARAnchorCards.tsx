@@ -7,10 +7,10 @@ const DECK =
   'https://docs.google.com/viewer?url=https://github.com/fatimarafiqui/Portfolio-Assets/raw/main/AR-Anchor/AR%20Anchor%20Cards-compressed.pdf'
 
 const methods = [
-  { img: 'method-product-evaluation.png', title: 'Product Evaluation', note: '4 applications' },
-  { img: 'method-interviews.png', title: 'User Interviews', note: '6 sessions' },
-  { img: 'method-survey.png', title: 'Survey', note: '52 responses' },
-  { img: 'method-desk-research.png', title: 'Desk Research', note: 'Multiple sources' },
+  { img: 'method-product-evaluation.webp', title: 'Product Evaluation', note: '4 applications' },
+  { img: 'method-interviews.webp', title: 'User Interviews', note: '6 sessions' },
+  { img: 'method-survey.webp', title: 'Survey', note: '52 responses' },
+  { img: 'method-desk-research.webp', title: 'Desk Research', note: 'Multiple sources' },
 ]
 
 const insights = [
@@ -45,10 +45,10 @@ const hmw = [
 ]
 
 const principles = [
-  { img: 'principle-preparedness.png', title: 'Preparedness' },
-  { img: 'principle-reliability.png', title: 'Reliability' },
-  { img: 'principle-familiarity.png', title: 'Familiarity' },
-  { img: 'principle-delightful.png', title: 'Delightful' },
+  { img: 'principle-preparedness.webp', title: 'Preparedness' },
+  { img: 'principle-reliability.webp', title: 'Reliability' },
+  { img: 'principle-familiarity.webp', title: 'Familiarity' },
+  { img: 'principle-delightful.webp', title: 'Delightful' },
 ]
 
 const ideas = [
@@ -100,7 +100,7 @@ export default function ARAnchorCards() {
           onboarding experience of newcomers in a city.
         </p>
         <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
-        <Img file="hero.png" alt="AR Anchor Cards hero" className="ar-hero-img" />
+        <Img file="hero.webp" alt="AR Anchor Cards hero" className="ar-hero-img" />
       </header>
 
       {/* Overview */}
@@ -188,7 +188,7 @@ export default function ARAnchorCards() {
               deeper into the issue.
             </p>
           </div>
-          <Img file="bg-ar.png" alt="A new settler navigating the New York subway" />
+          <Img file="bg-ar.webp" alt="A new settler navigating the New York subway" />
         </div>
       </section>
 
@@ -234,7 +234,7 @@ export default function ARAnchorCards() {
           We started by designing Maps for smart watches, but through research we realized we were not focusing on
           the right problem. We were trying to solve for route delays.
         </p>
-        <Img file="affinity-ar.png" alt="Affinity map from research synthesis" />
+        <Img file="affinity-ar.webp" alt="Affinity map from research synthesis" />
         <div className="ar-grid ar-grid--3 ar-mt">
           {dead.map((d) => (
             <div key={d.title} className="ar-dead">
@@ -276,7 +276,7 @@ export default function ARAnchorCards() {
         <span className="ar-kicker ar-mt">Persona</span>
         <h2 className="ar-h2">Meet the user.</h2>
         <div className="ar-split">
-          <Img file="bilal.png" alt="Persona: Bilal Kareem" />
+          <Img file="bilal.webp" alt="Persona: Bilal Kareem" />
           <div>
             <h3 className="ar-h3">Bilal Kareem</h3>
             <p><em>Inexperienced, cautious, excited, overwhelmed</em></p>
@@ -293,7 +293,7 @@ export default function ARAnchorCards() {
 
         <span className="ar-kicker ar-mt">User Journey</span>
         <h2 className="ar-h2">A look at his daily commute</h2>
-        <Img file="userjourney.png" alt="Bilal's daily commute user journey" />
+        <Img file="userjourney.webp" alt="Bilal's daily commute user journey" />
       </section>
 
       {/* Principles */}
@@ -343,7 +343,7 @@ export default function ARAnchorCards() {
         <h2 className="ar-h2">Hi-fidelity Prototypes</h2>
 
         <h3 className="ar-h3 ar-mt">Concept 1: Subway Micro-navigation</h3>
-        <Img file="subway-cards.png" alt="Subway navigation cards" />
+        <Img file="subway-cards.webp" alt="Subway navigation cards" />
         <div className="ar-split">
           <div>
             <h4 className="ar-h4">Subway Navigation Cards</h4>
@@ -352,7 +352,7 @@ export default function ARAnchorCards() {
               the information a user might need to make a decision at that point in the journey.
             </p>
           </div>
-          <Img file="subway-cards-detail.png" alt="Subway navigation card detail" />
+          <Img file="subway-cards-detail.webp" alt="Subway navigation card detail" />
         </div>
         <div className="ar-split ar-split--flip">
           <div>
@@ -363,11 +363,11 @@ export default function ARAnchorCards() {
               based on crowdsourced data.
             </p>
           </div>
-          <Img file="subway-design-decision.png" alt="Subway card design decision" />
+          <Img file="subway-design-decision.webp" alt="Subway card design decision" />
         </div>
 
         <h3 className="ar-h3 ar-mt">Concept 2: Personalized AR Anchors</h3>
-        <Img file="anchors-concept.png" alt="Personalized AR anchors" />
+        <Img file="anchors-concept.webp" alt="Personalized AR anchors" />
         <div className="ar-split">
           <div>
             <h4 className="ar-h4">Design Decisions</h4>
@@ -377,7 +377,7 @@ export default function ARAnchorCards() {
               travelling to the right place.
             </p>
           </div>
-          <Img file="anchors-design-decision.png" alt="Anchor card design decision" />
+          <Img file="anchors-design-decision.webp" alt="Anchor card design decision" />
         </div>
         <div className="ar-split ar-split--flip">
           <div>
@@ -387,7 +387,7 @@ export default function ARAnchorCards() {
               points left behind by the creator.
             </p>
           </div>
-          <Img file="anchors-map.png" alt="Anchor flags on the map" />
+          <Img file="anchors-map.webp" alt="Anchor flags on the map" />
         </div>
 
         <h3 className="ar-h3 ar-mt">Concept 3: AR Memories</h3>
@@ -397,7 +397,7 @@ export default function ARAnchorCards() {
             record his experiences of visiting a new place on the map. When he visits again, he can relive the
             experience by comparing old photos with the real location.
           </p>
-          <Img file="memories-concept.png" alt="AR memories concept" />
+          <Img file="memories-concept.webp" alt="AR memories concept" />
         </div>
       </section>
 

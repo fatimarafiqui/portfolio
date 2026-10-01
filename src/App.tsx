@@ -97,7 +97,7 @@ function App() {
             </div>
             <div className="hero-image-wrapper reveal reveal-scale delay-2">
               <img
-                src="/images/hero/fatima-hero.png"
+                src="/images/hero/fatima-hero.webp"
                 alt="Fatima Rafiqui"
                 className="hero-image"
               />
@@ -163,7 +163,7 @@ function App() {
           </div>
           <div className="about-image-wrapper reveal reveal-scale delay-2">
             <img
-              src="/images/about/about.jpg"
+              src="/images/about/about.webp"
               alt="Fatima speaking at a conference"
               className="about-image"
             />
