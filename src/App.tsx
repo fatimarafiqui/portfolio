@@ -120,8 +120,50 @@ function App() {
         <div className="projects-grid">
           {projects.map((project, i) => (
             <Link to={project.href} className={`project-card reveal reveal-up delay-${i + 1}`} key={project.id}>
-              <div className="project-card-image">
-                <span className="project-card-number">0{i + 1}</span>
+              <div
+                className={`project-card-image${project.imageFit === 'contain' ? ' project-card-image--contain' : ''}`}
+                style={project.imageBg ? { background: project.imageBg } : undefined}
+              >
+                {project.custom === 'copilot' && (
+                  <div className="thumb-copilot" aria-hidden="true">
+                    <span className="thumb-bubble thumb-bubble--q">
+                      <i className="skel skel--long" />
+                      <i className="skel skel--short" />
+                    </span>
+                    <img className="thumb-copilot-logo" src="/images/projects/copilot-in-data-factory/logo.webp" alt="" />
+                    <span className="thumb-bubble thumb-bubble--a">
+                      <i className="skel skel--long" />
+                      <i className="skel skel--med" />
+                      <i className="skel skel--short" />
+                    </span>
+                  </div>
+                )}
+                {project.custom === 'dbt' && (
+                  <div className="thumb-dbt" aria-hidden="true">
+                    <div className="thumb-dbt-laptop">
+                      <div className="thumb-dbt-lid">
+                        <img className="thumb-dbt-screen" src="/images/projects/dbt-job/screen.webp" alt="" />
+                      </div>
+                      <div className="thumb-dbt-base" />
+                    </div>
+                    <div className="thumb-dbt-logos">
+                      <img src="/images/projects/dbt-job/dbt.webp" alt="" />
+                      <span>+</span>
+                      <img src="/images/projects/dbt-job/fabric.webp" alt="" />
+                    </div>
+                  </div>
+                )}
+                {project.image && (
+                  <img
+                    className="project-card-media"
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
+                    loading="lazy"
+                  />
+                )}
+                {project.logo && <img className="project-card-logo" src={project.logo} alt="" />}
+                {!project.image && !project.custom && <span className="project-card-number">0{i + 1}</span>}
               </div>
               <div className="project-card-content">
                 <span className="project-card-category">{project.category}</span>
