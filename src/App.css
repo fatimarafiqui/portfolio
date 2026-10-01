@@ -404,7 +404,7 @@
 
 .project-card-image {
   width: 100%;
-  height: 240px;
+  aspect-ratio: 611 / 540;
   background: linear-gradient(160deg, var(--color-surface-warm) 0%, var(--color-accent-light) 100%);
   display: flex;
   align-items: flex-end;
@@ -413,7 +413,30 @@
   transition: transform var(--transition-slow);
 }
 
+.project-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.project-card-image--contain .project-card-media {
+  inset: var(--space-5);
+  width: calc(100% - 2 * var(--space-5));
+  height: calc(100% - 2 * var(--space-5));
+  object-fit: contain;
+}
+
 .project-card-number {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-heading);
   font-size: var(--text-4xl);
   font-weight: var(--weight-extrabold);
@@ -854,4 +877,177 @@
   .about-content {
     max-width: 100%;
   }
+}
+
+/* Custom thumbnail: Copilot in Data Factory */
+.project-card-image:has(.thumb-copilot) {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(79, 195, 247, 0.38) 0%, transparent 46%),
+    radial-gradient(circle at 85% 78%, rgba(244, 114, 182, 0.34) 0%, transparent 48%),
+    radial-gradient(circle at 78% 18%, rgba(167, 139, 250, 0.30) 0%, transparent 42%),
+    linear-gradient(160deg, #f6f7fb 0%, #eef0f8 100%);
+}
+
+.thumb-copilot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-copilot-logo {
+  width: 34%;
+  height: auto;
+  filter: drop-shadow(0 14px 28px rgba(80, 70, 160, 0.28));
+}
+
+.thumb-bubble {
+  position: absolute;
+  max-width: 52%;
+  padding: 10px 16px;
+  font-family: var(--font-body, inherit);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.3;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(60, 60, 110, 0.12);
+}
+
+.thumb-bubble--q {
+  top: 12%;
+  left: 7%;
+  color: var(--color-primary);
+  background: #ffffff;
+  border-bottom-left-radius: 6px;
+}
+
+.thumb-bubble--a {
+  bottom: 12%;
+  right: 7%;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f80ed 0%, #8b5cf6 100%);
+  border-bottom-right-radius: 6px;
+}
+
+/* Custom thumbnail: dbt Job (product screenshot on a laptop, with the dbt and Fabric logos) */
+.project-card-image:has(.thumb-dbt) {
+  background: #f1f2f5;
+}
+
+.thumb-dbt {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.thumb-dbt-laptop {
+  position: absolute;
+  left: 22%;
+  top: 27%;
+  width: 92%;
+}
+
+.thumb-dbt-lid {
+  background: #2f3347;
+  padding: 2.4% 2.4% 3.2%;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 24px 50px rgba(40, 46, 80, 0.18);
+}
+
+.thumb-dbt-screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.thumb-dbt-base {
+  position: relative;
+  width: 112%;
+  left: -6%;
+  height: 14px;
+  background: linear-gradient(180deg, #d9dce6 0%, #b9bdcc 100%);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 14px 24px rgba(40, 46, 80, 0.16);
+}
+
+.thumb-dbt-base::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 16%;
+  height: 5px;
+  transform: translateX(-50%);
+  background: #a3a8ba;
+  border-radius: 0 0 8px 8px;
+}
+
+.thumb-dbt-logos {
+  position: absolute;
+  top: 9%;
+  left: 7%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.thumb-dbt-logos img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.thumb-dbt-logos span {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1;
+  color: #8a8fa3;
+}
+
+/* Skeleton ("lazy load") lines inside the Copilot thumbnail chat bubbles */
+.thumb-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 38%;
+  padding: 14px 16px;
+}
+
+.skel {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(120, 130, 170, 0.22) 0%, rgba(120, 130, 170, 0.42) 50%, rgba(120, 130, 170, 0.22) 100%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.8s ease-in-out infinite;
+}
+
+.skel--long { width: 100%; }
+.skel--med { width: 80%; }
+.skel--short { width: 55%; }
+
+.thumb-bubble--a .skel {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.4) 100%);
+  background-size: 200% 100%;
+}
+
+@keyframes skel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel { animation: none; }
+}
+
+.project-card-logo {
+  position: absolute;
+  top: 8%;
+  left: 7%;
+  z-index: 1;
+  height: 44px;
+  width: auto;
+  filter: drop-shadow(0 4px 10px rgba(30, 60, 110, 0.18));
 }
