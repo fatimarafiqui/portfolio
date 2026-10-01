@@ -121,6 +121,19 @@ function App() {
           {projects.map((project, i) => (
             <Link to={project.href} className={`project-card reveal reveal-up delay-${i + 1}`} key={project.id}>
               <div className="project-card-image">
+                {project.video && (
+                  <video
+                    className="project-card-media"
+                    src={project.video}
+                    poster={project.poster}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-hidden="true"
+                  />
+                )}
                 <span className="project-card-number">0{i + 1}</span>
               </div>
               <div className="project-card-content">
