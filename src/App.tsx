@@ -1,11 +1,106 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from './data/projects'
 import { testimonials } from './data/testimonials'
-import { bio } from './data/about'
+import { aboutSummary, aboutPhotos, bio } from './data/about'
+import { useNavTheme } from './hooks/useNavTheme'
 import './App.css'
 
+const initials = (name: string) =>
+  name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase()
+
+const renderRich = (text: string) =>
+  text.split(/(==[^=]+==|\*\*[^*]+\*\*)/).map((part, i) => {
+    if (part.startsWith('==')) return <mark key={i} className="about-mark">{part.slice(2, -2)}</mark>
+    if (part.startsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>
+    return part
+  })
+
+// Leaf-spine network: two spine switches linked to four leaf switches (the fabric Clover Designer lays out).
+const cloverSpines = [{ x: 85, y: 18 }, { x: 175, y: 18 }]
+const cloverLeaves = [{ x: 34, y: 94 }, { x: 110, y: 94 }, { x: 150, y: 94 }, { x: 226, y: 94 }]
+
+function CloverNodes() {
+  return (
+    <svg className="thumb-clover" viewBox="0 0 260 116" aria-hidden="true">
+      {cloverSpines.map((spine, si) =>
+        cloverLeaves.map((leaf, li) => (
+          <line
+            key={`${si}-${li}`}
+            className="clover-link"
+            style={{ animationDelay: `${((si * 4 + li) * 0.35).toFixed(2)}s` }}
+            x1={spine.x}
+            y1={spine.y}
+            x2={leaf.x}
+            y2={leaf.y}
+          />
+        ))
+      )}
+      {[...cloverSpines, ...cloverLeaves].map((node, i) => (
+        <g key={i} className="clover-node" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s` }}>
+          <circle className="clover-pulse" cx={node.x} cy={node.y} r="9" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s` }} />
+          <rect className="clover-switch" x={node.x - 13} y={node.y - 7} width="26" height="14" rx="3.5" />
+          <circle className="clover-led" cx={node.x - 6} cy={node.y} r="1.8" />
+          <circle className="clover-led" cx={node.x} cy={node.y} r="1.8" />
+          <circle className="clover-led" cx={node.x + 6} cy={node.y} r="1.8" />
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+const mapsDistances = ['200 ft', '150 ft', '100 ft', '50 ft', 'Now']
+
+// Google Maps-style turn banner on the AR Anchor Cards thumbnail: the distance ticks down toward the turn.
+function MapsNav() {
+  const [step, setStep] = useState(0)
+  useEffect(() => {
+    const id = window.setInterval(() => setStep((s) => (s + 1) % mapsDistances.length), 1100)
+    return () => window.clearInterval(id)
+  }, [])
+  return (
+    <div className="thumb-maps" aria-hidden="true">
+      <span className="thumb-maps-badge">
+        <svg viewBox="0 0 24 24" className="thumb-maps-arrow">
+          <path d="M9 5 4 10l5 5M4 10h9a5 5 0 0 1 5 5v4" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </span>
+      <span className="thumb-maps-text">
+        <strong>Turn left</strong>
+        <span className={step === mapsDistances.length - 1 ? 'is-now' : ''}>{mapsDistances[step]}</span>
+      </span>
+      <span className="thumb-maps-dots">
+        <i /><i /><i />
+      </span>
+    </div>
+  )
+}
+
+const dbtCommands = ['dbt run', 'dbt build', 'dbt test']
+
+// Terminal chip on the dbt Job thumbnail: types each command in turn, then loops.
+function DbtTerminal() {
+  const [index, setIndex] = useState(0)
+  const command = dbtCommands[index]
+  return (
+    <div className="thumb-dbt-term">
+      <span className="thumb-dbt-prompt">$</span>
+      <span
+        className="thumb-dbt-typed"
+        data-chars={command.length}
+        style={{ '--chars': command.length } as React.CSSProperties}
+        onAnimationIteration={() => setIndex((i) => (i + 1) % dbtCommands.length)}
+      >
+        {command}
+      </span>
+      <i className="thumb-dbt-caret" />
+      <span className="thumb-dbt-ok">✓</span>
+    </div>
+  )
+}
+
 function App() {
+  useNavTheme()
   const observerRef = useRef<IntersectionObserver | null>(null)
   const heroRef = useRef<HTMLElement>(null)
   const blobRef = useRef<HTMLDivElement>(null)
@@ -151,8 +246,11 @@ function App() {
                       <span>+</span>
                       <img src="/images/projects/dbt-job/fabric.webp" alt="" />
                     </div>
+                    <DbtTerminal />
                   </div>
                 )}
+                {project.custom === 'clover' && <CloverNodes />}
+                {project.custom === 'maps' && <MapsNav />}
                 {project.image && (
                   <img
                     className="project-card-media"
@@ -198,17 +296,23 @@ function App() {
           <h2 className="section-title">The human behind pixels</h2>
         </div>
         <div className="about-layout">
-          <div className="about-content">
-            <p className="about-text reveal reveal-up delay-1">{bio.extended}</p>
-            <p className="about-text reveal reveal-up delay-2">{bio.background}</p>
-            <p className="about-text reveal reveal-up delay-3">{bio.personal}</p>
+          <div className="about-stack reveal reveal-scale delay-1">
+            {aboutPhotos.map((photo, i) => (
+              <figure key={photo.src} className={`about-polaroid about-polaroid--${i + 1}`}>
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  style={{ objectPosition: photo.position }}
+                />
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
+            ))}
           </div>
-          <div className="about-image-wrapper reveal reveal-scale delay-2">
-            <img
-              src="/images/about/about.jpg"
-              alt="Fatima speaking at a conference"
-              className="about-image"
-            />
+          <div className="about-content">
+            {aboutSummary.paragraphs.map((text, i) => (
+              <p key={i} className={`about-line reveal reveal-up delay-${i + 1}`}>{renderRich(text)}</p>
+            ))}
+            <p className="about-line reveal reveal-up delay-3">{aboutSummary.personal}</p>
           </div>
         </div>
       </section>
@@ -219,20 +323,46 @@ function App() {
           <span className="section-eyebrow">RECOMMENDATIONS</span>
           <h2 className="section-title">Their Words, Not Mine.</h2>
         </div>
-        <div className="testimonials-grid">
-          {testimonials.map((t, i) => (
-            <blockquote className={`testimonial-card reveal reveal-up delay-${i + 1}`} key={t.name}>
-              <p className="testimonial-quote">&ldquo;{t.quote}&rdquo;</p>
-              <footer className="testimonial-author">
-                <div className="testimonial-avatar"></div>
-                <div className="testimonial-info">
+        <div className="testimonials-featured">
+          {testimonials.filter((t) => t.featured).map((t, i) => (
+            <blockquote className={`quote-card quote-card--featured reveal reveal-up delay-${i + 1}`} key={t.name}>
+              <p className="quote-text">{renderRich(t.quote)}</p>
+              <footer className="quote-author">
+                <span className="quote-avatar" aria-hidden="true">
+                  {t.avatar ? <img src={t.avatar} alt="" /> : initials(t.name)}
+                </span>
+                <span className="quote-info">
                   <strong>{t.name}</strong>
-                  <span>{t.role}, {t.company}</span>
-                </div>
+                  <span>{[t.role, t.company].filter(Boolean).join(', ')}</span>
+                </span>
               </footer>
             </blockquote>
           ))}
         </div>
+        <div className="testimonials-grid">
+          {testimonials.filter((t) => !t.featured).map((t, i) => (
+            <blockquote className={`quote-card reveal reveal-up delay-${i + 1}`} key={t.name}>
+              <p className="quote-text">{renderRich(t.quote)}</p>
+              <footer className="quote-author">
+                <span className="quote-avatar" aria-hidden="true">
+                  {t.avatar ? <img src={t.avatar} alt="" /> : initials(t.name)}
+                </span>
+                <span className="quote-info">
+                  <strong>{t.name}</strong>
+                  <span>{[t.role, t.company].filter(Boolean).join(', ')}</span>
+                </span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+        <a
+          className="testimonials-link reveal reveal-up"
+          href="https://www.linkedin.com/in/fatimarafiqui/details/recommendations/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read all recommendations on LinkedIn →
+        </a>
       </section>
 
       {/* Contact Section */}

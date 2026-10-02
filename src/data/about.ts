@@ -35,3 +35,18 @@ export const writing = [
     url: "https://medium.com/iu-cewit/design-and-healthcare-a-conjunction-needed-to-combat-bias-in-medicine-49286a9674b5",
   },
 ];
+
+// Inline markup: ==highlight== and **bold**
+export const aboutSummary = {
+  paragraphs: [
+    "I'm a product designer, systems thinker, and ==builder at heart==. I started in engineering and found my home in design, where I could turn technical depth into **clarity, trust,** and usable experiences.",
+    "Today I design for **Microsoft Fabric's Data Factory** team, shaping AI-powered workflows on one of the most technical platforms in data. Along the way I've led ==high-impact product work==, contributed to ==patent-backed innovations==, published research, and spoken at global conferences.",
+  ],
+  personal: "Off duty, you'll find me chasing good coffee and coastal drives.",
+};
+
+export const aboutPhotos = [
+  { src: "/images/about/about.jpg", alt: "Fatima speaking on stage", caption: "On stage", position: "28% 30%" },
+  { src: "/images/about/hackathon.jpg", alt: "Fatima at a hackathon", caption: "Hackathon jam", position: "50% 22%" },
+  { src: "/images/about/garage.jpg", alt: "Fatima at the Makerspace", caption: "At the Makerspace", position: "45% 20%" },
+];
