@@ -1,31 +1,65 @@
 export interface Testimonial {
   name: string;
   role: string;
-  company: string;
+  company?: string;
   quote: string;
+  year?: number;
+  featured?: boolean;
   avatar?: string;
 }
 
+// Short excerpts from LinkedIn recommendations, newest first.
 export const testimonials: Testimonial[] = [
   {
-    name: "Lyuba Nesteroff",
-    role: "Product Design Lead",
-    company: "Juniper Networks",
+    name: "Dawn Ferguson",
+    avatar: "/images/testimonials/dawn.jpg",
+    role: "Senior UX Researcher",
+    company: "Microsoft",
+    year: 2025,
+    featured: true,
     quote:
-      "Fatima is adaptable and flexible when working to identify and solve problems in interactive design workflows. Her strong communication and active listening skills enable her to relate to others. While maintaining attention to details and visual aesthetics, Fatima keeps an open mind which makes her approachable and easy to work with.",
+      "Fatima excels at **clarifying complex problems** by ensuring that we start each project with a **well-defined problem statement**.",
   },
   {
-    name: "Yelena Kozlova",
-    role: "Senior UX Designer",
-    company: "Juniper Networks",
+    name: "Zaki S",
+    avatar: "/images/testimonials/zaki.jpg",
+    role: "Principal Product Designer Architect",
+    company: "Lucid Motors",
+    year: 2024,
+    featured: true,
     quote:
-      "Fatima takes initiative to support her fellow design team members. She is open to take on challenging projects, flexible and receptive to feedback, and overall dedicated to elevating her design expertise. She also takes the lead to promote the value of design in the tech industry with her writing and presentations.",
+      "A **creative and analytical mindset** that often led to **breakthroughs** where others saw dead ends.",
+  },
+  {
+    name: "Lisa Beam",
+    avatar: "/images/testimonials/lisa.jpg",
+    role: "Staff Product Designer",
+    year: 2022,
+    quote: "I was impressed by how **quickly she learned** the domain and the design library.",
+  },
+  {
+    name: "Yelena V. Kozlova",
+    avatar: "/images/testimonials/yelena.webp",
+    role: "Design",
+    company: "Cloudflare",
+    year: 2020,
+    quote:
+      "Flexible and receptive to feedback, and overall **dedicated to elevating her design expertise**.",
   },
   {
     name: "Avinash Agrawal",
-    role: "Senior Staff Engineer",
+    avatar: "/images/testimonials/avatar-default.svg",
+    role: "Engineering Leader",
     company: "Atlassian",
+    year: 2020,
+    quote: "**Full of energy** and a **go getter attitude**. She is an **asset to any team**.",
+  },
+  {
+    name: "Lyuba Nesteroff",
+    avatar: "/images/testimonials/lyuba.jpg",
+    role: "Product Design Lead",
+    company: "Juniper Networks",
     quote:
-      "Fatima is an awesome person to work with, full of energy and has a go getter attitude. She is an asset to any team. She's not afraid of a challenge, and has proven that she can drive multiple projects forward even with vague requirements.",
+      "Fatima keeps an **open mind** which makes her **approachable and easy to work with**.",
   },
 ];
