@@ -12,7 +12,7 @@ export interface Project {
   imageBg?: string;
   logo?: string;
   imagePosition?: string;
-  custom?: "copilot" | "dbt";
+  custom?: "copilot" | "dbt" | "clover" | "maps";
   imageFit?: "cover" | "contain";
   href: string;
 }
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     thumbnail: "/images/projects/clover-designer-thumb.png",
     image: "/images/projects/clover-designer/card.webp",
     imageBg: "#f1f2f5",
-
+    custom: "clover",
     href: "/projects/clover-designer",
   },
   {
@@ -75,6 +75,7 @@ export const projects: Project[] = [
     image: "/images/projects/ar-anchor-cards/card.webp",
     imageBg: "#ecf8ff",
     logo: "/images/projects/ar-anchor-cards/google.svg",
+    custom: "maps",
     href: "/projects/ar-anchor-cards",
   },
 ];

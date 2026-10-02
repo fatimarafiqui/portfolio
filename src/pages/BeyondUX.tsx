@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import BB8 from '../components/BB8'
+import { useNavTheme } from '../hooks/useNavTheme'
 import '../App.css'
 import './BeyondUX.css'
 
@@ -70,6 +71,7 @@ const stats = [
 ]
 
 function BeyondUX() {
+  useNavTheme()
   const pageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
