@@ -123,40 +123,49 @@ export default function ARAnchorCards() {
 
       {/* Hero */}
       <header className="ar-hero">
-        <span className="ar-eyebrow">Passion Project</span>
-        <img className="ar-maps-logo" src={`${IMG}/maps-logo.png`} alt="Google Maps logo" />
-        <h1 className="ar-title">AR Anchor Cards</h1>
-        <p className="ar-lede">
-          Navigation for new settlers and tourists has always been challenging, but Google Maps has been the one-stop
-          application for all. This project builds on Google Maps' existing Live View feature to simplify the
-          onboarding experience of newcomers in a city.
-        </p>
-        <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
-        <div className="ar-stage ar-stage--hero">
-          <Img file="hero.png" alt="AR Anchor Cards on two phones: subway card and AR memory polaroid" className="ar-hero-img" />
+        <div className="ar-hero-inner">
+          <div className="ar-hero-copy">
+            <span className="ar-eyebrow">Passion Project</span>
+            <img className="ar-maps-logo" src={`${IMG}/maps-logo.png`} alt="Google Maps" />
+            <h1 className="ar-title">AR Anchor Cards</h1>
+            <p className="ar-lede">
+              Navigation for new settlers and tourists has always been challenging, but Google Maps has been the
+              one-stop application for all. This project builds on Google Maps' existing Live View feature to simplify
+              the onboarding experience of newcomers in a city.
+            </p>
+            <div className="ar-hero-actions">
+              <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
+              <a className="ar-button ar-button--ghost" href="#solution">See the prototype</a>
+            </div>
+            <dl className="ar-meta">
+              <div>
+                <dt>My role</dt>
+                <dd>UX Research &bull; UX Design &bull; Interaction Design &bull; Usability Testing</dd>
+              </div>
+              <div>
+                <dt>Timeline</dt>
+                <dd>June - August 2020</dd>
+              </div>
+            </dl>
+          </div>
+          <div className="ar-hero-visual">
+            <Img file="hero.png" alt="AR Anchor Cards on two phones: a subway card and an AR memory polaroid" className="ar-hero-img" />
+          </div>
         </div>
       </header>
 
       {/* Overview */}
       <section className="ar-section ar-overview">
-        <div>
-          <h2 className="ar-h3">Project Vision</h2>
-          <p>
-            We kicked off this project by trying to simplify the subway experience in New York City, but ended up
-            designing an onboarding transportation experience for new settlers in Google Maps. The revised goal was
-            to design public transport navigation for travellers on a short visit.
-          </p>
-        </div>
-        <div>
-          <h2 className="ar-h3">My Role</h2>
-          <p>UX Research &bull; UX Design &bull; Interaction Design &bull; Usability Testing</p>
-          <h2 className="ar-h3 ar-mt-sm">Timeline</h2>
-          <p>June - August 2020</p>
-        </div>
+        <span className="ar-kicker">Project Vision</span>
+        <p className="ar-vision">
+          We kicked off this project by trying to simplify the subway experience in New York City, but ended up
+          designing an onboarding transportation experience for new settlers in Google Maps. The revised goal was
+          to design public transport navigation for travellers on a short visit.
+        </p>
       </section>
 
       {/* Solution */}
-      <section className="ar-section">
+      <section className="ar-section" id="solution">
         <span className="ar-kicker">The Solution</span>
         <h2 className="ar-h2">Final Prototype</h2>
 
