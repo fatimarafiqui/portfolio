@@ -68,14 +68,14 @@ const writing = [
 
 // Photo mosaic between the hero and the talks; `shape` sets how much of the grid a photo takes
 const collage = [
-  { file: 'group', alt: 'Hackathon participants and organizers posing together', shape: 'wide', pos: '50% 45%' },
-  { file: 'judge', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
-  { file: 'dawn', alt: 'Fatima laughing with a colleague at a conference', shape: 'one', pos: '40% 35%' },
-  { file: 'panel', alt: 'Fatima speaking on a panel', shape: 'wide', pos: '70% 35%' },
-  { file: 'talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
-  { file: 'garage', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
-  { file: 'booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
-  { file: 'booth2', alt: 'Fatima in conversation at a conference booth', shape: 'one', pos: '40% 35%' },
+  { file: 'group', label: 'Hackathon day', alt: 'Hackathon participants and organizers posing together', shape: 'wide', pos: '50% 45%' },
+  { file: 'judge', label: 'Judging', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
+  { file: 'dawn', label: 'Chatting at FabCon', alt: 'Fatima laughing with a colleague at a conference', shape: 'one', pos: '40% 35%' },
+  { file: 'panel', label: 'On a panel with Cristin', alt: 'Fatima and Cristin on a panel, Fatima gesturing as she speaks', shape: 'wide', pos: '50% 8%' },
+  { file: 'talk', label: "Designing Data's Future", alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
+  { file: 'garage', label: 'The Garage crew', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
+  { file: 'booth', label: 'Data Factory booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
+  { file: 'booth2', label: 'Booth conversations', alt: 'Fatima in conversation at a conference booth', shape: 'one', pos: '40% 35%' },
 ]
 
 const stats = [
@@ -149,13 +149,16 @@ function BeyondUX() {
         </div>
       </header>
 
-      {/* Photo mosaic: hackathons, judging, conferences */}
-      <section className="bux-mosaic bux-animate" aria-label="Photos from hackathons, judging and conferences">
-        {collage.map((c) => (
-          <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
-            <img src={`/images/beyond-ux/collage-${c.file}.jpg`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
-          </figure>
-        ))}
+      {/* Photo mosaic: what I get up to, with a glass label on every photo */}
+      <section className="bux-section bux-section--tint bux-section--tight" aria-label="Photos from hackathons, judging, panels and conferences">
+        <div className="bux-mosaic bux-animate">
+          {collage.map((c) => (
+            <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
+              <img src={`/images/beyond-ux/collage-${c.file}.jpg`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
+              <figcaption className="bux-glass">{c.label}</figcaption>
+            </figure>
+          ))}
+        </div>
       </section>
 
       {/* Speaking */}
