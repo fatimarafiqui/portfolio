@@ -149,7 +149,12 @@ function BeyondUX() {
       </header>
 
       {/* Photo mosaic: what I get up to, with a glass label on every photo */}
-      <section className="bux-section bux-section--tint bux-section--tight" aria-label="Photos from hackathons, judging, panels and conferences">
+      <section className="bux-section bux-section--tint" aria-label="Photos from hackathons, judging, panels and conferences">
+        <div className="bux-intro bux-animate">
+          <span className="bux-kicker">Community</span>
+          <h2 className="bux-h2">Showing up for other builders</h2>
+          <p className="bux-lede">Hackathons, judging tables, conference stages and expert booths. I say yes to rooms full of people building something new, to judge their ideas, answer their questions, and learn right alongside them.</p>
+        </div>
         <div className="bux-mosaic bux-animate">
           {collage.map((c) => (
             <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
