@@ -377,38 +377,13 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease;
 }
 
-/* Soft colour drifting behind the whole list, so the hover glass has something to frost */
+/* A full-section gradient behind the list, so the hover glass has color to frost */
 .bux-section--writing {
-  position: relative;
-  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 80% at 8% 90%, rgba(184, 217, 189, 0.85) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 70% at 95% 10%, rgba(241, 214, 176, 0.8) 0%, transparent 60%),
+    linear-gradient(135deg, #e4ede3 0%, var(--color-surface-warm) 52%, #f4e6d2 100%);
 }
-
-.bux-section--writing::before,
-.bux-section--writing::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(48px);
-  pointer-events: none;
-}
-
-.bux-section--writing::before {
-  width: 340px;
-  height: 340px;
-  left: 6%;
-  bottom: 4%;
-  background: rgba(122, 158, 126, 0.4);
-}
-
-.bux-section--writing::after {
-  width: 300px;
-  height: 300px;
-  right: 8%;
-  top: 22%;
-  background: rgba(214, 178, 120, 0.4);
-}
-
-.bux-section--writing > * { position: relative; z-index: 1; }
 
 .bux-write-row {
   border: 1px solid transparent;
