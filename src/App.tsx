@@ -325,9 +325,8 @@ function App() {
         <div className="divider-content reveal reveal-up delay-1">
           <span className="divider-accent" aria-hidden="true"></span>
           <blockquote>
-            <p>I help really complex concepts feel a little more <em>human</em> to the people using them.</p>
+            <p>Good design is the quiet kind. You only notice it when it&rsquo;s missing.</p>
           </blockquote>
-          <span className="divider-rule" aria-hidden="true"></span>
         </div>
       </section>
 
@@ -335,7 +334,7 @@ function App() {
       <section className="about" id="about">
         <div className="section-header reveal reveal-up">
           <span className="section-eyebrow">ABOUT</span>
-          <h2 className="section-title">The human behind pixels</h2>
+          <h2 className="section-title">Meet the innie</h2>
         </div>
         <div className="about-layout">
           <div className="about-stack reveal reveal-scale delay-1">
