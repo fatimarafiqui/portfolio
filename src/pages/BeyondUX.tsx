@@ -224,7 +224,6 @@ function BeyondUX() {
           {writing.map((post, i) => (
             <li key={i} className="bux-animate" style={{ animationDelay: `${i * 0.1}s` }}>
               <a className="bux-write-row" href={post.url} target="_blank" rel="noopener noreferrer">
-                <span className="bux-write-num">0{i + 1}</span>
                 <span className="bux-write-main">
                   <span className="bux-write-title">{post.title}</span>
                   <span className="bux-write-tag">{post.tag}</span>
