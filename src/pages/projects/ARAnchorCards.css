@@ -326,7 +326,82 @@
   box-shadow: var(--shadow-lg);
 }
 
-.ar-fig-media a { display: block; cursor: zoom-in; }
+.ar-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+/* Expanded image, on the same page */
+.ar-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: rgba(20, 30, 21, 0.88);
+  animation: ar-lightbox-in 0.2s ease;
+}
+
+.ar-lightbox-scroll {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  border-radius: var(--border-radius-lg);
+  background: #fff;
+}
+
+.ar-lightbox-scroll img {
+  display: block;
+  max-width: min(100%, 1400px);
+  max-height: calc(100vh - 3 * var(--space-6));
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+
+.ar-lightbox-close {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ar-lightbox-close:hover,
+.ar-lightbox-close:focus-visible { background: rgba(255, 255, 255, 0.3); outline: none; }
+
+.ar-lightbox-close svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@keyframes ar-lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ar-lightbox { animation: none; }
+}
 
 .ar-cap {
   margin-top: var(--space-3);

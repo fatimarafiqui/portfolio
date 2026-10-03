@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import SiteNav from '../../components/SiteNav'
 import ContactSection from '../../components/ContactSection'
 import { useNavTheme } from '../../hooks/useNavTheme'
@@ -85,22 +87,52 @@ function Img({ file, alt, className = '' }: { file: string; alt: string; classNa
   return <img className={`ar-img ${className}`} src={`${IMG}/${file}`} alt={alt} loading="lazy" />
 }
 
+// Full-screen view of an image, on the same page. Close with the X, Escape, or a click outside the image.
+function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div className="ar-lightbox" role="dialog" aria-modal="true" aria-label={alt} onClick={onClose}>
+      <button type="button" className="ar-lightbox-close" aria-label="Close image" onClick={onClose} autoFocus>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" /></svg>
+      </button>
+      <div className="ar-lightbox-scroll">
+        <img src={src} alt={alt} onClick={(e) => e.stopPropagation()} />
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 // A piece of media with a caption. `wide` = dense diagram on a white card (scrolls sideways on small screens),
-// `phone` = annotated phone mockup, `photo` = a real photograph.
+// `phone` = annotated phone mockup, `photo` = a real photograph. `open` lets the image expand in place.
 function Figure({
   file, alt, caption, kind, max, open = false,
 }: { file: string; alt: string; caption?: string; kind: 'wide' | 'phone' | 'photo'; max?: number; open?: boolean }) {
+  const [expanded, setExpanded] = useState(false)
   const img = <Img file={file} alt={alt} />
   return (
     <figure className={`ar-fig ar-fig--${kind}`} style={max ? { maxWidth: max } : undefined}>
       <div className="ar-fig-media">
         <div className="ar-fig-scroll">
           {open ? (
-            <a href={`${IMG}/${file}`} target="_blank" rel="noopener noreferrer" title="Open full size">{img}</a>
+            <button type="button" className="ar-zoom" onClick={() => setExpanded(true)} aria-label={`Expand image: ${alt}`}>
+              {img}
+            </button>
           ) : img}
         </div>
       </div>
       {caption && <figcaption className="ar-cap">{caption}</figcaption>}
+      {expanded && <Lightbox src={`${IMG}/${file}`} alt={alt} onClose={() => setExpanded(false)} />}
     </figure>
   )
 }
@@ -313,7 +345,7 @@ export default function ARAnchorCards() {
 
         <span className="ar-kicker ar-mt">User Journey</span>
         <h2 className="ar-h2">A day in his commute</h2>
-        <Figure kind="wide" file="userjourney.png" alt="Bilal's daily commute: decide, plan, experience, board, anticipate, arrive, with painpoints and opportunities" caption="Tap to open the full journey map" open />
+        <Figure kind="wide" file="userjourney.png" alt="Bilal's daily commute: decide, plan, experience, board, anticipate, arrive, with painpoints and opportunities" caption="Click to expand the full journey map" open />
       </section>
 
       {/* Principles */}
