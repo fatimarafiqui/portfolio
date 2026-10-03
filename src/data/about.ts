@@ -1,7 +1,8 @@
 export const bio = {
   headline: "Hello, I'm Fatima",
   intro:
-    "A Product Designer at Microsoft, with 8+ years of industry experience shaping impactful digital experiences.",
+    "Senior Product Designer at Microsoft, making complex data and AI feel effortless.",
+  punch: "I am the Human in the loop.",
   current:
     "Currently driving user experience innovation for Microsoft Fabric - Azure's flagship SaaS platform, at the forefront of the AI-powered data revolution.",
   extended:

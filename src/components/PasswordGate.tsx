@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import SiteNav from './SiteNav'
 import './PasswordGate.css'
 
 interface PasswordGateProps {
@@ -35,15 +35,7 @@ export default function PasswordGate({ projectTitle, projectCategory, children }
   return (
     <div className="gate">
       <div className="gate-bg"></div>
-      <nav className="nav">
-        <Link to="/" className="nav-logo">Fatima Rafiqui</Link>
-        <div className="nav-links">
-          <Link to="/#work">Work</Link>
-          <Link to="/#about">About</Link>
-          <Link to="/beyond-ux">Beyond UX</Link>
-          <Link to="/#contact">Contact</Link>
-        </div>
-      </nav>
+      <SiteNav />
       <div className="gate-container">
         <div className="gate-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
