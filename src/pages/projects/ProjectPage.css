@@ -44,7 +44,7 @@
 
 .project-hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6vw, var(--text-5xl));
+  font-size: clamp(1.75rem, 4.6vw, 3rem);
   font-weight: var(--weight-extrabold);
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -105,7 +105,7 @@
 /* Markdown content typography */
 .project-content h2 {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
+  font-size: 1.625rem;
   font-weight: var(--weight-bold);
   color: var(--color-primary);
   margin-top: var(--space-12);
@@ -114,7 +114,7 @@
 
 .project-content h3 {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   color: var(--color-primary);
   margin-top: var(--space-8);
