@@ -377,10 +377,37 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease;
 }
 
-.bux-write-row:hover {
+.bux-write-list > li { position: relative; }
+
+/* A soft sage-and-gold glow behind each strip that fades in on hover, so the glass has something to frost */
+.bux-write-list > li::before {
+  content: '';
+  position: absolute;
+  inset: -6px 10%;
+  border-radius: var(--border-radius-full);
+  background: linear-gradient(90deg, rgba(122, 158, 126, 0.55), rgba(184, 217, 189, 0.6) 45%, rgba(139, 111, 71, 0.4));
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.bux-write-list > li:hover::before,
+.bux-write-list > li:focus-within::before { opacity: 1; }
+
+.bux-write-row {
+  border: 1px solid transparent;
+}
+
+.bux-write-row:hover,
+.bux-write-row:focus-visible {
   transform: translateX(6px);
-  background: var(--color-primary);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 10px 30px rgba(44, 62, 45, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  outline: none;
 }
 
 .bux-write-main {
@@ -409,7 +436,7 @@
   transition: color 0.3s ease;
 }
 
-.bux-write-row:hover .bux-write-tag { color: var(--color-accent-light); }
+.bux-write-row:hover .bux-write-tag { color: var(--color-primary); }
 
 .bux-write-go {
   display: grid;
@@ -434,7 +461,7 @@
 
 .bux-write-row:hover .bux-write-go {
   transform: rotate(45deg);
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .bux-more {
