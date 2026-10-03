@@ -1480,8 +1480,19 @@
   border-color: rgba(255, 255, 255, 0.32);
 }
 
-/* Touch screens have no hover, so keep a small always-visible caption (category and title); tapping opens the project */
-@media (hover: none) {
+@keyframes card-glass-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Only shown on touch screens, once a card has been tapped */
+.project-card-open {
+  display: none;
+}
+
+/* Devices with no hover at all (phones, most tablets): a small always-visible caption, and a first tap that reveals the
+   full glass details; a second tap opens the project */
+@media (any-hover: none) {
   .project-card-content {
     inset: auto var(--space-3) var(--space-3) var(--space-3);
     padding: var(--space-3) var(--space-4);
@@ -1507,6 +1518,48 @@
   .project-card-content .project-card-summary,
   .project-card-content .project-card-tags {
     display: none;
+  }
+
+  .project-card[data-active='true'] .project-card-content {
+    inset: 0;
+    padding: var(--space-5);
+    border-radius: inherit;
+    background: linear-gradient(to top, rgba(20, 30, 22, 0.9) 0%, rgba(30, 44, 31, 0.64) 55%, rgba(44, 62, 45, 0.36) 100%);
+    animation: card-glass-in 0.3s ease both;
+  }
+
+  .project-card[data-active='true'] .project-card-content .project-card-category {
+    font-size: var(--text-xs);
+  }
+
+  .project-card[data-active='true'] .project-card-content .project-card-title {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-lg);
+  }
+
+  .project-card[data-active='true'] .project-card-content .project-card-summary {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+
+  .project-card[data-active='true'] .project-card-content .project-card-tags {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .project-card[data-active='true'] .project-card-content .tag {
+    padding: 2px var(--space-3);
+    font-size: 0.625rem;
+  }
+
+  .project-card[data-active='true'] .project-card-open {
+    display: block;
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: #fff;
   }
 }
 
