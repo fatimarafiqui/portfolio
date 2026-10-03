@@ -353,6 +353,9 @@
   .bux-hero { padding: calc(var(--space-16) + 40px) var(--space-6) var(--space-12); }
   .bux-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); }
   .bux-hero-photo { width: min(78%, 300px); }
+  .bux-stats { flex-wrap: nowrap; gap: var(--space-5); }
+  .bux-stats dt { font-size: var(--text-lg); }
+  .bux-stats dd { max-width: 9ch; }
   .bux-section,
   .bux-starwars { padding: var(--space-12) var(--space-6); }
   .bux-talks-grid,
