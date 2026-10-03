@@ -157,21 +157,41 @@ function BeyondUX() {
 
       {/* Hackathons, judging and mentoring */}
       <section className="bux-section bux-section--tint">
-        <div className="bux-intro bux-animate">
-          <span className="bux-kicker">Community</span>
-          <h2 className="bux-h2">Showing up for other builders</h2>
-          <p className="bux-lede">Some of my favorite work happens in rooms full of people building something new.</p>
-        </div>
-        <div className="bux-community-grid">
-          {community.map((c, i) => (
-            <div className="bux-community bux-animate" key={c.title} style={{ animationDelay: `${i * 0.1}s` }}>
-              <span className="bux-community-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">{c.icon}</svg>
-              </span>
-              <h3 className="bux-community-title">{c.title}</h3>
-              <p className="bux-community-body">{c.body}</p>
+        <div className="bux-community-layout">
+          <div className="bux-collage bux-animate">
+            <figure className="bux-collage-photo bux-collage-photo--tall">
+              <img src="/images/beyond-ux/collage-hackathon.jpg" alt="Fatima at a hackathon" style={{ objectPosition: '50% 22%' }} loading="lazy" />
+              <figcaption>Hackathon jam</figcaption>
+            </figure>
+            <figure className="bux-collage-photo">
+              <img src="/images/beyond-ux/collage-garage.jpg" alt="Fatima at the Makerspace" style={{ objectPosition: '45% 20%' }} loading="lazy" />
+              <figcaption>At the Makerspace</figcaption>
+            </figure>
+            <figure className="bux-collage-photo">
+              <img src="/images/beyond-ux/collage-about.jpg" alt="Fatima speaking on stage" style={{ objectPosition: '28% 30%' }} loading="lazy" />
+              <figcaption>On stage</figcaption>
+            </figure>
+          </div>
+          <div className="bux-community-copy">
+            <div className="bux-intro bux-animate">
+              <span className="bux-kicker">Community</span>
+              <h2 className="bux-h2">Showing up for other builders</h2>
+              <p className="bux-lede">Some of my favorite work happens in rooms full of people building something new.</p>
             </div>
-          ))}
+            <ul className="bux-community-list">
+              {community.map((c, i) => (
+                <li className="bux-community-item bux-animate" key={c.title} style={{ animationDelay: `${i * 0.1}s` }}>
+                  <span className="bux-community-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">{c.icon}</svg>
+                  </span>
+                  <div>
+                    <h3 className="bux-community-title">{c.title}</h3>
+                    <p className="bux-community-body">{c.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
