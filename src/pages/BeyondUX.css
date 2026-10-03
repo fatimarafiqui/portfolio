@@ -24,6 +24,11 @@
     radial-gradient(ellipse 60% 55% at 70% 100%, rgba(200, 219, 201, 0.7) 0%, transparent 60%),
     linear-gradient(135deg, #e4ede3 0%, var(--color-surface-warm) 52%, #f4e6d2 100%);
   color: var(--color-primary);
+  /* Fills the first screen, like the home hero, with the content centered in it */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
   padding: calc(var(--space-24) + 24px) var(--space-10) var(--space-20);
 }
 
@@ -39,6 +44,7 @@
 .bux-hero-inner {
   position: relative;
   z-index: 1;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: var(--space-12);
