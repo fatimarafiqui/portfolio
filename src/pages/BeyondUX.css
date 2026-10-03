@@ -208,106 +208,36 @@
   color: var(--color-text-muted);
 }
 
-/* --- Community: hackathons, judging, mentoring --- */
-.bux-community-layout {
+/* --- Photo mosaic: edge to edge, left to right --- */
+.bux-mosaic {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: var(--space-12);
-  align-items: center;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: clamp(150px, 17vw, 260px);
+  grid-auto-flow: dense;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface-alt);
 }
 
-/* Photo collage: the group shot across the top, two closer shots beneath */
-.bux-collage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-.bux-collage-photo {
-  position: relative;
+.bux-mosaic-photo {
   margin: 0;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
-  box-shadow: 0 12px 28px rgba(44, 62, 45, 0.16);
   background: var(--color-surface-warm);
 }
 
-.bux-collage-photo { aspect-ratio: 4 / 5; }
-.bux-collage-photo--wide { grid-column: 1 / 3; aspect-ratio: 16 / 9; }
+.bux-mosaic-photo--wide { grid-column: span 2; }
+.bux-mosaic-photo--tall { grid-row: span 2; }
 
-.bux-collage-photo:nth-child(1) { transform: rotate(-0.8deg); }
-.bux-collage-photo:nth-child(2) { transform: rotate(1.2deg); }
-.bux-collage-photo:nth-child(3) { transform: rotate(-1.2deg); }
-
-.bux-collage-photo img {
+.bux-mosaic-photo img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bux-collage-photo figcaption {
-  position: absolute;
-  left: var(--space-3);
-  bottom: var(--space-3);
-  padding: 4px 12px;
-  border-radius: var(--border-radius-full);
-  background: rgba(255, 255, 255, 0.9);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  color: var(--color-primary);
-}
-
-.bux-community-copy .bux-intro { margin-bottom: var(--space-8); }
-
-.bux-community-list {
-  display: grid;
-  gap: var(--space-6);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bux-community-item {
-  display: flex;
-  gap: var(--space-4);
-  align-items: flex-start;
-}
-
-.bux-community-icon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--color-accent-light);
-}
-
-.bux-community-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: var(--color-primary);
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.bux-community-title {
-  margin-bottom: var(--space-1);
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
-  color: var(--color-primary);
-}
-
-.bux-community-body {
-  margin: 0;
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  color: var(--color-text-muted);
-}
+.bux-mosaic-photo:hover img { transform: scale(1.04); }
 
 /* --- Talks --- */
 .bux-talks-grid {
@@ -511,8 +441,7 @@
 @media (max-width: 900px) {
   .bux-talks-grid,
   .bux-writing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bux-community-layout { grid-template-columns: 1fr; gap: var(--space-10); }
-  .bux-collage { max-width: 520px; }
+  .bux-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 38vw; }
 }
 
 @media (max-width: 768px) {

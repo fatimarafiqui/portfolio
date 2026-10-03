@@ -66,22 +66,16 @@ const writing = [
   },
 ]
 
-const community = [
-  {
-    title: "Hackathons",
-    body: "Build fast, learn faster. I join to test ideas out loud with people I would never get to work with otherwise.",
-    icon: <path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z" />,
-  },
-  {
-    title: "Judging",
-    body: "I look for the idea behind the demo: who it is for, and whether it holds up when real people use it.",
-    icon: <path d="M12 3v18M6 21h12M5 7h14M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7zM19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z" />,
-  },
-  {
-    title: "Mentoring",
-    body: "Sharing the shortcuts and detours I wish I had known, and helping designers find their own voice.",
-    icon: <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM4 21c0-4 3.5-6 8-6s8 2 8 6" />,
-  },
+// Photo mosaic between the hero and the talks; `shape` sets how much of the grid a photo takes
+const collage = [
+  { file: 'group', alt: 'Hackathon participants and organizers posing together', shape: 'wide', pos: '50% 45%' },
+  { file: 'judge', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
+  { file: 'dawn', alt: 'Fatima laughing with a colleague at a conference', shape: 'one', pos: '40% 35%' },
+  { file: 'panel', alt: 'Fatima speaking on a panel', shape: 'wide', pos: '70% 35%' },
+  { file: 'talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
+  { file: 'judging', alt: 'Fatima and fellow judges listening to a team\'s demo', shape: 'wide', pos: '62% 40%' },
+  { file: 'booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
+  { file: 'booth2', alt: 'Fatima in conversation at a conference booth', shape: 'one', pos: '40% 35%' },
 ]
 
 const stats = [
@@ -155,44 +149,13 @@ function BeyondUX() {
         </div>
       </header>
 
-      {/* Hackathons, judging and mentoring */}
-      <section className="bux-section bux-section--tint">
-        <div className="bux-community-layout">
-          <div className="bux-collage bux-animate">
-            <figure className="bux-collage-photo bux-collage-photo--wide">
-              <img src="/images/beyond-ux/collage-group.jpg" alt="Hackathon participants and organizers posing together" style={{ objectPosition: '50% 45%' }} loading="lazy" />
-              <figcaption>Hackathon day</figcaption>
-            </figure>
-            <figure className="bux-collage-photo">
-              <img src="/images/beyond-ux/collage-judge.jpg" alt="Fatima judging at a hackathon, pen in hand" style={{ objectPosition: '62% 30%' }} loading="lazy" />
-              <figcaption>Judging</figcaption>
-            </figure>
-            <figure className="bux-collage-photo">
-              <img src="/images/beyond-ux/collage-judging.jpg" alt="Fatima and fellow judges listening to a team's demo" style={{ objectPosition: '62% 40%' }} loading="lazy" />
-              <figcaption>Listening to a demo</figcaption>
-            </figure>
-          </div>
-          <div className="bux-community-copy">
-            <div className="bux-intro bux-animate">
-              <span className="bux-kicker">Community</span>
-              <h2 className="bux-h2">Showing up for other builders</h2>
-              <p className="bux-lede">Some of my favorite work happens in rooms full of people building something new.</p>
-            </div>
-            <ul className="bux-community-list">
-              {community.map((c, i) => (
-                <li className="bux-community-item bux-animate" key={c.title} style={{ animationDelay: `${i * 0.1}s` }}>
-                  <span className="bux-community-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">{c.icon}</svg>
-                  </span>
-                  <div>
-                    <h3 className="bux-community-title">{c.title}</h3>
-                    <p className="bux-community-body">{c.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+      {/* Photo mosaic: hackathons, judging, conferences */}
+      <section className="bux-mosaic bux-animate" aria-label="Photos from hackathons, judging and conferences">
+        {collage.map((c) => (
+          <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
+            <img src={`/images/beyond-ux/collage-${c.file}.jpg`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
+          </figure>
+        ))}
       </section>
 
       {/* Speaking */}
