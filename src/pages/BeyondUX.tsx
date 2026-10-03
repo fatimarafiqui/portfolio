@@ -159,17 +159,17 @@ function BeyondUX() {
       <section className="bux-section bux-section--tint">
         <div className="bux-community-layout">
           <div className="bux-collage bux-animate">
-            <figure className="bux-collage-photo bux-collage-photo--tall">
-              <img src="/images/beyond-ux/collage-hackathon.jpg" alt="Fatima at a hackathon" style={{ objectPosition: '50% 22%' }} loading="lazy" />
-              <figcaption>Hackathon jam</figcaption>
+            <figure className="bux-collage-photo bux-collage-photo--wide">
+              <img src="/images/beyond-ux/collage-group.jpg" alt="Hackathon participants and organizers posing together" style={{ objectPosition: '50% 45%' }} loading="lazy" />
+              <figcaption>Hackathon day</figcaption>
             </figure>
             <figure className="bux-collage-photo">
-              <img src="/images/beyond-ux/collage-garage.jpg" alt="Fatima at the Makerspace" style={{ objectPosition: '45% 20%' }} loading="lazy" />
-              <figcaption>At the Makerspace</figcaption>
+              <img src="/images/beyond-ux/collage-judge.jpg" alt="Fatima judging at a hackathon, pen in hand" style={{ objectPosition: '62% 30%' }} loading="lazy" />
+              <figcaption>Judging</figcaption>
             </figure>
             <figure className="bux-collage-photo">
-              <img src="/images/beyond-ux/collage-about.jpg" alt="Fatima speaking on stage" style={{ objectPosition: '28% 30%' }} loading="lazy" />
-              <figcaption>On stage</figcaption>
+              <img src="/images/beyond-ux/collage-judging.jpg" alt="Fatima and fellow judges listening to a team's demo" style={{ objectPosition: '62% 40%' }} loading="lazy" />
+              <figcaption>Listening to a demo</figcaption>
             </figure>
           </div>
           <div className="bux-community-copy">
