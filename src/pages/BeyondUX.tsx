@@ -12,37 +12,37 @@ const ytId = (url: string) => new URL(url).searchParams.get('v') ?? ''
 const talks = [
   {
     title: "Designing for a Brand ~ Equal Voice",
-    description: "Sharing the story of a product born from empathy, how listening shaped every design decision.",
+    description: "A product born from empathy, and how listening shaped every decision.",
     url: "https://www.youtube.com/watch?v=UNDjotU0E_U",
     year: "2020",
   },
   {
     title: "App Critique Workshop",
-    description: "Helping aspiring designers find their voice through critique, something I'm still learning myself.",
+    description: "Helping aspiring designers find their voice through critique.",
     url: "https://www.youtube.com/watch?v=EXqepUbNay8&t=506s",
     year: "2020",
   },
   {
     title: "Inclusive Web Design: CEW&T Annual Summit",
-    description: "A conversation about accessibility that started with our own blind spots and grew into something meaningful.",
+    description: "Accessibility, starting with our own blind spots.",
     url: "https://www.youtube.com/watch?v=wyLdjxtL6P8",
     year: "2021",
   },
   {
     title: "Figma Basics Workshop",
-    description: "Building a small learning community for women and underrepresented groups, one artboard at a time.",
+    description: "A learning community for women and underrepresented groups, one artboard at a time.",
     url: "https://www.youtube.com/watch?v=My4CV7FAi1o",
     year: "2021",
   },
   {
     title: "ACM Richard Tapia Conference - Panel Discussion",
-    description: "Honest reflections on navigating academia and industry as someone who's been on both sides.",
+    description: "Honest reflections on academia and industry, from both sides.",
     url: "https://www.youtube.com/watch?v=6mu2hUFqQi0",
     year: "2022",
   },
   {
     title: "Design your Brand's Website",
-    description: "Teaching what I wish someone had taught me earlier, how to make your work visible.",
+    description: "What I wish someone had taught me earlier: making your work visible.",
     url: "https://www.youtube.com/watch?v=j3ILieHXWUU",
     year: "2022",
   },
@@ -66,10 +66,21 @@ const writing = [
   },
 ]
 
+// Photo mosaic between the hero and the talks; `shape` sets how much of the grid a photo takes
+const collage = [
+  { file: 'group', label: 'Hackathon day', alt: 'Hackathon participants and organizers posing together', shape: 'wide', pos: '50% 45%' },
+  { file: 'gdg', ext: 'png', label: 'GDG 2026 Hackathon Judge', alt: 'Fatima standing beside the Google Developer Group DevFest Build with AI banner', shape: 'tall', pos: '60% 40%' },
+  { file: 'talk', label: 'Bay Area Breakthrough talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
+  { file: 'panel', label: 'Talk at Fabric Conference 2025', alt: 'Fatima giving a talk at Fabric Conference 2025, gesturing as she speaks', shape: 'wide', pos: '50% 8%' },
+  { file: 'judge', label: 'Judge for Microsoft Global Hackathon', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
+  { file: 'garage', label: 'The Garage Relaunch at Microsoft', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
+  { file: 'booth', label: 'Ask the Expert Booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
+]
+
 const stats = [
-  { number: "10+", label: "Talks & Workshops" },
-  { number: "3", label: "Published Stories" },
-  { number: "5+", label: "Communities Served" },
+  { number: "30+", label: "Talks & Workshops" },
+  { number: "2", label: "Published Patents" },
+  { number: "8+", label: "Communities" },
 ]
 
 function BeyondUX() {
@@ -95,59 +106,80 @@ function BeyondUX() {
   }, [])
 
   return (
-    <div className="app" ref={pageRef}>
+    <div className="app bux-page" ref={pageRef}>
       <SiteNav active="beyond-ux" />
 
-      {/* Hero - Editorial Split */}
-      <section className="bux-hero">
-        <div className="bux-hero-content bux-animate">
-          <span className="bux-hero-label">Beyond UX</span>
-          <h1 className="bux-hero-title">
-            There is more to a<br/>
-            designer than<br/>
-            <span className="bux-hero-accent">the craft</span>
-          </h1>
+      {/* Hero: the site's dark green, same pattern as the project pages */}
+      <header className="bux-hero">
+        <div className="bux-hero-inner">
+          <div className="bux-hero-copy bux-animate">
+            <span className="bux-eyebrow">Beyond UX</span>
+            <h1 className="bux-hero-title">There is more to a designer than the craft.</h1>
+            <p className="bux-hero-lede">Talks, writing, and a little Star Wars: the parts of the work that happen off the canvas.</p>
+            <dl className="bux-stats">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt>{stat.number}</dt>
+                  <dd>{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="bux-hero-visual bux-animate">
+            <div className="bux-hero-photo">
+              <img
+                src="/images/beyond-ux/portrait.webp"
+                alt="Fatima Rafiqui at the Microsoft Fabric booth"
+              />
+            </div>
+            <div className="bux-hero-card bux-hero-card--1">
+              <span className="bux-hero-emoji">🎤</span>
+              <span>Storyteller</span>
+            </div>
+            <div className="bux-hero-card bux-hero-card--2">
+              <span className="bux-hero-emoji">✍️</span>
+              <span>Thinker</span>
+            </div>
+            <div className="bux-hero-card bux-hero-card--3">
+              <span className="bux-hero-emoji">⚔️</span>
+              <span>Jedi-in-training</span>
+            </div>
+          </div>
         </div>
-        <div className="bux-hero-visual bux-animate">
-          <div className="bux-hero-photo">
-            <img
-              src="/images/beyond-ux/portrait.webp"
-              alt="Fatima Rafiqui at the Microsoft Fabric booth"
-            />
-          </div>
-          <div className="bux-hero-card bux-hero-card--1">
-            <span className="bux-hero-emoji">🎤</span>
-            <span>Storyteller</span>
-          </div>
-          <div className="bux-hero-card bux-hero-card--2">
-            <span className="bux-hero-emoji">✍️</span>
-            <span>Thinker</span>
-          </div>
-          <div className="bux-hero-card bux-hero-card--3">
-            <span className="bux-hero-emoji">⚔️</span>
-            <span>Jedi-in-training</span>
-          </div>
+        <button
+          type="button"
+          className="bux-scroll"
+          aria-label="Jump to lightspeed: scroll down"
+          onClick={() => document.getElementById('bux-community')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span>Jump to lightspeed</span>
+          <span className="bux-scroll-line" aria-hidden="true"></span>
+        </button>
+      </header>
+
+      {/* Photo mosaic: what I get up to, with a glass label on every photo */}
+      <section id="bux-community" className="bux-section bux-section--tint" aria-label="Photos from hackathons, judging, panels and conferences">
+        <div className="bux-intro bux-animate">
+          <span className="bux-kicker">Community</span>
+          <h2 className="bux-h2">Showing up for other builders</h2>
+          <p className="bux-lede">Hackathons, judging tables, conference stages and expert booths. I say yes to rooms full of people building something new, to judge their ideas, answer their questions, and learn right alongside them.</p>
+        </div>
+        <div className="bux-mosaic bux-animate">
+          {collage.map((c) => (
+            <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
+              <img src={`/images/beyond-ux/collage-${c.file}.${c.ext ?? 'jpg'}`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
+              <figcaption className="bux-glass">{c.label}</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bux-stats bux-animate">
-        {stats.map((stat, i) => (
-          <div className="bux-stat" key={i} style={{ animationDelay: `${i * 0.15}s` }}>
-            <span className="bux-stat-number">{stat.number}</span>
-            <span className="bux-stat-label">{stat.label}</span>
-          </div>
-        ))}
-      </section>
-
-      {/* Speaking - Timeline Layout */}
-      <section className="bux-speaking">
-        <div className="bux-section-intro bux-animate">
-          <span className="bux-section-number">01</span>
-          <h2 className="bux-section-heading">Sharing what I've learned</h2>
-          <p className="bux-section-body">
-            I never set out to be a speaker. I just wanted to share the mistakes, detours, and small wins that shaped my path, hoping someone in the room might feel a little less alone in theirs.
-          </p>
+      {/* Speaking */}
+      <section className="bux-section">
+        <div className="bux-intro bux-animate">
+          <span className="bux-kicker">Speaking</span>
+          <h2 className="bux-h2">Sharing what I've learned</h2>
+          <p className="bux-lede">I never set out to be a speaker. I just wanted someone in the room to feel a little less alone on their path.</p>
         </div>
         <div className="bux-talks-grid">
           {talks.map((talk, i) => {
@@ -159,7 +191,7 @@ function BeyondUX() {
                 rel="noopener noreferrer"
                 className="bux-talk bux-animate"
                 key={i}
-                style={{ animationDelay: `${i * 0.1}s` }}
+                style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <div className="bux-talk-thumb">
                   <img
@@ -176,14 +208,13 @@ function BeyondUX() {
                     loading="lazy"
                   />
                   <span className="bux-talk-play" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+                    <svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
                   </span>
-                  <span className="bux-talk-year">{talk.year}</span>
                 </div>
                 <div className="bux-talk-content">
+                  <span className="bux-talk-year">{talk.year}</span>
                   <h3 className="bux-talk-title">{talk.title}</h3>
                   <p className="bux-talk-desc">{talk.description}</p>
-                  <span className="bux-talk-watch">Watch on YouTube <span aria-hidden="true">&#8599;</span></span>
                 </div>
               </a>
             )
@@ -191,62 +222,45 @@ function BeyondUX() {
         </div>
       </section>
 
-      {/* Pull Quote */}
-      <section className="bux-pullquote bux-animate">
-        <p>"The best talks I've given weren't the polished ones, they were the honest ones, where I admitted what I <em>didn't know yet.</em>"</p>
-      </section>
-
-      {/* Writing - Magazine Cards */}
-      <section className="bux-writing">
-        <div className="bux-section-intro bux-animate">
-          <span className="bux-section-number">02</span>
-          <h2 className="bux-section-heading">Thinking out loud</h2>
-          <p className="bux-section-body">
-            Writing is how I process things. Some of these pieces were written at turning points in my life, moments where I needed to make sense of a decision before I could take the next step.
-          </p>
+      {/* Writing */}
+      <section className="bux-section bux-section--tint bux-section--writing">
+        <div className="bux-intro bux-animate">
+          <span className="bux-kicker">Writing</span>
+          <h2 className="bux-h2">Thinking out loud</h2>
+          <p className="bux-lede">Writing is how I make sense of a decision before I take the next step.</p>
         </div>
-        <div className="bux-writing-grid">
+        <ol className="bux-write-list">
           {writing.map((post, i) => (
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bux-article bux-animate"
-              key={i}
-              style={{ animationDelay: `${i * 0.12}s` }}
-            >
-              <div className="bux-article-top">
-                <span className="bux-article-tag">{post.tag}</span>
-                <span className="bux-article-arrow">&#8599;</span>
-              </div>
-              <h3 className="bux-article-title">{post.title}</h3>
-              <span className="bux-article-cta">Read on Medium</span>
-            </a>
+            <li key={i} className="bux-animate" style={{ animationDelay: `${i * 0.1}s` }}>
+              <a className="bux-write-row" href={post.url} target="_blank" rel="noopener noreferrer">
+                <span className="bux-write-main">
+                  <span className="bux-write-title">{post.title}</span>
+                  <span className="bux-write-tag">{post.tag}</span>
+                </span>
+                <span className="bux-write-go" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
+        <a className="bux-more" href="https://fatimarafiqui.medium.com" target="_blank" rel="noopener noreferrer">More on Medium <span aria-hidden="true">&#8599;</span></a>
       </section>
 
       <Recommendations />
 
-      {/* Star Wars - Immersive */}
-      <section className="bux-starwars bux-animate">
-        <div className="bux-starwars-bg" aria-hidden="true">
-          <div className="bux-star bux-star--1"></div>
-          <div className="bux-star bux-star--2"></div>
-          <div className="bux-star bux-star--3"></div>
-          <div className="bux-star bux-star--4"></div>
-          <div className="bux-star bux-star--5"></div>
-        </div>
-        <div className="bux-starwars-layout">
+      {/* Star Wars */}
+      <section className="bux-starwars">
+        <div className="bux-starwars-inner bux-animate">
           <div className="bux-starwars-content">
-            <span className="bux-section-number bux-section-number--light">03</span>
-            <h2 className="bux-starwars-title">A Jedi in training</h2>
+            <span className="bux-kicker bux-kicker--light">Off duty</span>
+            <h2 className="bux-h2 bux-h2--light">A Jedi in training</h2>
             <p className="bux-starwars-text">
-              This might sound silly, but Star Wars taught me more about resilience than most self-help books. The idea that progress is slow, that you fail before you grow, that patience isn't passive, it stuck with me. I carry a little bit of that hope into everything I do.
+              Star Wars taught me more about resilience than most self-help books: progress is slow, you fail before you grow, and patience is not passive.
             </p>
             <blockquote className="bux-starwars-quote">
               <p>"Never tell me the odds!"</p>
-              <cite>~ Han Solo (and me, every time I start something new)</cite>
+              <cite>Han Solo, and me every time I start something new</cite>
             </blockquote>
           </div>
           <div className="bux-starwars-bb8">

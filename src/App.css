@@ -848,95 +848,69 @@
 
 /* --- Testimonials --- */
 .testimonials {
-  padding: var(--space-40) var(--space-10) var(--space-24);
-  background: linear-gradient(90deg, #e4ede3 0%, var(--color-surface-warm) 50%, #f1e5d3 100%);
+  padding: var(--space-20) max(var(--space-10), calc((100% - 1000px) / 2));
+  background: var(--color-surface);
 }
 
-.testimonials .section-header,
-.testimonials .testimonials-grid,
-.testimonials .testimonials-featured {
-  max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 1;
+.testimonials-intro {
+  margin-bottom: var(--space-8);
 }
 
 .testimonials-featured {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
-  margin-bottom: var(--space-6);
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
 }
 
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-5);
 }
 
+/* Flat, bordered cards, like the rest of the site */
 .quote-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: var(--space-8);
+  gap: var(--space-5);
   margin: 0;
-  padding: var(--space-8);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.25));
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
+  padding: var(--space-5);
+  background: #fff;
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 8px 32px rgba(44, 62, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  overflow: hidden;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.quote-card::before {
-  content: '\201C';
-  position: absolute;
-  top: -0.1em;
-  right: var(--space-5);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 7rem;
-  line-height: 1;
-  color: var(--color-accent-light);
-  pointer-events: none;
-}
-
 .quote-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(44, 62, 45, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .quote-text {
-  position: relative;
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  line-height: 1.45;
-  color: var(--color-text);
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-normal);
+  line-height: 1.6;
+  color: var(--color-text-muted);
 }
 
 .quote-text strong {
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semibold);
   color: var(--color-primary);
 }
 
 .quote-card--featured {
-  padding: var(--space-10);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(200, 219, 201, 0.3));
-}
-
-.quote-card--featured::before {
-  font-size: 9rem;
-  color: rgba(122, 158, 126, 0.35);
+  padding: var(--space-6);
+  background: var(--color-surface-alt);
+  border-color: transparent;
 }
 
 .quote-card--featured .quote-text {
-  font-size: clamp(1.35rem, 2vw, var(--text-xl));
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
 }
 
 .quote-author {
@@ -949,8 +923,8 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
@@ -969,6 +943,7 @@
 .quote-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .quote-info strong {
@@ -979,18 +954,15 @@
 
 .quote-info span {
   font-size: var(--text-xs);
+  line-height: 1.4;
   color: var(--color-text-muted);
-}
-
-.quote-card--featured .quote-avatar {
-  background: rgba(255, 255, 255, 0.85);
 }
 
 .testimonials-link {
   display: block;
   width: max-content;
-  max-width: var(--max-width);
-  margin: var(--space-10) auto 0;
+  max-width: 100%;
+  margin: var(--space-8) 0 0;
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   color: var(--color-primary);
@@ -1001,6 +973,16 @@
 
 .testimonials-link:hover {
   opacity: 0.65;
+}
+
+@media (max-width: 900px) {
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .testimonials { padding: var(--space-12) var(--space-6); }
+  .testimonials-featured,
+  .testimonials-grid { grid-template-columns: 1fr; }
 }
 
 /* --- Contact / Footer --- */
@@ -1337,10 +1319,6 @@
 
   .section-title {
     font-size: var(--text-3xl);
-  }
-
-  .quote-card--featured {
-    padding: var(--space-8);
   }
 
   .about-layout {
