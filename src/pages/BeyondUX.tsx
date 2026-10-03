@@ -115,11 +115,24 @@ function BeyondUX() {
             </dl>
           </div>
           <div className="bux-hero-visual bux-animate">
-            <img
-              className="bux-hero-photo"
-              src="/images/beyond-ux/portrait.webp"
-              alt="Fatima Rafiqui at the Microsoft Fabric booth"
-            />
+            <div className="bux-hero-photo">
+              <img
+                src="/images/beyond-ux/portrait.webp"
+                alt="Fatima Rafiqui at the Microsoft Fabric booth"
+              />
+            </div>
+            <div className="bux-hero-card bux-hero-card--1">
+              <span className="bux-hero-emoji">🎤</span>
+              <span>Storyteller</span>
+            </div>
+            <div className="bux-hero-card bux-hero-card--2">
+              <span className="bux-hero-emoji">✍️</span>
+              <span>Thinker</span>
+            </div>
+            <div className="bux-hero-card bux-hero-card--3">
+              <span className="bux-hero-emoji">⚔️</span>
+              <span>Jedi-in-training</span>
+            </div>
           </div>
         </div>
       </header>
