@@ -53,19 +53,16 @@ const writing = [
     title: "Why did I quit a high paying job to pursue a degree in HCI?",
     url: "https://fatimarafiqui.medium.com/why-did-i-quit-a-high-paying-job-to-pursue-a-degree-in-hci-fb162b286748",
     tag: "Leap of Faith",
-    teaser: "The decision behind the degree.",
   },
   {
     title: "Invaluable lessons from my UX internship at Juniper Networks",
     url: "https://medium.com/juniperux/a-design-reflection-invaluable-lessons-from-my-ux-internship-at-juniper-networks-c18585f77f4d",
     tag: "Reflection",
-    teaser: "What a summer at Juniper Networks taught me.",
   },
   {
     title: "Design & Healthcare - A conjunction needed to combat Bias in Medicine",
     url: "https://medium.com/iu-cewit/design-and-healthcare-a-conjunction-needed-to-combat-bias-in-medicine-49286a9674b5",
     tag: "Research",
-    teaser: "Why medicine needs designers in the room.",
   },
 ]
 
@@ -223,26 +220,22 @@ function BeyondUX() {
           <h2 className="bux-h2">Thinking out loud</h2>
           <p className="bux-lede">Writing is how I make sense of a decision before I take the next step.</p>
         </div>
-        <div className="bux-writing-grid">
+        <ol className="bux-write-list">
           {writing.map((post, i) => (
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`bux-article bux-animate${i === 0 ? ' bux-article--featured' : ''}`}
-              key={i}
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <div className="bux-article-top">
-                <span className="bux-article-tag">{post.tag}</span>
-                <span className="bux-article-arrow" aria-hidden="true">&#8599;</span>
-              </div>
-              <h3 className="bux-article-title">{post.title}</h3>
-              <p className="bux-article-teaser">{post.teaser}</p>
-              <span className="bux-article-cta">Read on Medium</span>
-            </a>
+            <li key={i} className="bux-animate" style={{ animationDelay: `${i * 0.1}s` }}>
+              <a className="bux-write-row" href={post.url} target="_blank" rel="noopener noreferrer">
+                <span className="bux-write-num">0{i + 1}</span>
+                <span className="bux-write-main">
+                  <span className="bux-write-title">{post.title}</span>
+                  <span className="bux-write-tag">{post.tag}</span>
+                </span>
+                <span className="bux-write-go" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
         <a className="bux-more" href="https://fatimarafiqui.medium.com" target="_blank" rel="noopener noreferrer">More on Medium <span aria-hidden="true">&#8599;</span></a>
       </section>
 
