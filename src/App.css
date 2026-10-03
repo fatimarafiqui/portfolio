@@ -1912,3 +1912,29 @@
   width: auto;
   filter: drop-shadow(0 4px 10px rgba(30, 60, 110, 0.18));
 }
+
+/* Small phones: the hover/focus details layer is tighter so its text always fits inside the card */
+@media (max-width: 420px) {
+  .project-card-content {
+    padding: var(--space-4);
+  }
+
+  .project-card-content .project-card-title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+  }
+
+  .project-card-content .project-card-summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+  }
+
+  .project-card-content .tag {
+    padding: 2px var(--space-2);
+  }
+}

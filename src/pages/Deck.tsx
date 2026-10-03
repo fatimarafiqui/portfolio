@@ -22,7 +22,7 @@ const slides: Slide[] = [
         </div>
         <div className="deck-portrait-wrap">
           <span className="deck-portrait-index">01</span>
-          <img src="/images/hero/fatima-hero.png" alt="Fatima Rafiqui" className="deck-portrait" />
+          <img src="/images/hero/fatima-hero.webp" alt="Fatima Rafiqui" className="deck-portrait" />
         </div>
       </div>
     ),

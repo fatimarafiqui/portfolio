@@ -12,7 +12,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     name: "Dawn Ferguson",
-    avatar: "/images/testimonials/dawn.jpg",
+    avatar: "/images/testimonials/dawn.webp",
     role: "Senior UX Researcher",
     company: "Microsoft",
     year: 2025,
@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Zaki S",
-    avatar: "/images/testimonials/zaki.jpg",
+    avatar: "/images/testimonials/zaki.webp",
     role: "Principal Product Designer Architect",
     company: "Lucid Motors",
     year: 2024,
@@ -32,7 +32,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Lisa Beam",
-    avatar: "/images/testimonials/lisa.jpg",
+    avatar: "/images/testimonials/lisa.webp",
     role: "Staff Product Designer",
     year: 2022,
     quote: "I was impressed by how **quickly she learned** the domain and the design library.",
@@ -56,7 +56,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Lyuba Nesteroff",
-    avatar: "/images/testimonials/lyuba.jpg",
+    avatar: "/images/testimonials/lyuba.webp",
     role: "Product Design Lead",
     company: "Juniper Networks",
     quote:

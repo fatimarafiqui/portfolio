@@ -69,7 +69,7 @@ function MapsPhone() {
     <video
       ref={videoRef}
       className="thumb-maps-video"
-      poster="/images/projects/ar-anchor-cards/phone-poster.jpg"
+      poster="/images/projects/ar-anchor-cards/phone-poster.webp"
       muted
       loop
       playsInline
@@ -215,7 +215,7 @@ function App() {
             </div>
             <div className="hero-image-wrapper reveal reveal-scale delay-2">
               <img
-                src="/images/hero/fatima-hero.png"
+                src="/images/hero/fatima-hero.webp"
                 alt="Fatima Rafiqui"
                 className="hero-image"
               />
@@ -277,7 +277,7 @@ function App() {
                     <div className="thumb-clover-monitor">
                       <div className="thumb-clover-bezel">
                         <div className="thumb-clover-screenwrap">
-                          <img className="thumb-clover-screen" src="/images/projects/clover-designer/screen.jpg" alt="" />
+                          <img className="thumb-clover-screen" src="/images/projects/clover-designer/screen.webp" alt="" />
                           <CloverFlow />
                         </div>
                       </div>
