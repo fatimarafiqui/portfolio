@@ -72,7 +72,7 @@ const collage = [
   { file: 'gdg', ext: 'png', label: 'GDG 2026 Hackathon Judge', alt: 'Fatima standing beside the Google Developer Group DevFest Build with AI banner', shape: 'tall', pos: '25% 40%' },
   { file: 'talk', label: 'Bay Area Breakthrough talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
   { file: 'panel', label: 'Talk at Fabric Conference 2025', alt: 'Fatima giving a talk at Fabric Conference 2025, gesturing as she speaks', shape: 'wide', pos: '50% 8%' },
-  { file: 'judge', label: 'Judging', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
+  { file: 'judge', label: 'Judge for Microsoft Global Hackathon', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
   { file: 'garage', label: 'The Garage Relaunch at Microsoft', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
   { file: 'booth', label: 'Ask the Expert Booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
 ]
