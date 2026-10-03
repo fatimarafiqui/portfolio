@@ -74,7 +74,7 @@ const collage = [
   { file: 'panel', label: 'Talk at Fabric Conference 2025', alt: 'Fatima giving a talk at Fabric Conference 2025, gesturing as she speaks', shape: 'wide', pos: '50% 8%' },
   { file: 'talk', label: 'Bay Area Breakthrough talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
   { file: 'garage', label: 'The Garage Relaunch at Microsoft', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
-  { file: 'booth', label: 'Data Factory booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
+  { file: 'booth', label: 'Ask the Expert Booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
   { file: 'booth2', label: 'Booth conversations', alt: 'Fatima in conversation at a conference booth', shape: 'one', pos: '40% 35%' },
 ]
 
