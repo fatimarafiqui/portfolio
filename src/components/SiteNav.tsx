@@ -55,7 +55,7 @@ export default function SiteNav({ home = false, active }: SiteNavProps) {
         <Link to="/beyond-ux" className={active === 'beyond-ux' ? 'nav-active' : undefined} onClick={close}>
           Beyond UX
         </Link>
-        {section('contact', 'Contact')}
+        <a href="/resume/Fatima-Rafiqui-Resume.pdf" target="_blank" rel="noopener noreferrer" onClick={close}>Resume</a>
       </div>
     </nav>
   )

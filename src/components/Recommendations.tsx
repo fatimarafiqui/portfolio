@@ -13,9 +13,9 @@ export default function Recommendations() {
 
   return (
     <section className="testimonials" ref={ref}>
-      <div className="section-header reveal reveal-up">
-        <span className="section-eyebrow">RECOMMENDATIONS</span>
-        <h2 className="section-title">Their Words, Not Mine.</h2>
+      <div className="testimonials-intro reveal reveal-up">
+        <span className="bux-kicker">Testimonials</span>
+        <h2 className="bux-h2">Their words, not mine.</h2>
       </div>
       <div className="testimonials-featured">
         {testimonials.filter((t) => t.featured).map((t, i) => (
@@ -55,7 +55,7 @@ export default function Recommendations() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Read all recommendations on LinkedIn →
+        Read more testimonials on LinkedIn →
       </a>
     </section>
   )
