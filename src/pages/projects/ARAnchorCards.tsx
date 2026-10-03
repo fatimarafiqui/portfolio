@@ -63,15 +63,15 @@ const ideas = [
 const reflections = [
   {
     title: 'Discoverability Dilemma',
-    body: 'Ensuring feature discoverability was a challenge. Knowing that Google Maps is complex and has many moving parts, we had to map the entry point for our features to that of the underlying feature supporting it.',
+    body: 'Making new features discoverable was hard. Google Maps is complex, with many moving parts, so we tied each of our entry points to the existing feature that supports it.',
   },
   {
     title: 'Feature Evolution',
-    body: 'While exploring micro navigation, we were able to expand the concept to build on features Google Maps already offers. Micro navigation, for instance, could be merged with personal location sharing and Local Guides.',
+    body: 'While exploring micro-navigation we realized the idea could grow out of what Maps already offers. It could, for instance, merge with personal location sharing and Local Guides.',
   },
   {
     title: 'Design Pivot',
-    body: 'We reached a point where everything we thought fell apart. This project taught me that you can never predict your solution until you do the groundwork well. Only then do you see the true requirements, and trusting the research process goes a long way.',
+    body: 'At one point everything we believed fell apart. This project taught me that you cannot predict the solution until the groundwork is done. Only then do the true requirements show up, and trusting the research process goes a long way.',
   },
 ]
 
@@ -129,9 +129,7 @@ export default function ARAnchorCards() {
             <img className="ar-maps-logo" src={`${IMG}/maps-logo.png`} alt="Google Maps" />
             <h1 className="ar-title">AR Anchor Cards</h1>
             <p className="ar-lede">
-              Navigation for new settlers and tourists has always been challenging, but Google Maps has been the
-              one-stop application for all. This project builds on Google Maps' existing Live View feature to simplify
-              the onboarding experience of newcomers in a city.
+              Google Maps is the one-stop app for getting around, yet new settlers and tourists still get lost in the first few weeks. This passion project builds on Live View to make a new city feel familiar, one next step at a time.
             </p>
             <dl className="ar-meta">
               <div>
@@ -158,28 +156,23 @@ export default function ARAnchorCards() {
       <section className="ar-section ar-overview">
         <span className="ar-kicker">Project Vision</span>
         <p className="ar-vision">
-          We kicked off this project by trying to simplify the subway experience in New York City, but ended up
-          designing an onboarding transportation experience for new settlers in Google Maps. The revised goal was
-          to design public transport navigation for travellers on a short visit.
+          We set out to simplify the New York subway. We ended up designing something bigger: an onboarding experience inside Google Maps for new settlers, and public transport navigation for travelers on a short visit.
         </p>
       </section>
 
       {/* Solution */}
       <section className="ar-section" id="solution">
         <span className="ar-kicker">The Solution</span>
-        <h2 className="ar-h2">Final Prototype</h2>
+        <h2 className="ar-h2">Two ideas, one goal: make the next step obvious.</h2>
 
         <div className="ar-feature">
           <div className="ar-feature-text">
-            <h3 className="ar-h3">Micronavigation through AR Cards</h3>
+            <h3 className="ar-h3">Micro-navigation through AR cards</h3>
             <p>
-              Lines, numbers, and colors mean different things to people used to a different transport system. With
-              subway micro navigation, a user only needs to worry about their next steps. You can now onboard faster
-              without being delayed by deciphering signboards.
+              Lines, numbers and colors mean different things to people raised on a different transit system. With micro-navigation, a rider only has to think about the very next step, so they can onboard faster instead of decoding signboards.
             </p>
             <p>
-              The filter chips add delight to the user's journey. In AR mode, users can set filters to see relevant
-              content. For example, travelers can discover and learn about the culture through the AR culture filter.
+              Filter chips add a little delight. In AR mode, travelers choose what they want to see. Switch on the culture filter, for example, and the city starts explaining itself.
             </p>
           </div>
           <div className="ar-stage ar-videos ar-videos--3">
@@ -191,24 +184,19 @@ export default function ARAnchorCards() {
 
         <div className="ar-feature ar-feature--side">
           <div className="ar-feature-text">
-            <h3 className="ar-h3">Breadcrumbs will guide you home: AR Anchor Cards</h3>
+            <h3 className="ar-h3">Breadcrumbs that guide you home: AR Anchor Cards</h3>
             <p>
-              New settlers can navigate to a common meeting place by requesting AR-anchor-powered directions from a
-              friend or an acquaintance.
+              A new settler can ask a friend for directions to a shared meeting place, and get them as AR anchors placed along the way.
             </p>
             <p>
-              A friend can help someone with the location by providing user-generated anchor points. This feature is
-              based on the user behavior of navigating by landmarks or places of significance.
+              Those user-generated anchor points mirror how people really navigate: by landmarks and places that mean something, not by street names.
             </p>
-            <h3 className="ar-h3 ar-mt-sm">Polaroids in the Air: AR Memories</h3>
+            <h3 className="ar-h3 ar-mt-sm">Polaroids in the air: AR Memories</h3>
             <p>
-              Taking the concept further, an AR polaroid could also be used as a private photo map feature. Bilal
-              could record his experiences of visiting a new place on the map. When he visits again, he can relive
-              the experience by comparing old photos with the real location.
+              Taking the idea further, an AR polaroid becomes a private photo map. Meet Bilal, a new settler in NYC: he records a first visit to a new place, and when he returns, he can hold his old photos up against the real location and relive it.
             </p>
             <p>
-              This gives Bilal a chance to reminisce, share experiences that feel lived in, and form a stronger tie
-              with Google products.
+              It gives Bilal room to reminisce, share moments that feel lived in, and form a stronger tie with Google products.
             </p>
           </div>
           <div className="ar-stage ar-videos ar-videos--1">
@@ -220,15 +208,12 @@ export default function ARAnchorCards() {
       {/* Background */}
       <section className="ar-section ar-band">
         <span className="ar-kicker">The Background</span>
-        <h2 className="ar-h2">But how did we get to the final product?</h2>
+        <h2 className="ar-h2">So how did we get here?</h2>
         <div className="ar-split ar-split--photo-right">
           <div>
-            <h3 className="ar-h3">It all started with a friend having problems</h3>
+            <h3 className="ar-h3">It started with a friend who kept getting lost</h3>
             <p>
-              A friend who is a new settler in New York had recently come to start his journey as a graduate student.
-              In casual conversations, he often expressed his frustration at getting confused while figuring out
-              public transportation in New York. We saw this as an interesting design opportunity and started to dig
-              deeper into the issue.
+              A friend had just moved to New York to start grad school. In casual conversation he kept returning to one frustration: figuring out public transit. He was confused, and we were curious. It looked like a real design opportunity, so we started digging.
             </p>
           </div>
           <Figure kind="photo" file="bg-ar.png" alt="A new settler checking directions on a phone" />
@@ -238,11 +223,9 @@ export default function ARAnchorCards() {
       {/* Research */}
       <section className="ar-section">
         <span className="ar-kicker">The Process</span>
-        <h2 className="ar-h2">But wait, my friend is tech savvy. Why is he having problems?</h2>
+        <h2 className="ar-h2">But he is tech savvy. So why is he struggling?</h2>
         <p className="ar-narrow">
-          To understand the problem, we conducted desk research, collected survey results, interviewed New Yorkers
-          and evaluated navigation applications used in New York. We uncovered that many factors make navigation
-          difficult for a new settler.
+          To find out, we ran desk research and a survey, interviewed New Yorkers, and evaluated the navigation apps people use in the city. The answer was not one thing. Many small factors stack up to make navigation hard for a newcomer.
         </p>
         <div className="ar-grid ar-grid--4">
           {methods.map((m) => (
@@ -256,7 +239,7 @@ export default function ARAnchorCards() {
           ))}
         </div>
 
-        <span className="ar-kicker ar-mt">Key Takeaways</span>
+        <span className="ar-kicker ar-mt">What we heard</span>
         <h2 className="ar-h2">Research Insights</h2>
         <div className="ar-grid ar-grid--2">
           {insights.map((x, i) => (
@@ -272,12 +255,12 @@ export default function ARAnchorCards() {
       {/* Synthesis */}
       <section className="ar-section ar-band">
         <span className="ar-kicker">Research Synthesis</span>
-        <h2 className="ar-h2">We wanted to design for a watch, but it was time to trust the data.</h2>
+        <h2 className="ar-h2">We wanted to design for a watch. The data said otherwise.</h2>
         <p className="ar-narrow">
-          We started by designing Maps for smart watches, but through research we realized we were not focusing on
-          the right problem. We were trying to solve for route delays.
+          We began by designing Maps for smartwatches, aiming to solve route delays. Research showed we were solving the wrong problem.
         </p>
         <Figure kind="photo" file="affinity-ar.png" alt="The team affinity mapping research notes on a table" caption="Affinity mapping the research" max={820} />
+        <p className="ar-narrow ar-mt-sm"><strong>Three directions we ruled out:</strong></p>
         <div className="ar-grid ar-grid--3">
           {dead.map((d) => (
             <div key={d.title} className="ar-dead">
@@ -288,14 +271,11 @@ export default function ARAnchorCards() {
           ))}
         </div>
         <p className="ar-narrow ar-mt-sm">
-          After research, we realized we were focusing on the lesser issues: making delay communication better,
-          advocating for aggregation of services, and making cultural information available as a travel guide. These
-          solutions were either already implemented or would not be impactful. After affinity mapping and concept
-          generation, we revisited the problem and revised our design goals.
+          The issues we had been chasing were the lesser ones: better delay communication, aggregating services, and cultural information as a travel guide. Each was either already solved or would not move the needle. So after affinity mapping and concept generation, we went back to the problem and reset our goals.
         </p>
 
         <span className="ar-kicker ar-mt">How might we</span>
-        <h2 className="ar-h2">Revised Design Opportunity</h2>
+        <h2 className="ar-h2">A sharper problem to solve</h2>
         <div className="ar-grid ar-grid--3">
           {hmw.map((h, i) => (
             <div key={i} className="ar-insight">
@@ -309,23 +289,20 @@ export default function ARAnchorCards() {
       {/* Goal + persona */}
       <section className="ar-section">
         <span className="ar-kicker">Design Goal</span>
-        <h2 className="ar-h2">Making navigation simpler, easier and contextual.</h2>
+        <h2 className="ar-h2">Make navigation simpler, easier and contextual.</h2>
         <p className="ar-narrow">
-          We settled on contextual navigation with just-in-time information, which was only possible through
-          augmented reality and location anchors. Using AR-based cards also opened up possibilities to improve
-          navigation and normalize culture through personalized directions and photo sharing.
+          The answer was just-in-time information, delivered in context. That is only possible with augmented reality and location anchors. AR cards also opened the door to personalized directions and photo sharing: ways to improve navigation and make a new culture feel normal.
         </p>
 
         <span className="ar-kicker ar-mt">Persona</span>
-        <h2 className="ar-h2">Meet the user.</h2>
+        <h2 className="ar-h2">Meet Bilal.</h2>
         <div className="ar-persona">
           <Img file="bilal.png" alt="Persona: Bilal Kareem, checking his phone with a backpack on" className="ar-persona-img" />
           <div className="ar-persona-body">
             <h3 className="ar-h3">Bilal Kareem</h3>
             <p className="ar-persona-tags"><em>Inexperienced, cautious, excited, overwhelmed</em></p>
             <p>
-              Bilal recently moved to NYC from a small town in Europe. He needs to figure out his way around the city
-              while adjusting to his new life.
+              Bilal just moved to NYC from a small town in Europe. He has to find his way around a huge city while building a whole new life in it.
             </p>
             <h4 className="ar-h4">Goals &amp; motivation</h4>
             <p>Build a new mental model. Balance work and settling in. Balance safety with exploring the city.</p>
@@ -335,18 +312,16 @@ export default function ARAnchorCards() {
         </div>
 
         <span className="ar-kicker ar-mt">User Journey</span>
-        <h2 className="ar-h2">A look at his daily commute</h2>
+        <h2 className="ar-h2">A day in his commute</h2>
         <Figure kind="wide" file="userjourney.png" alt="Bilal's daily commute: decide, plan, experience, board, anticipate, arrive, with painpoints and opportunities" caption="Tap to open the full journey map" open />
       </section>
 
       {/* Principles */}
       <section className="ar-section ar-band">
         <span className="ar-kicker">Design Principles</span>
-        <h2 className="ar-h2">Cementing our principles to guide the design process</h2>
+        <h2 className="ar-h2">Wild ideas, solid principles</h2>
         <p className="ar-narrow">
-          To form our guiding principles, we used idea mash-up, where we came up with wild solutions to very real
-          problems. Although those solutions were far from implementable, they gave us solid principles for our final
-          solution.
+          To find our guiding principles, we ran an idea mash-up: wild solutions to very real problems. None of them were buildable, but they left us with four principles to design by.
         </p>
         <div className="ar-grid ar-grid--4">
           {principles.map((p) => (
@@ -360,12 +335,10 @@ export default function ARAnchorCards() {
 
       {/* Ideas */}
       <section className="ar-section">
-        <span className="ar-kicker">Moving towards the solution</span>
-        <h2 className="ar-h2">Adding navigation to the AR world</h2>
+        <span className="ar-kicker">Toward the solution</span>
+        <h2 className="ar-h2">Adding a digital layer to the real world</h2>
         <p className="ar-narrow">
-          Out of all our ideas, it was clear we could not solve for every physical problem in public transport. We
-          needed to add a digital layer to simplify the experience for our users. We needed a digital duct tape to
-          hide real-world blemishes.
+          We could not fix every physical problem in public transport. What we could do was lay a digital layer over it that simplifies the experience: digital duct tape for real-world blemishes.
         </p>
         <div className="ar-grid ar-grid--3">
           {ideas.map((p) => (
@@ -383,22 +356,19 @@ export default function ARAnchorCards() {
       {/* Hi-fi */}
       <section className="ar-section ar-band">
         <span className="ar-kicker">Solution</span>
-        <h2 className="ar-h2">Hi-fidelity Prototypes</h2>
+        <h2 className="ar-h2">Hi-fidelity prototypes</h2>
 
         <h3 className="ar-h3 ar-concept">Concept 1: Subway Micro-navigation</h3>
         <Figure kind="phone" file="subway-cards.png" alt="Subway AR card on a phone with callouts for AR cards, journey information and AR filters" max={760} />
         <Block title="Subway Navigation Cards">
           <p>
-            The subway navigation cards provide contextual information to new settlers like Bilal. Each card holds
-            the information a user might need to make a decision at that point in the journey.
+            These cards give new settlers like Bilal the right information at the right moment. Each one is built around the decision he faces at that point in the journey.
           </p>
         </Block>
         <Figure kind="wide" file="subway-cards-detail.png" alt="Subway cards at the entrance, concourse and platform levels" open />
         <Block title="Design Decision">
           <p>
-            The initial card design lacked visual hierarchy, and the information was not grouped to be understood at
-            a glance. The revised cards have better hierarchy, are easy to follow, and also suggest a subway car
-            based on crowdsourced data.
+            Our first cards had weak hierarchy and loosely grouped information, so they could not be read at a glance. The revised cards are clearer and easier to follow, and they even suggest the best subway car using crowdsourced data.
           </p>
         </Block>
         <Figure kind="wide" file="subway-design-decision.png" alt="Initial and revised subway card designs" open />
@@ -407,17 +377,13 @@ export default function ARAnchorCards() {
         <Figure kind="phone" file="anchors-concept.png" alt="Anchor card on a phone with callouts for personal AR cards, entry field and post button" max={760} />
         <Block title="Design Decisions">
           <p>
-            The initial card design did not give enough information about system status. The revised card lets
-            users view a snapshot of the sender's location. With this interaction, the user is assured they are
-            travelling to the right place.
+            The first card did not communicate system status. The revised card shows a snapshot of the sender's location, so the user knows they are heading to the right place.
           </p>
         </Block>
         <Figure kind="wide" file="anchors-design-decision.png" alt="Initial and revised anchor card designs" open />
         <Block>
           <p>
-            To give a sense of anchor points, "steps and more" listed them. However, nothing on the map showed the
-            personal anchor points. The revised design added flags on the map as a visual indicator for the anchor
-            points left behind by the creator.
+            Anchor points were listed under "steps and more", but nothing on the map showed them. We added flags to the map as a visual marker for the points the creator left behind.
           </p>
         </Block>
         <Figure kind="wide" file="anchors-map.png" alt="Anchor flags shown on the map" open />
@@ -429,7 +395,7 @@ export default function ARAnchorCards() {
       {/* Retrospective */}
       <section className="ar-section">
         <span className="ar-kicker">Retrospective</span>
-        <h2 className="ar-h2">Reflecting on the experience</h2>
+        <h2 className="ar-h2">What I took away</h2>
         <div className="ar-grid ar-grid--3">
           {reflections.map((r) => (
             <div key={r.title} className="ar-insight">
