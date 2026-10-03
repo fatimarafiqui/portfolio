@@ -377,14 +377,6 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease;
 }
 
-/* A full-section gradient behind the list, so the hover glass has color to frost */
-.bux-section--writing {
-  background:
-    radial-gradient(ellipse 55% 80% at 8% 95%, rgba(184, 217, 189, 0.35) 0%, transparent 62%),
-    radial-gradient(ellipse 50% 70% at 95% 5%, rgba(241, 214, 176, 0.3) 0%, transparent 60%),
-    linear-gradient(135deg, #eef2ec 0%, #f4f1ec 52%, #f6efe5 100%);
-}
-
 .bux-write-row {
   border: 1px solid transparent;
 }
@@ -392,12 +384,37 @@
 .bux-write-row:hover,
 .bux-write-row:focus-visible {
   transform: translateX(6px);
-  background: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  backdrop-filter: blur(16px) saturate(170%);
-  border-color: rgba(255, 255, 255, 0.75);
-  box-shadow: 0 10px 30px rgba(44, 62, 45, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.72));
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border-color: rgba(122, 158, 126, 0.4);
+  box-shadow: 0 8px 24px rgba(44, 62, 45, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
   outline: none;
+}
+
+/* A soft glass sheen that sweeps across the strip on hover */
+.bux-write-row::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(184, 217, 189, 0.45), transparent);
+  transform: skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bux-write-row:hover::after,
+.bux-write-row:focus-visible::after {
+  animation: bux-sheen 0.9s ease forwards;
+}
+
+@keyframes bux-sheen {
+  0% { left: -40%; opacity: 0; }
+  20% { opacity: 1; }
+  100% { left: 110%; opacity: 0; }
 }
 
 .bux-write-main {
@@ -451,7 +468,7 @@
 
 .bux-write-row:hover .bux-write-go {
   transform: rotate(45deg);
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-accent-light);
 }
 
 .bux-more {
@@ -560,5 +577,6 @@
   .bux-animate { opacity: 1; transform: none; transition: none; }
   .bux-talk,
   .bux-write-row { transition: none; }
+  .bux-write-row:hover::after { animation: none; }
   .bux-hero-card { animation: none; }
 }
