@@ -130,6 +130,16 @@ function DbtTerminal() {
 
 function App() {
   useNavTheme()
+  // Touch screens can't hover, so a first tap on a project card reveals its glass details and a second tap opens it.
+  // The state lives in a data attribute (not a class) so React doesn't overwrite the `revealed` class the scroll fade adds.
+  const [activeCard, setActiveCard] = useState<string | null>(null)
+  useEffect(() => {
+    const clear = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.project-card')) setActiveCard(null)
+    }
+    document.addEventListener('click', clear)
+    return () => document.removeEventListener('click', clear)
+  }, [])
   const observerRef = useRef<IntersectionObserver | null>(null)
   const heroRef = useRef<HTMLElement>(null)
   const blobRef = useRef<HTMLDivElement>(null)
@@ -237,7 +247,18 @@ function App() {
         </div>
         <div className="projects-grid">
           {projects.map((project, i) => (
-            <Link to={project.href} className={`project-card reveal reveal-up delay-${i + 1}`} key={project.id}>
+            <Link
+              to={project.href}
+              className={`project-card reveal reveal-up delay-${i + 1}`}
+              data-active={activeCard === project.id}
+              key={project.id}
+              onClick={(e) => {
+                if (window.matchMedia('(any-hover: none)').matches && activeCard !== project.id) {
+                  e.preventDefault()
+                  setActiveCard(project.id)
+                }
+              }}
+            >
               <div
                 className={`project-card-image${project.imageFit === 'contain' ? ' project-card-image--contain' : ''}`}
                 style={project.imageBg ? { background: project.imageBg } : undefined}
@@ -314,6 +335,7 @@ function App() {
                     <span key={tag} className="tag">{tag}</span>
                   ))}
                 </div>
+                <span className="project-card-open">Tap again to open &rarr;</span>
               </div>
             </Link>
           ))}
