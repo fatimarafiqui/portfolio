@@ -120,9 +120,10 @@
 .ar-meta {
   display: grid;
   gap: var(--space-4);
-  margin: var(--space-10) 0 0;
-  padding-top: var(--space-6);
+  margin: 0 0 var(--space-8);
+  padding: var(--space-5) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .ar-meta dt {
