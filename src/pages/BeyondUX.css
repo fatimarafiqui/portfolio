@@ -171,7 +171,7 @@
 }
 
 .bux-hero-card--1 { top: 14.6%; left: 14.6%; animation-delay: 0s; }
-.bux-hero-card--2 { top: 50%; left: 100%; animation-delay: 1.3s; }
+.bux-hero-card--2 { top: 50%; left: auto; right: -14px; translate: 0 -50%; animation-delay: 1.3s; }
 .bux-hero-card--3 { top: 85.4%; left: 14.6%; animation-delay: 2.6s; }
 
 .bux-hero-emoji { font-size: var(--text-xl); }
@@ -587,16 +587,17 @@
 @media (max-width: 900px) {
   .bux-talks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bux-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 36vw; gap: var(--space-3); }
+  /* two columns: the second tall photo has no partner, so it spans the row instead of leaving a hole */
+  .bux-mosaic-photo--tall ~ .bux-mosaic-photo--tall { grid-column: span 2; grid-row: span 1; }
   .bux-section--tight { padding-top: var(--space-8); padding-bottom: var(--space-8); }
 }
 
 @media (max-width: 768px) {
   .bux-hero { padding: calc(var(--space-16) + 40px) var(--space-6) var(--space-12); }
   .bux-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); }
-  .bux-scroll { left: var(--space-6); bottom: var(--space-5); }
+  .bux-scroll { display: none; }
   .bux-hero-visual { width: min(70%, 280px); margin: 0 auto var(--space-6); }
   .bux-hero-card { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
-  .bux-hero-card--2 { left: 96%; }
   .bux-stats { flex-wrap: nowrap; gap: var(--space-5); }
   .bux-stats dt { font-size: var(--text-lg); }
   .bux-stats dd { max-width: 9ch; }
@@ -605,10 +606,17 @@
   .bux-talks-grid { grid-template-columns: 1fr; }
   .bux-write-row { border-radius: var(--border-radius-xl); padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5); }
   .bux-write-main { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
-  @media (prefers-reduced-motion: reduce) {
+  .bux-glass { left: var(--space-2); bottom: var(--space-2); max-width: calc(100% - 2 * var(--space-2)); padding: 4px 10px; font-size: 0.6875rem; line-height: 1.25; border-radius: 12px; }
+  .bux-starwars-inner { flex-direction: column-reverse; align-items: flex-start; gap: var(--space-8); }
+  .bux-starwars-content { max-width: none; }
+  .bux-starwars-bb8 { flex: 0 0 auto; width: 200px; height: 200px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .bux-animate { opacity: 1; transform: none; transition: none; }
   .bux-talk,
   .bux-write-row { transition: none; }
   .bux-write-row:hover::after { animation: none; }
   .bux-hero-card { animation: none; }
+  .bux-scroll-line { animation: none; }
 }
