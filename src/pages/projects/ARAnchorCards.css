@@ -2,28 +2,7 @@
   min-height: 100vh;
   background: var(--color-surface);
   color: var(--color-primary);
-  padding-bottom: var(--space-16);
 }
-
-.ar-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: var(--space-5) var(--space-10);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-}
-
-.ar-back {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.ar-back:hover { opacity: 0.6; }
 
 /* --- Hero --- */
 .ar-hero {
@@ -386,11 +365,6 @@
 .ar-dead img { display: block; margin-bottom: var(--space-3); }
 .ar-dead strong { display: block; margin-bottom: var(--space-2); }
 
-.ar-footer {
-  text-align: center;
-  padding: var(--space-16) var(--space-10) var(--space-8);
-}
-
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .ar-grid--4 { grid-template-columns: repeat(2, 1fr); }
@@ -399,7 +373,6 @@
 }
 
 @media (max-width: 768px) {
-  .ar-nav { padding: var(--space-4) var(--space-6); }
   .ar-hero { padding: calc(var(--space-16) + 40px) var(--space-6) var(--space-8); }
   .ar-section { padding: var(--space-12) var(--space-6); }
   .ar-overview,
