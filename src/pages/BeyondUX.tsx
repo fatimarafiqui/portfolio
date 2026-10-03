@@ -214,7 +214,7 @@ function BeyondUX() {
       </section>
 
       {/* Writing */}
-      <section className="bux-section bux-section--tint">
+      <section className="bux-section bux-section--tint bux-section--writing">
         <div className="bux-intro bux-animate">
           <span className="bux-kicker">Writing</span>
           <h2 className="bux-h2">Thinking out loud</h2>
