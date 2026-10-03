@@ -1,57 +1,86 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from './data/projects'
-import { testimonials } from './data/testimonials'
 import { aboutSummary, aboutPhotos, bio } from './data/about'
 import { useNavTheme } from './hooks/useNavTheme'
+import SiteNav from './components/SiteNav'
+import ContactSection from './components/ContactSection'
+import { renderRich } from './utils/richText'
 import './App.css'
 
-const initials = (name: string) =>
-  name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase()
+// Data flowing through the real Fabric Designer diagram on the monitor: a soft pulse runs along each link from the
+// plane switches down to the two PoDs, with a faint ripple where it lands. Coordinates are in screenshot pixels
+// (the overlay is stretched exactly over the screenshot).
+const CLOVER_VIEW = { w: 1666, h: 996 }
+const cloverPlanes = [{ x: 466, y: 415 }, { x: 709, y: 415 }, { x: 976, y: 418 }, { x: 1232, y: 418 }]
+const cloverPods = [{ x: 427, y: 543 }, { x: 1141, y: 541 }]
 
-const renderRich = (text: string) =>
-  text.split(/(==[^=]+==|\*\*[^*]+\*\*)/).map((part, i) => {
-    if (part.startsWith('==')) return <mark key={i} className="about-mark">{part.slice(2, -2)}</mark>
-    if (part.startsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>
-    return part
-  })
-
-// Leaf-spine network: two spine switches linked to four leaf switches (the fabric Clover Designer lays out).
-const cloverSpines = [{ x: 85, y: 18 }, { x: 175, y: 18 }]
-const cloverLeaves = [{ x: 34, y: 94 }, { x: 110, y: 94 }, { x: 150, y: 94 }, { x: 226, y: 94 }]
-
-function CloverNodes() {
+function CloverFlow() {
+  const links = cloverPlanes.flatMap((plane, pi) =>
+    cloverPods.map((pod, ki) => {
+      const drop = pod.y - plane.y
+      return {
+        id: `${pi}-${ki}`,
+        d: `M${plane.x} ${plane.y} C${plane.x} ${plane.y + drop * 0.55} ${pod.x} ${plane.y + drop * 0.45} ${pod.x} ${pod.y}`,
+        delay: (pi * 2 + ki) * 0.4,
+      }
+    })
+  )
   return (
-    <svg className="thumb-clover" viewBox="0 0 260 116" aria-hidden="true">
-      {cloverSpines.map((spine, si) =>
-        cloverLeaves.map((leaf, li) => (
-          <line
-            key={`${si}-${li}`}
-            className="clover-link"
-            style={{ animationDelay: `${((si * 4 + li) * 0.35).toFixed(2)}s` }}
-            x1={spine.x}
-            y1={spine.y}
-            x2={leaf.x}
-            y2={leaf.y}
-          />
-        ))
-      )}
-      {[...cloverSpines, ...cloverLeaves].map((node, i) => (
-        <g key={i} className="clover-node" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s` }}>
-          <circle className="clover-pulse" cx={node.x} cy={node.y} r="9" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s` }} />
-          <rect className="clover-switch" x={node.x - 13} y={node.y - 7} width="26" height="14" rx="3.5" />
-          <circle className="clover-led" cx={node.x - 6} cy={node.y} r="1.8" />
-          <circle className="clover-led" cx={node.x} cy={node.y} r="1.8" />
-          <circle className="clover-led" cx={node.x + 6} cy={node.y} r="1.8" />
-        </g>
+    <svg className="clover-flow" viewBox={`0 0 ${CLOVER_VIEW.w} ${CLOVER_VIEW.h}`} preserveAspectRatio="none" aria-hidden="true">
+      {links.map((l) => (
+        <path key={l.id} d={l.d} pathLength={100} className="clover-flow-path" style={{ animationDelay: `${l.delay}s` }} />
+      ))}
+      {cloverPods.map((pod, ki) => (
+        <circle key={ki} cx={pod.x} cy={pod.y} r="14" className="clover-flow-ripple" style={{ animationDelay: `${ki * 0.4}s` }} />
       ))}
     </svg>
   )
 }
 
+// The phone on the AR Anchor Cards thumbnail is the real AR prototype video from the case study (hosted in the
+// Portfolio-Assets repo, like on the project page). The recording already includes its own phone frame on a white
+// background, so the white is blended away in CSS. It only loads and plays while the card is on screen, and not at
+// all for visitors who prefer reduced motion; until then (or if it can't load) the still image below shows instead.
+const AR_PROTOTYPE_VIDEO = 'https://github.com/fatimarafiqui/Portfolio-Assets/raw/main/AR-Anchor/ar2.mp4'
+
+function MapsPhone() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!video.src) video.src = AR_PROTOTYPE_VIDEO
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.4 }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <video
+      ref={videoRef}
+      className="thumb-maps-video"
+      poster="/images/projects/ar-anchor-cards/phone-poster.jpg"
+      muted
+      loop
+      playsInline
+      preload="none"
+    />
+  )
+}
+
 const mapsDistances = ['200 ft', '150 ft', '100 ft', '50 ft', 'Now']
 
-// Google Maps-style turn banner on the AR Anchor Cards thumbnail: the distance ticks down toward the turn.
+// Google Maps-style turn banner on the AR Anchor Cards thumbnail: the distance ticks down toward the right turn.
 function MapsNav() {
   const [step, setStep] = useState(0)
   useEffect(() => {
@@ -62,11 +91,11 @@ function MapsNav() {
     <div className="thumb-maps" aria-hidden="true">
       <span className="thumb-maps-badge">
         <svg viewBox="0 0 24 24" className="thumb-maps-arrow">
-          <path d="M9 5 4 10l5 5M4 10h9a5 5 0 0 1 5 5v4" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M15 5l5 5-5 5M20 10h-9a5 5 0 0 0-5 5v4" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
       <span className="thumb-maps-text">
-        <strong>Turn left</strong>
+        <strong>Turn right</strong>
         <span className={step === mapsDistances.length - 1 ? 'is-now' : ''}>{mapsDistances[step]}</span>
       </span>
       <span className="thumb-maps-dots">
@@ -163,15 +192,7 @@ function App() {
   return (
     <div className="app">
       {/* Navigation */}
-      <nav className="nav">
-        <span className="nav-logo">Fatima Rafiqui</span>
-        <div className="nav-links">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <Link to="/beyond-ux">Beyond UX</Link>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
+      <SiteNav home />
 
       {/* Hero - Dark cinematic section */}
       <section className="hero" ref={heroRef}>
@@ -183,12 +204,14 @@ function App() {
         <div className="hero-inner">
           <div className="hero-content">
             <div className="hero-text">
-              <p className="hero-eyebrow reveal reveal-up">PRODUCT DESIGNER</p>
               <h1 className="hero-name">
                 <span className="hero-line reveal reveal-up delay-1">Hello,</span>
                 <span className="hero-line reveal reveal-up delay-2">I'm <span className="hero-name-gradient">Fatima</span>.</span>
               </h1>
-              <p className="hero-subtitle reveal reveal-up delay-3">{bio.intro}</p>
+              <p className="hero-subtitle reveal reveal-up delay-3">
+                {bio.intro}
+                <span className="hero-punch">{bio.punch}</span>
+              </p>
             </div>
             <div className="hero-image-wrapper reveal reveal-scale delay-2">
               <img
@@ -210,7 +233,7 @@ function App() {
         <div className="section-header reveal reveal-up">
           <span className="section-eyebrow">WORK</span>
           <h2 className="section-title">See What I've Built</h2>
-          <p className="section-subtitle">Selected projects across product design, research, and interaction design.</p>
+          <p className="section-subtitle">Selected projects across different domains.</p>
         </div>
         <div className="projects-grid">
           {projects.map((project, i) => (
@@ -249,8 +272,27 @@ function App() {
                     <DbtTerminal />
                   </div>
                 )}
-                {project.custom === 'clover' && <CloverNodes />}
-                {project.custom === 'maps' && <MapsNav />}
+                {project.custom === 'clover' && (
+                  <div className="thumb-dbt thumb-clover-card" aria-hidden="true">
+                    <div className="thumb-clover-monitor">
+                      <div className="thumb-clover-bezel">
+                        <div className="thumb-clover-screenwrap">
+                          <img className="thumb-clover-screen" src="/images/projects/clover-designer/screen.jpg" alt="" />
+                          <CloverFlow />
+                        </div>
+                      </div>
+                      <div className="thumb-clover-neck" />
+                      <div className="thumb-clover-foot" />
+                    </div>
+                    <img className="thumb-clover-logo" src="/images/projects/clover-designer/juniper-logo.png" alt="" />
+                  </div>
+                )}
+                {project.custom === 'maps' && (
+                  <div className="thumb-dbt thumb-maps-card" aria-hidden="true">
+                    <MapsPhone />
+                    <MapsNav />
+                  </div>
+                )}
                 {project.image && (
                   <img
                     className="project-card-media"
@@ -313,74 +355,39 @@ function App() {
               <p key={i} className={`about-line reveal reveal-up delay-${i + 1}`}>{renderRich(text)}</p>
             ))}
             <p className="about-line reveal reveal-up delay-3">{aboutSummary.personal}</p>
+            <Link to="/beyond-ux" className="about-cta reveal reveal-up delay-3">
+              <svg className="about-cta-bb8" viewBox="0 0 40 40" aria-hidden="true">
+                <defs>
+                  <radialGradient id="bb8-body" cx="35%" cy="30%" r="75%">
+                    <stop offset="0" stopColor="#ffffff" />
+                    <stop offset="1" stopColor="#d6dbe2" />
+                  </radialGradient>
+                </defs>
+                <circle cx="20" cy="26" r="12.5" fill="url(#bb8-body)" stroke="#b4bbc6" strokeWidth="0.6" />
+                <g className="bb8-marks">
+                  <circle cx="20" cy="26" r="8.2" fill="none" stroke="#e8793a" strokeWidth="1.6" />
+                  <circle cx="20" cy="26" r="3.8" fill="#e8793a" />
+                  <circle cx="20" cy="26" r="1.5" fill="#ffffff" />
+                  <path d="M20 15.5v2.6M20 33.9v2.6M9.5 26h2.6M27.9 26h2.6" stroke="#aab1bc" strokeWidth="1" strokeLinecap="round" />
+                  <circle cx="12.4" cy="20.6" r="1.3" fill="#e8793a" />
+                  <circle cx="27.6" cy="31.4" r="1.3" fill="#e8793a" />
+                </g>
+                <g className="bb8-head">
+                  <path d="M12.5 14.2a7.5 7.5 0 0 1 15 0z" fill="#ffffff" stroke="#b4bbc6" strokeWidth="0.6" />
+                  <path d="M13.2 11.7h13.6" stroke="#e8793a" strokeWidth="1.3" />
+                  <circle cx="21.6" cy="9.4" r="2.4" fill="#1d2330" stroke="#8a919c" strokeWidth="0.6" />
+                  <circle cx="22.3" cy="8.7" r="0.75" fill="#7fd1ff" />
+                  <path d="M16.8 7 16 3.2" stroke="#6b7280" strokeWidth="0.9" strokeLinecap="round" />
+                </g>
+              </svg>
+              <span>Psst, there's a Jedi-in-training in here</span>
+              <span className="about-cta-arrow" aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="testimonials">
-        <div className="section-header reveal reveal-up">
-          <span className="section-eyebrow">RECOMMENDATIONS</span>
-          <h2 className="section-title">Their Words, Not Mine.</h2>
-        </div>
-        <div className="testimonials-featured">
-          {testimonials.filter((t) => t.featured).map((t, i) => (
-            <blockquote className={`quote-card quote-card--featured reveal reveal-up delay-${i + 1}`} key={t.name}>
-              <p className="quote-text">{renderRich(t.quote)}</p>
-              <footer className="quote-author">
-                <span className="quote-avatar" aria-hidden="true">
-                  {t.avatar ? <img src={t.avatar} alt="" /> : initials(t.name)}
-                </span>
-                <span className="quote-info">
-                  <strong>{t.name}</strong>
-                  <span>{[t.role, t.company].filter(Boolean).join(', ')}</span>
-                </span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-        <div className="testimonials-grid">
-          {testimonials.filter((t) => !t.featured).map((t, i) => (
-            <blockquote className={`quote-card reveal reveal-up delay-${i + 1}`} key={t.name}>
-              <p className="quote-text">{renderRich(t.quote)}</p>
-              <footer className="quote-author">
-                <span className="quote-avatar" aria-hidden="true">
-                  {t.avatar ? <img src={t.avatar} alt="" /> : initials(t.name)}
-                </span>
-                <span className="quote-info">
-                  <strong>{t.name}</strong>
-                  <span>{[t.role, t.company].filter(Boolean).join(', ')}</span>
-                </span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-        <a
-          className="testimonials-link reveal reveal-up"
-          href="https://www.linkedin.com/in/fatimarafiqui/details/recommendations/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Read all recommendations on LinkedIn →
-        </a>
-      </section>
-
-      {/* Contact Section */}
-      <footer className="contact" id="contact">
-        <div className="contact-inner reveal reveal-up">
-          <div className="contact-top">
-            <p className="contact-eyebrow">Get in touch</p>
-            <h2 className="contact-heading">Let's talk design, data,<br/>or ideas over coffee.</h2>
-            <a href="mailto:fatima.rafiqui@gmail.com" className="contact-email">
-              Say hello &rarr;
-            </a>
-          </div>
-          <div className="contact-bottom">
-            <p className="contact-copy">&copy; 2026 Fatima Rafiqui</p>
-            <p className="contact-copy">Designed with heart, built with vibecode</p>
-          </div>
-        </div>
-      </footer>
+      <ContactSection />
     </div>
   )
 }

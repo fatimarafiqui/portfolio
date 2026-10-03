@@ -29,6 +29,9 @@ export const projects: Project[] = [
     role: "Product Designer",
     timeline: "2025 - 2026",
     thumbnail: "/images/projects/dbt-job-thumb.png",
+    // Built from dbt's brand: a whisper of their light orange (#fff9f5) fading into a faint tint of the signature orange (#fe6703)
+    imageBg:
+      "radial-gradient(circle at 10% 8%, rgba(254, 103, 3, 0.05) 0%, transparent 46%), linear-gradient(160deg, #fffdfb 0%, #fff6ef 55%, #ffeadb 100%)",
     custom: "dbt",
     href: "/projects/dbt-job",
   },
@@ -56,7 +59,6 @@ export const projects: Project[] = [
     role: "Product Designer",
     timeline: "",
     thumbnail: "/images/projects/clover-designer-thumb.png",
-    image: "/images/projects/clover-designer/card.webp",
     imageBg: "#f1f2f5",
     custom: "clover",
     href: "/projects/clover-designer",
@@ -72,8 +74,8 @@ export const projects: Project[] = [
     role: "UX Research • UX Design • Interaction Design • Usability Testing",
     timeline: "June - August 2020",
     thumbnail: "/images/projects/ar-anchor-cards-thumb.png",
-    image: "/images/projects/ar-anchor-cards/card.webp",
-    imageBg: "#ecf8ff",
+    imageBg: "linear-gradient(160deg, #f9fdff 0%, #ecf8ff 50%, #dcf0fc 100%)",
+
     logo: "/images/projects/ar-anchor-cards/google.svg",
     custom: "maps",
     href: "/projects/ar-anchor-cards",
