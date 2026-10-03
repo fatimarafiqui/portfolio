@@ -130,15 +130,28 @@ function DbtTerminal() {
 
 function App() {
   useNavTheme()
-  // Touch screens can't hover, so a first tap on a project card reveals its glass details and a second tap opens it.
-  // The state lives in a data attribute (not a class) so React doesn't overwrite the `revealed` class the scroll fade adds.
+  // Touch can't hover, so on touch a first tap on a project card reveals its glass details and a second tap opens it.
+  // Whether we are in touch mode follows the input actually being used (data-input on <html>): a mouse always gets the
+  // hover glass and normal clicks, even on hybrid devices, remote desktops or device emulation where media queries lie.
+  // The active card lives in a data attribute (not a class) so React doesn't overwrite the `revealed` class.
   const [activeCard, setActiveCard] = useState<string | null>(null)
   useEffect(() => {
+    const root = document.documentElement
+    const setInput = (mode: 'touch' | 'mouse') => {
+      root.dataset.input = mode
+      if (mode === 'mouse') setActiveCard(null)
+    }
+    setInput(window.matchMedia('(hover: none) and (pointer: coarse)').matches ? 'touch' : 'mouse')
+    const onPointer = (e: PointerEvent) => setInput(e.pointerType === 'touch' ? 'touch' : 'mouse')
     const clear = (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest('.project-card')) setActiveCard(null)
     }
+    document.addEventListener('pointerdown', onPointer, true)
     document.addEventListener('click', clear)
-    return () => document.removeEventListener('click', clear)
+    return () => {
+      document.removeEventListener('pointerdown', onPointer, true)
+      document.removeEventListener('click', clear)
+    }
   }, [])
   const observerRef = useRef<IntersectionObserver | null>(null)
   const heroRef = useRef<HTMLElement>(null)
@@ -253,7 +266,7 @@ function App() {
               data-active={activeCard === project.id}
               key={project.id}
               onClick={(e) => {
-                if (window.matchMedia('(any-hover: none)').matches && activeCard !== project.id) {
+                if (document.documentElement.dataset.input === 'touch' && activeCard !== project.id) {
                   e.preventDefault()
                   setActiveCard(project.id)
                 }
