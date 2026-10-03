@@ -130,29 +130,6 @@ function DbtTerminal() {
 
 function App() {
   useNavTheme()
-  // Touch can't hover, so on touch a first tap on a project card reveals its glass details and a second tap opens it.
-  // Whether we are in touch mode follows the input actually being used (data-input on <html>): a mouse always gets the
-  // hover glass and normal clicks, even on hybrid devices, remote desktops or device emulation where media queries lie.
-  // The active card lives in a data attribute (not a class) so React doesn't overwrite the `revealed` class.
-  const [activeCard, setActiveCard] = useState<string | null>(null)
-  useEffect(() => {
-    const root = document.documentElement
-    const setInput = (mode: 'touch' | 'mouse') => {
-      root.dataset.input = mode
-      if (mode === 'mouse') setActiveCard(null)
-    }
-    setInput(window.matchMedia('(hover: none) and (pointer: coarse)').matches ? 'touch' : 'mouse')
-    const onPointer = (e: PointerEvent) => setInput(e.pointerType === 'touch' ? 'touch' : 'mouse')
-    const clear = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest('.project-card')) setActiveCard(null)
-    }
-    document.addEventListener('pointerdown', onPointer, true)
-    document.addEventListener('click', clear)
-    return () => {
-      document.removeEventListener('pointerdown', onPointer, true)
-      document.removeEventListener('click', clear)
-    }
-  }, [])
   const observerRef = useRef<IntersectionObserver | null>(null)
   const heroRef = useRef<HTMLElement>(null)
   const blobRef = useRef<HTMLDivElement>(null)
@@ -260,18 +237,7 @@ function App() {
         </div>
         <div className="projects-grid">
           {projects.map((project, i) => (
-            <Link
-              to={project.href}
-              className={`project-card reveal reveal-up delay-${i + 1}`}
-              data-active={activeCard === project.id}
-              key={project.id}
-              onClick={(e) => {
-                if (document.documentElement.dataset.input === 'touch' && activeCard !== project.id) {
-                  e.preventDefault()
-                  setActiveCard(project.id)
-                }
-              }}
-            >
+            <Link to={project.href} className={`project-card reveal reveal-up delay-${i + 1}`} key={project.id}>
               <div
                 className={`project-card-image${project.imageFit === 'contain' ? ' project-card-image--contain' : ''}`}
                 style={project.imageBg ? { background: project.imageBg } : undefined}
@@ -348,7 +314,6 @@ function App() {
                     <span key={tag} className="tag">{tag}</span>
                   ))}
                 </div>
-                <span className="project-card-open">Tap again to open &rarr;</span>
               </div>
             </Link>
           ))}
