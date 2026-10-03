@@ -73,7 +73,7 @@ const collage = [
   { file: 'dawn', alt: 'Fatima laughing with a colleague at a conference', shape: 'one', pos: '40% 35%' },
   { file: 'panel', alt: 'Fatima speaking on a panel', shape: 'wide', pos: '70% 35%' },
   { file: 'talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
-  { file: 'judging', alt: 'Fatima and fellow judges listening to a team\'s demo', shape: 'wide', pos: '62% 40%' },
+  { file: 'garage', alt: 'Fatima with three teammates in front of The Garage, holding giant ceremonial scissors', shape: 'wide', pos: '50% 30%' },
   { file: 'booth', alt: 'Fatima chatting with colleagues at the Data Factory booth', shape: 'one', pos: '75% 40%' },
   { file: 'booth2', alt: 'Fatima in conversation at a conference booth', shape: 'one', pos: '40% 35%' },
 ]
