@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import BB8 from '../components/BB8'
 import { useNavTheme } from '../hooks/useNavTheme'
+import SiteNav from '../components/SiteNav'
+import Recommendations from '../components/Recommendations'
+import ContactSection from '../components/ContactSection'
 import '../App.css'
 import './BeyondUX.css'
 
@@ -94,15 +96,7 @@ function BeyondUX() {
 
   return (
     <div className="app" ref={pageRef}>
-      <nav className="nav">
-        <Link to="/" className="nav-logo">Fatima Rafiqui</Link>
-        <div className="nav-links">
-          <Link to="/#work">Work</Link>
-          <Link to="/#about">About</Link>
-          <Link to="/beyond-ux" className="nav-active">Beyond UX</Link>
-          <Link to="/#contact">Contact</Link>
-        </div>
-      </nav>
+      <SiteNav active="beyond-ux" />
 
       {/* Hero - Editorial Split */}
       <section className="bux-hero">
@@ -232,6 +226,8 @@ function BeyondUX() {
         </div>
       </section>
 
+      <Recommendations />
+
       {/* Star Wars - Immersive */}
       <section className="bux-starwars bux-animate">
         <div className="bux-starwars-bg" aria-hidden="true">
@@ -259,22 +255,7 @@ function BeyondUX() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="contact">
-        <div className="contact-inner">
-          <div className="contact-top">
-            <p className="contact-eyebrow">Get in touch</p>
-            <h2 className="contact-heading">Let's talk design, data,<br/>or ideas over coffee.</h2>
-            <a href="mailto:fatima.rafiqui@gmail.com" className="contact-email">
-              Say hello &rarr;
-            </a>
-          </div>
-          <div className="contact-bottom">
-            <p className="contact-copy">&copy; 2026 Fatima Rafiqui</p>
-            <p className="contact-copy">Designed with heart, built with vibecode</p>
-          </div>
-        </div>
-      </footer>
+      <ContactSection />
     </div>
   )
 }
