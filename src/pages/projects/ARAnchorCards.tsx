@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom'
+import SiteNav from '../../components/SiteNav'
+import ContactSection from '../../components/ContactSection'
+import { useNavTheme } from '../../hooks/useNavTheme'
+import '../../App.css'
 import './ARAnchorCards.css'
 
 const IMG = '/images/projects/ar-anchor-cards'
@@ -113,11 +116,10 @@ function Block({ title, children }: { title?: string; children: React.ReactNode 
 }
 
 export default function ARAnchorCards() {
+  useNavTheme()
   return (
-    <div className="ar-page">
-      <nav className="ar-nav">
-        <Link to="/#work" className="ar-back">&larr; Back</Link>
-      </nav>
+    <div className="ar-page app">
+      <SiteNav />
 
       {/* Hero */}
       <header className="ar-hero">
@@ -430,10 +432,7 @@ export default function ARAnchorCards() {
         <a className="ar-button ar-mt" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
       </section>
 
-      <footer className="ar-footer">
-        <h2 className="ar-h2">Interested in more projects?</h2>
-        <Link to="/#work" className="ar-button">Back to all work</Link>
-      </footer>
+      <ContactSection />
     </div>
   )
 }
