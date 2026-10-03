@@ -149,10 +149,10 @@ function BeyondUX() {
         <button
           type="button"
           className="bux-scroll"
-          aria-label="Scroll to explore"
+          aria-label="Jump to lightspeed: scroll down"
           onClick={() => document.getElementById('bux-community')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <span>Scroll to explore</span>
+          <span>Jump to lightspeed</span>
           <span className="bux-scroll-line" aria-hidden="true"></span>
         </button>
       </header>
