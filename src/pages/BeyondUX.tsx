@@ -69,7 +69,7 @@ const writing = [
 // Photo mosaic between the hero and the talks; `shape` sets how much of the grid a photo takes
 const collage = [
   { file: 'group', label: 'Hackathon day', alt: 'Hackathon participants and organizers posing together', shape: 'wide', pos: '50% 45%' },
-  { file: 'gdg', ext: 'png', label: 'GDG 2026 Hackathon Judge', alt: 'Fatima standing beside the Google Developer Group DevFest Build with AI banner', shape: 'tall', pos: '60% 40%' },
+  { file: 'gdg', label: 'GDG 2026 Hackathon Judge', alt: 'Fatima standing beside the Google Developer Group DevFest Build with AI banner', shape: 'tall', pos: '60% 40%' },
   { file: 'talk', label: 'Bay Area Breakthrough talk', alt: 'Fatima at the podium in front of two Designing Data\'s Future slides', shape: 'one', pos: '50% 38%' },
   { file: 'panel', label: 'Talk at Fabric Conference 2025', alt: 'Fatima giving a talk at Fabric Conference 2025, gesturing as she speaks', shape: 'wide', pos: '50% 8%' },
   { file: 'judge', label: 'Judge for Microsoft Global Hackathon', alt: 'Fatima judging at a hackathon, pen in hand', shape: 'tall', pos: '62% 30%' },
@@ -167,7 +167,7 @@ function BeyondUX() {
         <div className="bux-mosaic bux-animate">
           {collage.map((c) => (
             <figure className={`bux-mosaic-photo bux-mosaic-photo--${c.shape}`} key={c.file}>
-              <img src={`/images/beyond-ux/collage-${c.file}.${c.ext ?? 'jpg'}`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
+              <img src={`/images/beyond-ux/collage-${c.file}.webp`} alt={c.alt} style={{ objectPosition: c.pos }} loading="lazy" />
               <figcaption className="bux-glass">{c.label}</figcaption>
             </figure>
           ))}

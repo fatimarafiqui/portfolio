@@ -47,7 +47,7 @@ export const aboutSummary = {
 };
 
 export const aboutPhotos = [
-  { src: "/images/about/about.jpg", alt: "Fatima speaking on stage", caption: "On stage", position: "28% 30%" },
-  { src: "/images/about/hackathon.jpg", alt: "Fatima at a hackathon", caption: "Hackathon jam", position: "50% 22%" },
-  { src: "/images/about/garage.jpg", alt: "Fatima at the Makerspace", caption: "At the Makerspace", position: "45% 20%" },
+  { src: "/images/about/about.webp", alt: "Fatima speaking on stage", caption: "On stage", position: "28% 30%" },
+  { src: "/images/about/hackathon.webp", alt: "Fatima at a hackathon", caption: "Hackathon jam", position: "50% 22%" },
+  { src: "/images/about/garage.webp", alt: "Fatima at the Makerspace", caption: "At the Makerspace", position: "45% 20%" },
 ];
