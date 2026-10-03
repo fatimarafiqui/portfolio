@@ -14,7 +14,7 @@ export default function Recommendations() {
   return (
     <section className="testimonials" ref={ref}>
       <div className="testimonials-intro reveal reveal-up">
-        <span className="bux-kicker">Recommendations</span>
+        <span className="bux-kicker">Testimonials</span>
         <h2 className="bux-h2">Their words, not mine.</h2>
       </div>
       <div className="testimonials-featured">
@@ -55,7 +55,7 @@ export default function Recommendations() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Read all recommendations on LinkedIn →
+        Read more testimonials on LinkedIn →
       </a>
     </section>
   )
