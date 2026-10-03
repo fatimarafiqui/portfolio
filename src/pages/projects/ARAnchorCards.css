@@ -254,8 +254,13 @@
   margin-top: var(--space-8);
 }
 
-.ar-split--photo-right { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
-.ar-split--photo-right .ar-fig { max-width: 440px; margin: 0 0 0 auto; }
+/* Text and photo share one row, one top and one bottom: the photo is cropped to a calm landscape and the copy centers on it */
+.ar-split--photo-right { grid-template-columns: 1fr 1fr; align-items: center; margin-top: var(--space-10); }
+.ar-split--photo-right .ar-fig { max-width: none; margin: 0; }
+.ar-split--photo-right .ar-img { aspect-ratio: 4 / 3; object-fit: cover; }
+.ar-split--photo-right .ar-h3 { margin-top: 0; font-size: var(--text-2xl); line-height: 1.2; margin-bottom: var(--space-4); }
+.ar-split--photo-right p { font-size: var(--text-lg); line-height: 1.65; }
+.ar-split--photo-right p:last-child { margin-bottom: 0; }
 
 /* Solution blocks: text then its demo videos */
 .ar-feature {
@@ -469,7 +474,6 @@
   .ar-persona,
   .ar-grid--2,
   .ar-grid--3 { grid-template-columns: 1fr; }
-  .ar-split--photo-right .ar-fig { margin: 0 auto; }
   .ar-persona-img { max-width: 320px; }
   .ar-persona-body { padding: var(--space-5); }
   .ar-stage { padding: var(--space-5); }
