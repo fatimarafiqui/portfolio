@@ -133,10 +133,6 @@ export default function ARAnchorCards() {
               one-stop application for all. This project builds on Google Maps' existing Live View feature to simplify
               the onboarding experience of newcomers in a city.
             </p>
-            <div className="ar-hero-actions">
-              <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
-              <a className="ar-button ar-button--ghost" href="#solution">See the prototype</a>
-            </div>
             <dl className="ar-meta">
               <div>
                 <dt>My role</dt>
@@ -147,6 +143,10 @@ export default function ARAnchorCards() {
                 <dd>June - August 2020</dd>
               </div>
             </dl>
+            <div className="ar-hero-actions">
+              <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
+              <a className="ar-button ar-button--ghost" href="#solution">See the prototype</a>
+            </div>
           </div>
           <div className="ar-hero-visual">
             <Img file="hero.png" alt="AR Anchor Cards on two phones: a subway card and an AR memory polaroid" className="ar-hero-img" />
