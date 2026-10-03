@@ -146,10 +146,19 @@ function BeyondUX() {
             </div>
           </div>
         </div>
+        <button
+          type="button"
+          className="bux-scroll"
+          aria-label="Scroll to explore"
+          onClick={() => document.getElementById('bux-community')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span>Scroll to explore</span>
+          <span className="bux-scroll-line" aria-hidden="true"></span>
+        </button>
       </header>
 
       {/* Photo mosaic: what I get up to, with a glass label on every photo */}
-      <section className="bux-section bux-section--tint" aria-label="Photos from hackathons, judging, panels and conferences">
+      <section id="bux-community" className="bux-section bux-section--tint" aria-label="Photos from hackathons, judging, panels and conferences">
         <div className="bux-intro bux-animate">
           <span className="bux-kicker">Community</span>
           <h2 className="bux-h2">Showing up for other builders</h2>

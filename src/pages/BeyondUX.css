@@ -181,6 +181,37 @@
   50% { transform: translateY(-8px); }
 }
 
+/* Scroll cue at the bottom-left of the first screen, like the home page */
+.bux-scroll {
+  position: absolute;
+  z-index: 1;
+  bottom: var(--space-8);
+  left: max(var(--space-10), calc((100% - 1000px) / 2));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.bux-scroll span:first-child {
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.bux-scroll-line {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--color-accent), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
 /* --- Sections --- */
 .bux-section {
   padding: var(--space-20) max(var(--space-10), calc((100% - 1000px) / 2));
@@ -562,6 +593,7 @@
 @media (max-width: 768px) {
   .bux-hero { padding: calc(var(--space-16) + 40px) var(--space-6) var(--space-12); }
   .bux-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); }
+  .bux-scroll { left: var(--space-6); bottom: var(--space-5); }
   .bux-hero-visual { width: min(70%, 280px); margin: 0 auto var(--space-6); }
   .bux-hero-card { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
   .bux-hero-card--2 { left: 96%; }
