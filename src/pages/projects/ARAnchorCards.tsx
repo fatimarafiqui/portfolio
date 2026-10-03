@@ -82,6 +82,36 @@ function Img({ file, alt, className = '' }: { file: string; alt: string; classNa
   return <img className={`ar-img ${className}`} src={`${IMG}/${file}`} alt={alt} loading="lazy" />
 }
 
+// A piece of media with a caption. `wide` = dense diagram on a white card (scrolls sideways on small screens),
+// `phone` = annotated phone mockup, `photo` = a real photograph.
+function Figure({
+  file, alt, caption, kind, max, open = false,
+}: { file: string; alt: string; caption?: string; kind: 'wide' | 'phone' | 'photo'; max?: number; open?: boolean }) {
+  const img = <Img file={file} alt={alt} />
+  return (
+    <figure className={`ar-fig ar-fig--${kind}`} style={max ? { maxWidth: max } : undefined}>
+      <div className="ar-fig-media">
+        <div className="ar-fig-scroll">
+          {open ? (
+            <a href={`${IMG}/${file}`} target="_blank" rel="noopener noreferrer" title="Open full size">{img}</a>
+          ) : img}
+        </div>
+      </div>
+      {caption && <figcaption className="ar-cap">{caption}</figcaption>}
+    </figure>
+  )
+}
+
+// A short titled write-up that always sits directly above the media it explains
+function Block({ title, children }: { title?: string; children: React.ReactNode }) {
+  return (
+    <div className="ar-block">
+      {title && <h4 className="ar-h4">{title}</h4>}
+      {children}
+    </div>
+  )
+}
+
 export default function ARAnchorCards() {
   return (
     <div className="ar-page">
@@ -100,7 +130,9 @@ export default function ARAnchorCards() {
           onboarding experience of newcomers in a city.
         </p>
         <a className="ar-button" href={DECK} target="_blank" rel="noopener noreferrer">View Process Deck</a>
-        <Img file="hero.png" alt="AR Anchor Cards hero" className="ar-hero-img" />
+        <div className="ar-stage ar-stage--hero">
+          <Img file="hero.png" alt="AR Anchor Cards on two phones: subway card and AR memory polaroid" className="ar-hero-img" />
+        </div>
       </header>
 
       {/* Overview */}
@@ -116,7 +148,7 @@ export default function ARAnchorCards() {
         <div>
           <h2 className="ar-h3">My Role</h2>
           <p>UX Research &bull; UX Design &bull; Interaction Design &bull; Usability Testing</p>
-          <h2 className="ar-h3 ar-mt">Timeline</h2>
+          <h2 className="ar-h3 ar-mt-sm">Timeline</h2>
           <p>June - August 2020</p>
         </div>
       </section>
@@ -126,8 +158,8 @@ export default function ARAnchorCards() {
         <span className="ar-kicker">The Solution</span>
         <h2 className="ar-h2">Final Prototype</h2>
 
-        <div className="ar-split">
-          <div>
+        <div className="ar-feature">
+          <div className="ar-feature-text">
             <h3 className="ar-h3">Micronavigation through AR Cards</h3>
             <p>
               Lines, numbers, and colors mean different things to people used to a different transport system. With
@@ -139,15 +171,15 @@ export default function ARAnchorCards() {
               content. For example, travelers can discover and learn about the culture through the AR culture filter.
             </p>
           </div>
-          <div className="ar-videos">
+          <div className="ar-stage ar-videos ar-videos--3">
             <Video file="ar3.mp4" />
             <Video file="ar2.mp4" />
             <Video file="ar1.mp4" />
           </div>
         </div>
 
-        <div className="ar-split ar-split--flip">
-          <div>
+        <div className="ar-feature ar-feature--side">
+          <div className="ar-feature-text">
             <h3 className="ar-h3">Breadcrumbs will guide you home: AR Anchor Cards</h3>
             <p>
               New settlers can navigate to a common meeting place by requesting AR-anchor-powered directions from a
@@ -157,7 +189,7 @@ export default function ARAnchorCards() {
               A friend can help someone with the location by providing user-generated anchor points. This feature is
               based on the user behavior of navigating by landmarks or places of significance.
             </p>
-            <h3 className="ar-h3 ar-mt">Polaroids in the Air: AR Memories</h3>
+            <h3 className="ar-h3 ar-mt-sm">Polaroids in the Air: AR Memories</h3>
             <p>
               Taking the concept further, an AR polaroid could also be used as a private photo map feature. Bilal
               could record his experiences of visiting a new place on the map. When he visits again, he can relive
@@ -168,7 +200,7 @@ export default function ARAnchorCards() {
               with Google products.
             </p>
           </div>
-          <div className="ar-videos">
+          <div className="ar-stage ar-videos ar-videos--1">
             <Video file="ar4.mp4" />
           </div>
         </div>
@@ -178,7 +210,7 @@ export default function ARAnchorCards() {
       <section className="ar-section ar-band">
         <span className="ar-kicker">The Background</span>
         <h2 className="ar-h2">But how did we get to the final product?</h2>
-        <div className="ar-split">
+        <div className="ar-split ar-split--photo-right">
           <div>
             <h3 className="ar-h3">It all started with a friend having problems</h3>
             <p>
@@ -188,7 +220,7 @@ export default function ARAnchorCards() {
               deeper into the issue.
             </p>
           </div>
-          <Img file="bg-ar.png" alt="A new settler navigating the New York subway" />
+          <Figure kind="photo" file="bg-ar.png" alt="A new settler checking directions on a phone" />
         </div>
       </section>
 
@@ -234,8 +266,8 @@ export default function ARAnchorCards() {
           We started by designing Maps for smart watches, but through research we realized we were not focusing on
           the right problem. We were trying to solve for route delays.
         </p>
-        <Img file="affinity-ar.png" alt="Affinity map from research synthesis" />
-        <div className="ar-grid ar-grid--3 ar-mt">
+        <Figure kind="photo" file="affinity-ar.png" alt="The team affinity mapping research notes on a table" caption="Affinity mapping the research" max={820} />
+        <div className="ar-grid ar-grid--3">
           {dead.map((d) => (
             <div key={d.title} className="ar-dead">
               <img src={`${IMG}/cross.png`} alt="" width={20} height={20} />
@@ -244,7 +276,7 @@ export default function ARAnchorCards() {
             </div>
           ))}
         </div>
-        <p className="ar-narrow ar-mt">
+        <p className="ar-narrow ar-mt-sm">
           After research, we realized we were focusing on the lesser issues: making delay communication better,
           advocating for aggregation of services, and making cultural information available as a travel guide. These
           solutions were either already implemented or would not be impactful. After affinity mapping and concept
@@ -275,11 +307,11 @@ export default function ARAnchorCards() {
 
         <span className="ar-kicker ar-mt">Persona</span>
         <h2 className="ar-h2">Meet the user.</h2>
-        <div className="ar-split">
-          <Img file="bilal.png" alt="Persona: Bilal Kareem" />
-          <div>
+        <div className="ar-persona">
+          <Img file="bilal.png" alt="Persona: Bilal Kareem, checking his phone with a backpack on" className="ar-persona-img" />
+          <div className="ar-persona-body">
             <h3 className="ar-h3">Bilal Kareem</h3>
-            <p><em>Inexperienced, cautious, excited, overwhelmed</em></p>
+            <p className="ar-persona-tags"><em>Inexperienced, cautious, excited, overwhelmed</em></p>
             <p>
               Bilal recently moved to NYC from a small town in Europe. He needs to figure out his way around the city
               while adjusting to his new life.
@@ -293,7 +325,7 @@ export default function ARAnchorCards() {
 
         <span className="ar-kicker ar-mt">User Journey</span>
         <h2 className="ar-h2">A look at his daily commute</h2>
-        <Img file="userjourney.png" alt="Bilal's daily commute user journey" />
+        <Figure kind="wide" file="userjourney.png" alt="Bilal's daily commute: decide, plan, experience, board, anticipate, arrive, with painpoints and opportunities" caption="Tap to open the full journey map" open />
       </section>
 
       {/* Principles */}
@@ -326,8 +358,8 @@ export default function ARAnchorCards() {
         </p>
         <div className="ar-grid ar-grid--3">
           {ideas.map((p) => (
-            <figure key={p.title} className="ar-card">
-              <Img file={p.img} alt={p.title} />
+            <figure key={p.title} className="ar-card ar-card--icon">
+              <div className="ar-tile"><Img file={p.img} alt={p.title} /></div>
               <figcaption>
                 <strong>{p.title}</strong>
                 <span>{p.sub}</span>
@@ -342,63 +374,45 @@ export default function ARAnchorCards() {
         <span className="ar-kicker">Solution</span>
         <h2 className="ar-h2">Hi-fidelity Prototypes</h2>
 
-        <h3 className="ar-h3 ar-mt">Concept 1: Subway Micro-navigation</h3>
-        <Img file="subway-cards.png" alt="Subway navigation cards" />
-        <div className="ar-split">
-          <div>
-            <h4 className="ar-h4">Subway Navigation Cards</h4>
-            <p>
-              The subway navigation cards provide contextual information to new settlers like Bilal. Each card holds
-              the information a user might need to make a decision at that point in the journey.
-            </p>
-          </div>
-          <Img file="subway-cards-detail.png" alt="Subway navigation card detail" />
-        </div>
-        <div className="ar-split ar-split--flip">
-          <div>
-            <h4 className="ar-h4">Design Decision</h4>
-            <p>
-              The initial card design lacked visual hierarchy, and the information was not grouped to be understood at
-              a glance. The revised cards have better hierarchy, are easy to follow, and also suggest a subway car
-              based on crowdsourced data.
-            </p>
-          </div>
-          <Img file="subway-design-decision.png" alt="Subway card design decision" />
-        </div>
-
-        <h3 className="ar-h3 ar-mt">Concept 2: Personalized AR Anchors</h3>
-        <Img file="anchors-concept.png" alt="Personalized AR anchors" />
-        <div className="ar-split">
-          <div>
-            <h4 className="ar-h4">Design Decisions</h4>
-            <p>
-              The initial card design did not give enough information about system status. The revised card lets
-              users view a snapshot of the sender's location. With this interaction, the user is assured they are
-              travelling to the right place.
-            </p>
-          </div>
-          <Img file="anchors-design-decision.png" alt="Anchor card design decision" />
-        </div>
-        <div className="ar-split ar-split--flip">
-          <div>
-            <p>
-              To give a sense of anchor points, "steps and more" listed them. However, nothing on the map showed the
-              personal anchor points. The revised design added flags on the map as a visual indicator for the anchor
-              points left behind by the creator.
-            </p>
-          </div>
-          <Img file="anchors-map.png" alt="Anchor flags on the map" />
-        </div>
-
-        <h3 className="ar-h3 ar-mt">Concept 3: AR Memories</h3>
-        <div className="ar-split">
+        <h3 className="ar-h3 ar-concept">Concept 1: Subway Micro-navigation</h3>
+        <Figure kind="phone" file="subway-cards.png" alt="Subway AR card on a phone with callouts for AR cards, journey information and AR filters" max={760} />
+        <Block title="Subway Navigation Cards">
           <p>
-            Taking the concept further, an AR polaroid could also be used as a private photo map feature. Bilal could
-            record his experiences of visiting a new place on the map. When he visits again, he can relive the
-            experience by comparing old photos with the real location.
+            The subway navigation cards provide contextual information to new settlers like Bilal. Each card holds
+            the information a user might need to make a decision at that point in the journey.
           </p>
-          <Img file="memories-concept.png" alt="AR memories concept" />
-        </div>
+        </Block>
+        <Figure kind="wide" file="subway-cards-detail.png" alt="Subway cards at the entrance, concourse and platform levels" open />
+        <Block title="Design Decision">
+          <p>
+            The initial card design lacked visual hierarchy, and the information was not grouped to be understood at
+            a glance. The revised cards have better hierarchy, are easy to follow, and also suggest a subway car
+            based on crowdsourced data.
+          </p>
+        </Block>
+        <Figure kind="wide" file="subway-design-decision.png" alt="Initial and revised subway card designs" open />
+
+        <h3 className="ar-h3 ar-concept">Concept 2: Personalized AR Anchors</h3>
+        <Figure kind="phone" file="anchors-concept.png" alt="Anchor card on a phone with callouts for personal AR cards, entry field and post button" max={760} />
+        <Block title="Design Decisions">
+          <p>
+            The initial card design did not give enough information about system status. The revised card lets
+            users view a snapshot of the sender's location. With this interaction, the user is assured they are
+            travelling to the right place.
+          </p>
+        </Block>
+        <Figure kind="wide" file="anchors-design-decision.png" alt="Initial and revised anchor card designs" open />
+        <Block>
+          <p>
+            To give a sense of anchor points, "steps and more" listed them. However, nothing on the map showed the
+            personal anchor points. The revised design added flags on the map as a visual indicator for the anchor
+            points left behind by the creator.
+          </p>
+        </Block>
+        <Figure kind="wide" file="anchors-map.png" alt="Anchor flags shown on the map" open />
+
+        <h3 className="ar-h3 ar-concept">Concept 3: AR Memories</h3>
+        <Figure kind="phone" file="memories-concept.png" alt="AR memory flow: select a location, then post a polaroid card" caption="Pin a polaroid to a place and relive it when you return" max={900} />
       </section>
 
       {/* Retrospective */}
