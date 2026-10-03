@@ -208,6 +208,55 @@
   color: var(--color-text-muted);
 }
 
+/* --- Community: hackathons, judging, mentoring --- */
+.bux-community-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.bux-community {
+  padding: var(--space-6);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+}
+
+.bux-community-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background: var(--color-accent-light);
+}
+
+.bux-community-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bux-community-title {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+.bux-community-body {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
 /* --- Talks --- */
 .bux-talks-grid {
   display: grid;
@@ -410,6 +459,7 @@
 @media (max-width: 900px) {
   .bux-talks-grid,
   .bux-writing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bux-community-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -424,7 +474,8 @@
   .bux-section,
   .bux-starwars { padding: var(--space-12) var(--space-6); }
   .bux-talks-grid,
-  .bux-writing-grid { grid-template-columns: 1fr; }
+  .bux-writing-grid,
+  .bux-community-grid { grid-template-columns: 1fr; }
   .bux-starwars-inner { flex-direction: column-reverse; align-items: flex-start; gap: var(--space-8); }
   .bux-starwars-bb8 { flex-basis: 200px; width: 200px; height: 200px; }
 }

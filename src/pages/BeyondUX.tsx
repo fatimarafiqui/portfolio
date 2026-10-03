@@ -66,6 +66,24 @@ const writing = [
   },
 ]
 
+const community = [
+  {
+    title: "Hackathons",
+    body: "Build fast, learn faster. I join to test ideas out loud with people I would never get to work with otherwise.",
+    icon: <path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z" />,
+  },
+  {
+    title: "Judging",
+    body: "I look for the idea behind the demo: who it is for, and whether it holds up when real people use it.",
+    icon: <path d="M12 3v18M6 21h12M5 7h14M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7zM19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z" />,
+  },
+  {
+    title: "Mentoring",
+    body: "Sharing the shortcuts and detours I wish I had known, and helping designers find their own voice.",
+    icon: <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM4 21c0-4 3.5-6 8-6s8 2 8 6" />,
+  },
+]
+
 const stats = [
   { number: "30+", label: "Talks & Workshops" },
   { number: "2", label: "Published Patents" },
@@ -136,6 +154,26 @@ function BeyondUX() {
           </div>
         </div>
       </header>
+
+      {/* Hackathons, judging and mentoring */}
+      <section className="bux-section bux-section--tint">
+        <div className="bux-intro bux-animate">
+          <span className="bux-kicker">Community</span>
+          <h2 className="bux-h2">Showing up for other builders</h2>
+          <p className="bux-lede">Some of my favorite work happens in rooms full of people building something new.</p>
+        </div>
+        <div className="bux-community-grid">
+          {community.map((c, i) => (
+            <div className="bux-community bux-animate" key={c.title} style={{ animationDelay: `${i * 0.1}s` }}>
+              <span className="bux-community-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">{c.icon}</svg>
+              </span>
+              <h3 className="bux-community-title">{c.title}</h3>
+              <p className="bux-community-body">{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Speaking */}
       <section className="bux-section">
