@@ -35,7 +35,7 @@ export default function SiteNav({ home = false, active }: SiteNavProps) {
   return (
     <nav className="nav" data-open={open}>
       {home ? (
-        <span className="nav-logo">Fatima Rafiqui</span>
+        <a href="#top" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}>Fatima Rafiqui</a>
       ) : (
         <Link to="/" className="nav-logo">Fatima Rafiqui</Link>
       )}

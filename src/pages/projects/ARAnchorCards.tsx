@@ -86,7 +86,7 @@ export default function ARAnchorCards() {
   return (
     <div className="ar-page">
       <nav className="ar-nav">
-        <Link to="/" className="ar-back">&larr; Back</Link>
+        <Link to="/#work" className="ar-back">&larr; Back</Link>
       </nav>
 
       {/* Hero */}

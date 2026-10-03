@@ -36,7 +36,7 @@ export default function ProjectPageLayout({ content }: ProjectPageLayoutProps) {
   return (
     <div className="project-page">
       <nav className="project-nav">
-        <Link to="/" className="project-nav-back">&larr; Back</Link>
+        <Link to="/#work" className="project-nav-back">&larr; Back</Link>
       </nav>
       <header className="project-hero">
         <span className="project-hero-category">{frontmatter.category}</span>
