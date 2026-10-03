@@ -67,9 +67,9 @@ const writing = [
 ]
 
 const stats = [
-  { number: "10+", label: "Talks & Workshops" },
-  { number: "3", label: "Published Stories" },
-  { number: "5+", label: "Communities Served" },
+  { number: "30+", label: "Talks & Workshops" },
+  { number: "2", label: "Published Patents" },
+  { number: "8+", label: "Communities" },
 ]
 
 function BeyondUX() {
