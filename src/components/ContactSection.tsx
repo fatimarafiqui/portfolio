@@ -85,7 +85,7 @@ export default function ContactSection() {
         </div>
         <div className="contact-bottom">
           <p className="contact-copy">&copy; 2026 Fatima Rafiqui</p>
-          <p className="contact-copy">Designed with heart, built with vibecode</p>
+          <p className="contact-copy">May the Force be with you.</p>
         </div>
       </div>
     </footer>
