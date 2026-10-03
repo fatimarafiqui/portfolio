@@ -380,9 +380,9 @@
 /* A full-section gradient behind the list, so the hover glass has color to frost */
 .bux-section--writing {
   background:
-    radial-gradient(ellipse 55% 80% at 8% 90%, rgba(184, 217, 189, 0.85) 0%, transparent 62%),
-    radial-gradient(ellipse 50% 70% at 95% 10%, rgba(241, 214, 176, 0.8) 0%, transparent 60%),
-    linear-gradient(135deg, #e4ede3 0%, var(--color-surface-warm) 52%, #f4e6d2 100%);
+    radial-gradient(ellipse 55% 80% at 8% 95%, rgba(184, 217, 189, 0.35) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 70% at 95% 5%, rgba(241, 214, 176, 0.3) 0%, transparent 60%),
+    linear-gradient(135deg, #eef2ec 0%, #f4f1ec 52%, #f6efe5 100%);
 }
 
 .bux-write-row {
