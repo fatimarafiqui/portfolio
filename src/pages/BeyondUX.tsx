@@ -53,16 +53,19 @@ const writing = [
     title: "Why did I quit a high paying job to pursue a degree in HCI?",
     url: "https://fatimarafiqui.medium.com/why-did-i-quit-a-high-paying-job-to-pursue-a-degree-in-hci-fb162b286748",
     tag: "Leap of Faith",
+    teaser: "The decision behind the degree.",
   },
   {
     title: "Invaluable lessons from my UX internship at Juniper Networks",
     url: "https://medium.com/juniperux/a-design-reflection-invaluable-lessons-from-my-ux-internship-at-juniper-networks-c18585f77f4d",
     tag: "Reflection",
+    teaser: "What a summer at Juniper Networks taught me.",
   },
   {
     title: "Design & Healthcare - A conjunction needed to combat Bias in Medicine",
     url: "https://medium.com/iu-cewit/design-and-healthcare-a-conjunction-needed-to-combat-bias-in-medicine-49286a9674b5",
     tag: "Research",
+    teaser: "Why medicine needs designers in the room.",
   },
 ]
 
@@ -226,16 +229,21 @@ function BeyondUX() {
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bux-article bux-animate"
+              className={`bux-article bux-animate${i === 0 ? ' bux-article--featured' : ''}`}
               key={i}
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              <span className="bux-article-tag">{post.tag}</span>
+              <div className="bux-article-top">
+                <span className="bux-article-tag">{post.tag}</span>
+                <span className="bux-article-arrow" aria-hidden="true">&#8599;</span>
+              </div>
               <h3 className="bux-article-title">{post.title}</h3>
-              <span className="bux-article-cta">Read on Medium <span aria-hidden="true">&#8599;</span></span>
+              <p className="bux-article-teaser">{post.teaser}</p>
+              <span className="bux-article-cta">Read on Medium</span>
             </a>
           ))}
         </div>
+        <a className="bux-more" href="https://fatimarafiqui.medium.com" target="_blank" rel="noopener noreferrer">More on Medium <span aria-hidden="true">&#8599;</span></a>
       </section>
 
       <Recommendations />
