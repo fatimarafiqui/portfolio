@@ -25,6 +25,12 @@ export default function SiteNav({ home = false, active }: SiteNavProps) {
   }, [open])
 
   const close = () => setOpen(false)
+  const logo = (
+    <>
+      <img className="nav-logo-mark" src="/favicon.svg" alt="" width={26} height={26} />
+      <span>Fatima Rafiqui</span>
+    </>
+  )
   const section = (hash: string, label: string) =>
     home ? (
       <a href={`#${hash}`} onClick={close}>{label}</a>
@@ -35,9 +41,9 @@ export default function SiteNav({ home = false, active }: SiteNavProps) {
   return (
     <nav className="nav" data-open={open}>
       {home ? (
-        <a href="#top" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}>Fatima Rafiqui</a>
+        <a href="#top" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}>{logo}</a>
       ) : (
-        <Link to="/" className="nav-logo">Fatima Rafiqui</Link>
+        <Link to="/" className="nav-logo">{logo}</Link>
       )}
       <button
         type="button"
