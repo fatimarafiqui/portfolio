@@ -986,57 +986,61 @@
 }
 
 /* --- Contact / Footer --- */
+/* Rises out of the section above on a soft wave, then one calm centered gradient: no hard edge, no thin card */
 .contact {
-  padding: var(--space-12) var(--space-10) var(--space-5);
-  background: linear-gradient(90deg, #e4ede3 0%, var(--color-surface-warm) 50%, #f1e5d3 100%);
-  border-top: 1px solid rgba(44, 62, 45, 0.1);
+  position: relative;
+  margin-top: -1px;
+  padding: calc(var(--space-16) + 28px) var(--space-10) var(--space-6);
+  background:
+    radial-gradient(ellipse 45% 60% at 12% 70%, rgba(184, 217, 189, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 55% at 90% 40%, rgba(241, 214, 176, 0.55) 0%, transparent 62%),
+    linear-gradient(180deg, #e7eee5 0%, #f2ece2 100%);
 }
 
+.contact-wave {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  height: clamp(48px, 7vw, 96px);
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.contact-wave path { fill: #e7eee5; }
+
 .contact-inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-12);
 }
 
-/* Glass card over the dotted dark green */
-.contact-card {
+.contact-body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-6) var(--space-8);
-  padding: var(--space-8) var(--space-10);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.38));
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  backdrop-filter: blur(18px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: var(--border-radius-xl);
-  box-shadow: 0 16px 44px rgba(44, 62, 45, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.contact-main {
-  display: flex;
-  flex: 1 1 520px;
-  align-items: center;
-  gap: var(--space-5);
-  min-width: 0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .contact-cup {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-4);
   fill: none;
   stroke: var(--color-primary);
-  stroke-width: 2.4;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .contact-mug {
-  fill: rgba(122, 158, 126, 0.28);
+  fill: rgba(122, 158, 126, 0.3);
 }
 
 .contact-steam {
@@ -1063,15 +1067,16 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-secondary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .contact-heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
   font-weight: var(--weight-bold);
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--color-primary);
 }
 
@@ -1081,37 +1086,48 @@
   color: var(--color-highlight);
 }
 
+.contact-lede {
+  max-width: 440px;
+  margin-top: var(--space-4);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
 .contact-actions {
   display: flex;
-  flex-shrink: 0;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--space-3);
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
 }
 
 .contact-icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 54px;
+  height: 54px;
   color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(44, 62, 45, 0.18);
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 50%;
-  transition: all var(--transition-fast);
+  box-shadow: 0 6px 18px rgba(44, 62, 45, 0.1);
+  transition: all var(--transition-base);
 }
 
 .contact-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 .contact-icon:hover,
 .contact-icon:focus-visible {
   color: #fff;
   background: var(--color-primary);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(44, 62, 45, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(44, 62, 45, 0.25);
 }
 
 .contact-bottom {
@@ -1326,15 +1342,16 @@
   }
 
   .contact {
-    padding-top: var(--space-10);
+    padding-top: calc(var(--space-12) + 20px);
   }
 
-  .contact-card {
-    padding: var(--space-6) var(--space-5);
+  .contact-inner {
+    gap: var(--space-8);
   }
 
-  .contact-actions {
-    justify-content: flex-start;
+  .contact-bottom {
+    justify-content: center;
+    text-align: center;
   }
 
   .about-content {

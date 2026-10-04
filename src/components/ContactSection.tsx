@@ -44,30 +44,31 @@ const contactLinks = [
   },
 ]
 
-// Footer / contact bar shared by the home page and Beyond UX.
+// Closing section shared by the home page, Beyond UX and the AR page: it rises out of whatever is above it
+// on a soft wave, and everything sits centered on one calm gradient.
 export default function ContactSection() {
   const ref = useRef<HTMLElement>(null)
   useReveal(ref)
 
   return (
     <footer className="contact" id="contact" ref={ref}>
+      <svg className="contact-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70C180 118 380 122 620 80C860 38 1100 18 1440 62V121H0Z" />
+      </svg>
       <div className="contact-inner">
-        <div className="contact-card reveal reveal-up">
-          <div className="contact-main">
-            <svg className="contact-cup" viewBox="0 0 64 64" aria-hidden="true">
-              <path className="contact-steam contact-steam--1" d="M24 22c-3-4 3-6 0-10" />
-              <path className="contact-steam contact-steam--2" d="M32 22c-3-4 3-6 0-10" />
-              <path className="contact-steam contact-steam--3" d="M40 22c-3-4 3-6 0-10" />
-              <path className="contact-mug" d="M16 28h30v10a13 13 0 0 1-13 13h-4A13 13 0 0 1 16 38z" />
-              <path className="contact-mug" d="M46 31h3a6 6 0 0 1 0 12h-4" fill="none" />
-            </svg>
-            <div>
-              <p className="contact-eyebrow">Get in touch</p>
-              <h2 className="contact-heading">
-                Let's talk design, data, or ideas over <em>coffee</em>.
-              </h2>
-            </div>
-          </div>
+        <div className="contact-body reveal reveal-up">
+          <svg className="contact-cup" viewBox="0 0 64 64" aria-hidden="true">
+            <path className="contact-steam contact-steam--1" d="M24 22c-3-4 3-6 0-10" />
+            <path className="contact-steam contact-steam--2" d="M32 22c-3-4 3-6 0-10" />
+            <path className="contact-steam contact-steam--3" d="M40 22c-3-4 3-6 0-10" />
+            <path className="contact-mug" d="M16 28h30v10a13 13 0 0 1-13 13h-4A13 13 0 0 1 16 38z" />
+            <path className="contact-mug" d="M46 31h3a6 6 0 0 1 0 12h-4" fill="none" />
+          </svg>
+          <p className="contact-eyebrow">Get in touch</p>
+          <h2 className="contact-heading">
+            Let's talk design, data, or ideas over <em>coffee</em>.
+          </h2>
+          <p className="contact-lede">Open to conversations, collaborations and a good cup of coffee.</p>
           <div className="contact-actions">
             {contactLinks.map((link) => (
               <a
