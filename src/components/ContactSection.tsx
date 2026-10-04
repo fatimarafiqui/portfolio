@@ -68,7 +68,6 @@ export default function ContactSection() {
           <h2 className="contact-heading">
             Let's talk design, data, or ideas over <em>coffee</em>.
           </h2>
-          <p className="contact-lede">Open to conversations, collaborations and a good cup of coffee.</p>
           <div className="contact-actions">
             {contactLinks.map((link) => (
               <a
