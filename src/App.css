@@ -78,11 +78,21 @@
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-heading);
   font-weight: var(--weight-bold);
   font-size: var(--text-sm);
   letter-spacing: 0.02em;
   color: var(--color-primary);
+}
+
+.nav-logo-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(44, 62, 45, 0.2);
 }
 
 .nav-links {

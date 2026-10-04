@@ -180,7 +180,7 @@ export default function Deck() {
   return (
     <main className="deck-shell">
       <header className="deck-nav">
-        <Link to="/" className="deck-brand">Fatima Rafiqui<span>Portfolio presentation</span></Link>
+        <Link to="/" className="deck-brand"><img className="deck-brand-mark" src="/favicon.svg" alt="" width={26} height={26} />Fatima Rafiqui<span>Portfolio presentation</span></Link>
         <nav className="deck-chapters" aria-label="Presentation chapters">
           {[1, 2, 3].map(chapter => (
             <button
