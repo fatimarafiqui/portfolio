@@ -990,7 +990,7 @@
 .contact {
   position: relative;
   margin-top: -1px;
-  padding: calc(var(--space-16) + 28px) var(--space-10) var(--space-6);
+  padding: var(--space-10) var(--space-10) var(--space-4);
   background:
     radial-gradient(ellipse 45% 60% at 12% 70%, rgba(184, 217, 189, 0.55) 0%, transparent 65%),
     radial-gradient(ellipse 40% 55% at 90% 40%, rgba(241, 214, 176, 0.55) 0%, transparent 62%),
@@ -1002,7 +1002,7 @@
   top: 2px;
   left: 0;
   width: 100%;
-  height: clamp(48px, 7vw, 96px);
+  height: clamp(28px, 4vw, 52px);
   transform: translateY(-100%);
   pointer-events: none;
 }
@@ -1016,22 +1016,22 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: var(--space-6);
 }
 
 .contact-body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 700px;
+  max-width: 760px;
   margin: 0 auto;
   text-align: center;
 }
 
 .contact-cup {
-  width: 64px;
-  height: 64px;
-  margin-bottom: var(--space-4);
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-2);
   fill: none;
   stroke: var(--color-primary);
   stroke-width: 2.2;
@@ -1067,12 +1067,12 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-secondary);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .contact-heading {
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
   font-weight: var(--weight-bold);
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -1086,27 +1086,19 @@
   color: var(--color-highlight);
 }
 
-.contact-lede {
-  max-width: 440px;
-  margin-top: var(--space-4);
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--color-text-muted);
-}
-
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-4);
-  margin-top: var(--space-8);
+  gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 
 .contact-icon {
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
+  width: 42px;
+  height: 42px;
   color: var(--color-primary);
   background: rgba(255, 255, 255, 0.6);
   -webkit-backdrop-filter: blur(10px);
@@ -1118,8 +1110,8 @@
 }
 
 .contact-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 .contact-icon:hover,
@@ -1342,11 +1334,11 @@
   }
 
   .contact {
-    padding-top: calc(var(--space-12) + 20px);
+    padding-top: var(--space-8);
   }
 
   .contact-inner {
-    gap: var(--space-8);
+    gap: var(--space-5);
   }
 
   .contact-bottom {
