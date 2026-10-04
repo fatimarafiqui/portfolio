@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
+  <title id="t">Fatima's home</title>
+  <defs>
+    <radialGradient id="planet" cx="36%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#e3e9e4"/>
+      <stop offset="0.55" stop-color="#a9b5ad"/>
+      <stop offset="1" stop-color="#5f6e65"/>
+    </radialGradient>
+    <clipPath id="clip"><circle cx="32" cy="33" r="23"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#2c3e2d"/>
+  <circle cx="9" cy="12" r="1.1" fill="#b8d9bd"/>
+  <circle cx="55" cy="11" r="0.9" fill="#b8d9bd"/>
+  <circle cx="56" cy="54" r="1.2" fill="#b8d9bd"/>
+  <circle cx="10" cy="53" r="0.9" fill="#b8d9bd"/>
+  <circle cx="49" cy="6" r="0.7" fill="#b8d9bd"/>
+  <!-- the planet -->
+  <circle cx="32" cy="33" r="23" fill="url(#planet)"/>
+  <g clip-path="url(#clip)" fill="none" stroke-linecap="round">
+    <!-- equatorial trench -->
+    <path d="M6 33.6C20 39.4 44 39.4 58 33.6" stroke="#34433a" stroke-width="2.6"/>
+    <path d="M6 36C20 41.8 44 41.8 58 36" stroke="#d6ded8" stroke-width="0.9" opacity="0.7"/>
+    <!-- surface panel lines -->
+    <path d="M12 46C22 51 42 51 52 46" stroke="#4d5d54" stroke-width="0.9" opacity="0.55"/>
+    <path d="M16 22C24 17 40 17 48 22" stroke="#4d5d54" stroke-width="0.9" opacity="0.45"/>
+    <path d="M32 10v24" stroke="#4d5d54" stroke-width="0.8" opacity="0.3"/>
+  </g>
+  <!-- dish -->
+  <circle cx="42.5" cy="24" r="7.2" fill="#4a594f"/>
+  <circle cx="42.5" cy="24" r="7.2" fill="none" stroke="#dfe6e0" stroke-width="1"/>
+  <circle cx="42.5" cy="24" r="4.2" fill="none" stroke="#7e8d84" stroke-width="0.9"/>
+  <circle cx="42.5" cy="24" r="2.1" fill="#b8e6a8"/>
+  <circle cx="42.5" cy="24" r="0.8" fill="#fff"/>
+  <!-- rim light -->
+  <path d="M13 41A23 23 0 0 1 24 13" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+</svg>
