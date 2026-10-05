@@ -51,6 +51,8 @@
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
+  /* room on the right for the bubble that hangs half off the photo */
+  padding-right: 64px;
 }
 
 .bux-eyebrow,
@@ -171,7 +173,7 @@
 }
 
 .bux-hero-card--1 { top: 14.6%; left: 14.6%; animation-delay: 0s; }
-.bux-hero-card--2 { top: 50%; left: auto; right: -14px; translate: 0 -50%; animation-delay: 1.3s; }
+.bux-hero-card--2 { top: 50%; left: 100%; animation-delay: 1.3s; }
 .bux-hero-card--3 { top: 85.4%; left: 14.6%; animation-delay: 2.6s; }
 
 .bux-hero-emoji { font-size: var(--text-xl); }
@@ -594,7 +596,7 @@
 
 @media (max-width: 768px) {
   .bux-hero { padding: calc(var(--space-16) + 40px) var(--space-6) var(--space-12); }
-  .bux-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); }
+  .bux-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); padding-right: 0; }
   .bux-scroll { display: none; }
   .bux-hero-visual { width: min(70%, 280px); margin: 0 auto var(--space-6); }
   .bux-hero-card { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
