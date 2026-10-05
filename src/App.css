@@ -1083,7 +1083,7 @@
 }
 
 .contact-heading em {
-  font-style: italic;
+  font-style: normal;
   font-weight: var(--weight-semibold);
   color: var(--color-highlight);
 }
