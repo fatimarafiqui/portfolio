@@ -325,7 +325,7 @@ function App() {
         <div className="divider-content reveal reveal-up delay-1">
           <span className="divider-accent" aria-hidden="true"></span>
           <blockquote>
-            <p>Good design is the quiet kind. You only notice it when it&rsquo;s missing.</p>
+            <p>I believe good design is the quiet kind. You only notice it when it&rsquo;s missing.</p>
           </blockquote>
         </div>
       </section>
