@@ -85,7 +85,20 @@ export default function ContactSection() {
         </div>
         <div className="contact-bottom">
           <p className="contact-copy">&copy; 2026 Fatima Rafiqui</p>
-          <p className="contact-copy">May the Force be with you.</p>
+          <p className="contact-copy contact-force">
+            May the Force be with you.
+            <svg className="awing" viewBox="0 0 44 24" aria-hidden="true">
+              <g className="awing-hull">
+                <path d="M44 12L22 9H6v5.5h16z" />
+                <path d="M22 9L8 1.5 6 3l6 6.5zM22 15l-14 7.5L6 21l6-6.5z" />
+                <rect x="1" y="7" width="12" height="2.6" rx="1.2" />
+                <rect x="1" y="14.4" width="12" height="2.6" rx="1.2" />
+              </g>
+              <ellipse className="awing-canopy" cx="29" cy="12" rx="4.5" ry="1.7" />
+              <circle className="awing-glow" cx="1.4" cy="8.3" r="1.4" />
+              <circle className="awing-glow" cx="1.4" cy="15.7" r="1.4" />
+            </svg>
+          </p>
         </div>
       </div>
     </footer>
