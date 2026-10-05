@@ -29,15 +29,21 @@
 .delay-4 { transition-delay: 0.5s; }
 
 /* --- App Shell --- */
+/* Nothing may stick out past the page, sideways or below the footer: clip (not hidden, so it never becomes a scroll container) */
 .app {
-  overflow-x: clip;
+  overflow: clip;
 }
 
-/* Phones can still pan sideways past the footer if anything pokes out; clip it at the root too */
 html,
 body {
   overflow-x: clip;
   max-width: 100%;
+}
+
+/* The footer is the end of the page: no rubber-band bounce past it, and if a phone still bounces it shows the footer's own colour, not white */
+html {
+  overscroll-behavior-y: none;
+  background-color: #f2ece2;
 }
 
 /* --- Navigation --- */
