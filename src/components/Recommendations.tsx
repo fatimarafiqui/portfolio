@@ -15,7 +15,7 @@ export default function Recommendations() {
     <section className="testimonials" ref={ref}>
       <div className="testimonials-intro reveal reveal-up">
         <span className="bux-kicker">Testimonials</span>
-        <h2 className="bux-h2">Their words, not mine.</h2>
+        <h2 className="bux-h2">Intercepted transmissions.</h2>
       </div>
       <div className="testimonials-featured">
         {testimonials.filter((t) => t.featured).map((t, i) => (
