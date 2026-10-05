@@ -197,6 +197,10 @@ function App() {
       {/* Hero - Dark cinematic section */}
       <section className="hero" ref={heroRef}>
         <div className="hero-topo"></div>
+        <div className="hero-sky" aria-hidden="true">
+          <span className="hero-streak hero-streak--1"></span>
+          <span className="hero-streak hero-streak--2"></span>
+        </div>
         <div className="hero-aurora">
           <div className="hero-aurora-blob" ref={blobRef}></div>
           <div className="hero-aurora-blob-secondary" ref={blobSecRef}></div>
@@ -204,9 +208,10 @@ function App() {
         <div className="hero-inner">
           <div className="hero-content">
             <div className="hero-text">
+              <p className="hero-crawl reveal reveal-up">A long time ago, in a design studio far, far away…</p>
               <h1 className="hero-name">
-                <span className="hero-line reveal reveal-up delay-1">Hello,</span>
-                <span className="hero-line reveal reveal-up delay-2">I'm <span className="hero-name-gradient">Fatima</span>.</span>
+                <span className="hero-line hero-line--lead reveal reveal-up delay-1">There lived</span>
+                <span className="hero-line hero-line--name reveal reveal-up delay-2"><span className="hero-name-gradient">Fatima</span>.</span>
               </h1>
               <p className="hero-subtitle reveal reveal-up delay-3">
                 {bio.intro}
@@ -222,7 +227,7 @@ function App() {
             </div>
           </div>
           <div className="hero-scroll-indicator reveal reveal-up delay-4">
-            <span>Scroll to explore</span>
+            <span>This is the way</span>
             <div className="scroll-line"></div>
           </div>
         </div>
@@ -230,9 +235,44 @@ function App() {
 
       {/* Work Section */}
       <section className="work" id="work">
+        <svg className="work-falcon" viewBox="0 0 400 400" aria-hidden="true">
+          <g fill="currentColor">
+            {/* round hull with a forward wedge that runs up into the mandibles */}
+            <circle cx="200" cy="250" r="122" />
+            <path d="M78 250L146 96h108l68 154z" />
+            {/* the two long mandibles */}
+            <path d="M158 47h28v57h-36zM214 47h28l8 57h-36z" />
+            <path d="M196 62h8v46h-8z" />
+            {/* cockpit tube and canopy on the right */}
+            <path d="M292 206l46-48 14 14-44 52z" />
+            <rect x="330" y="116" width="36" height="42" rx="6" transform="rotate(38 348 137)" />
+            {/* rear engine strip */}
+            <rect x="128" y="364" width="144" height="20" rx="6" />
+          </g>
+          <g fill="none" stroke="var(--color-surface)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+            {/* mouth between the mandibles and the panel lines on the wedge */}
+            <path d="M186 104v30M214 104v30M186 134h28" />
+            <path d="M152 104L100 214M248 104l52 110" />
+            {/* dish rings and plating */}
+            <circle cx="200" cy="250" r="40" />
+            <circle cx="200" cy="250" r="78" strokeWidth="2" />
+            <circle cx="200" cy="250" r="110" strokeWidth="2.4" strokeDasharray="3 9" />
+            <path d="M238 262L307 285M224 282L266 341M200 290L200 362M176 282L134 341M162 262L93 285M162 238L93 215M176 218L134 159M200 210L200 138M224 218L266 159M238 238L307 215" strokeWidth="1.8" />
+            {/* engine slots and cockpit window */}
+            <path d="M152 372v4M172 372v4M192 372v4M212 372v4M232 372v4M252 372v4" strokeWidth="2.4" />
+            <path d="M334 128l16 14" strokeWidth="2" />
+          </g>
+          <g fill="var(--color-surface)">
+            <circle cx="200" cy="250" r="24" />
+            <circle cx="168" cy="296" r="6.5" /><circle cx="194" cy="310" r="6.5" /><circle cx="220" cy="296" r="6.5" /><circle cx="180" cy="330" r="6.5" /><circle cx="208" cy="336" r="6.5" />
+            <circle cx="148" cy="180" r="8" />
+            <circle cx="252" cy="180" r="8" />
+          </g>
+          <circle cx="200" cy="250" r="9" fill="currentColor" />
+        </svg>
         <div className="section-header reveal reveal-up">
           <span className="section-eyebrow">WORK</span>
-          <h2 className="section-title">See What I've Built</h2>
+          <h2 className="section-title">The Jedi Archives</h2>
           <p className="section-subtitle">Selected projects across different domains.</p>
         </div>
         <div className="projects-grid">
@@ -323,9 +363,23 @@ function App() {
       {/* Pull quote divider */}
       <section className="divider-quote">
         <div className="divider-content reveal reveal-up delay-1">
-          <span className="divider-accent" aria-hidden="true"></span>
+          <svg className="divider-tie" viewBox="0 0 72 52" aria-hidden="true">
+            <g>
+              <polygon points="14,2 24,13 24,39 14,50 4,39 4,13" />
+              <polygon points="58,2 48,13 48,39 58,50 68,39 68,13" />
+              <rect x="24" y="24" width="4" height="4" />
+              <rect x="44" y="24" width="4" height="4" />
+              <circle cx="36" cy="26" r="11" />
+            </g>
+            <g className="divider-tie-lines">
+              <path d="M14 26L14 2M14 26L24 13M14 26L24 39M14 26L14 50M14 26L4 39M14 26L4 13M58 26L58 2M58 26L48 13M58 26L48 39M58 26L58 50M58 26L68 39M58 26L68 13" />
+              <circle cx="36" cy="26" r="6.5" />
+              <path d="M36 19.5v13M29.5 26h13" />
+            </g>
+            <circle className="divider-tie-glow" cx="36" cy="26" r="2.6" />
+          </svg>
           <blockquote>
-            <p>I believe good design is the quiet kind. You only notice it when it&rsquo;s missing.</p>
+            <p>I believe good design is like the Force: quiet, everywhere,<br className="divider-br" /> and you only feel it when it&rsquo;s missing.</p>
           </blockquote>
         </div>
       </section>
@@ -334,7 +388,7 @@ function App() {
       <section className="about" id="about">
         <div className="section-header reveal reveal-up">
           <span className="section-eyebrow">ABOUT</span>
-          <h2 className="section-title">Meet the innie</h2>
+          <h2 className="section-title">Meet the Rebel</h2>
         </div>
         <div className="about-layout">
           <div className="about-stack reveal reveal-scale delay-1">
