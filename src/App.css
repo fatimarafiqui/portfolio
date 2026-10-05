@@ -313,8 +313,8 @@
   margin: 0 auto;
   width: 100%;
   padding-top: var(--space-8);
-  /* Leave room at the bottom for the "scroll to explore" hint */
-  padding-bottom: calc(var(--space-24) + var(--space-4));
+  /* Leave room at the bottom for the "scroll to explore" hint: its offset (40px) + its height (80px) + a clear gap above it */
+  padding-bottom: calc(var(--space-10) + 80px + var(--space-8));
   position: relative;
   z-index: 1;
   min-height: calc(100vh - var(--space-20));
@@ -1276,7 +1276,8 @@
 
   .hero-inner {
     padding-top: var(--space-16);
-    padding-bottom: var(--space-16);
+    /* the cue sits 24px from the bottom here: 24 + 80 + a clear 32px gap */
+    padding-bottom: calc(var(--space-6) + 80px + var(--space-8));
     min-height: calc(100vh - var(--space-12));
     min-height: calc(100svh - var(--space-12));
   }
