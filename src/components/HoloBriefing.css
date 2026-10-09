@@ -426,3 +426,20 @@
 
 /* diagrams drawn for a white page sit on a white card, so their dark text stays readable */
 .hud-media-item.is-card img { background: #fff; padding: 6px; border-color: rgba(255, 255, 255, 0.5); }
+
+/* Touch: the browser handles vertical scrolling inside the panel, and sideways swipes are left to the chapter swipe, so a
+   phone doesn't claim them as a pan and cancel the gesture. */
+.holo-panel,
+.holo-body { touch-action: pan-y; }
+
+/* Fingers: keep the look, but make the small controls easier to hit with an invisible larger target. */
+@media (pointer: coarse) {
+  .holo-panel .hud-arrow,
+  .holo-panel .hud-close,
+  .holo-panel .hud-dots button,
+  .holo-panel .holo-end { position: relative; }
+  .holo-panel .hud-arrow::before,
+  .holo-panel .hud-close::before,
+  .holo-panel .holo-end::before { content: ''; position: absolute; inset: -9px -7px; }
+  .holo-panel .hud-dots button::before { content: ''; position: absolute; inset: -13px 0; }
+}
