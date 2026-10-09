@@ -3,6 +3,8 @@ import type { MutableRefObject } from 'react'
 import { projects } from '../data/projects'
 import AtAtScene from './AtAtScene'
 import ArenaCard from './ArenaCard'
+import HoloBriefing from './HoloBriefing'
+import { play, say, setSound, soundEnabled } from '../utils/playSound'
 import type { Body } from './ArenaCard'
 import './GalaxyArena.css'
 
@@ -35,6 +37,8 @@ const projectBodies: Body[] = projects.map((p, i) => ({
   to: p.href,
   cta: 'Accept the mission',
 }))
+
+const LAST_STOP_KEY = 'portfolio-play-stop'
 
 const bodies: Body[] = [
   ...projectBodies,
@@ -232,7 +236,7 @@ function loadVisited(): string[] {
   }
 }
 
-type Toast = { id: number; title: string; sub?: string; tone: 'xp' | 'rank' }
+type Toast = { id: number; title: string; sub?: string; ms: number; tone: 'xp' | 'rank' | 'hint' }
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const coarsePointer = () => window.matchMedia('(pointer: coarse)').matches
@@ -320,6 +324,25 @@ function Starfield({ pan }: { pan: MutableRefObject<Pan> }) {
   return <canvas className="arena-stars" ref={ref} aria-hidden="true" />
 }
 
+// Sound is on by default; this mutes it and remembers the choice.
+function SoundToggle() {
+  const [on, setOn] = useState(soundEnabled)
+  return (
+    <button
+      type="button"
+      className="arena-sound"
+      aria-pressed={on}
+      aria-label={on ? 'Sound on, tap to mute' : 'Sound off, tap to turn on'}
+      onClick={() => { setSound(!on); setOn(!on) }}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor" />
+        {on ? <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
+      </svg>
+    </button>
+  )
+}
+
 // A tiny A-wing that trails the pointer (mouse only).
 function Ship() {
   const ref = useRef<HTMLDivElement>(null)
@@ -376,11 +399,12 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
   const drag = useRef({ active: false, moved: false, sx: 0, sy: 0, px: 0, py: 0, id: -1 })
   const exitRef = useRef<HTMLButtonElement>(null)
   const [selected, setSelected] = useState<Body | null>(null)
+  const [briefing, setBriefing] = useState<Body | null>(null)
   const [visited, setVisited] = useState<string[]>(loadVisited)
   const [toast, setToast] = useState<Toast | null>(null)
   const toastId = useRef(0)
   const toastTimer = useRef(0)
-  const [hint, setHint] = useState(true)
+  const toastRef = useRef<Toast | null>(null)
 
   const apply = useCallback(() => {
     const { x, y, scale } = pan.current
@@ -402,7 +426,14 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
       const vw = window.innerWidth
       const vh = skyRef.current?.clientHeight ?? 0
       pan.current.scale = Math.min(1.15, Math.max(0.55, vh / WORLD.h))
-      if (reset) pan.current.x = (vw - WORLD.w * pan.current.scale) / 2
+      if (reset) {
+        pan.current.x = (vw - WORLD.w * pan.current.scale) / 2
+        // coming back from a page: start where you left off
+        let last = ''
+        try { last = sessionStorage.getItem(LAST_STOP_KEY) ?? '' } catch { /* fine */ }
+        const stop = bodies.find((b) => b.id === last)
+        if (stop) pan.current.x = vw / 2 - stop.x * pan.current.scale
+      }
       clampPan()
       apply()
     }
@@ -426,20 +457,17 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return
-      if (selected) setSelected(null)
+      if (document.querySelector('.holo-zoom')) return // an expanded picture closes first
+      if (briefing) setBriefing(null)
+      else if (selected) setSelected(null)
       else onExit()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [selected, onExit])
-
-  useEffect(() => {
-    const t = window.setTimeout(() => setHint(false), 7000)
-    return () => window.clearTimeout(t)
-  }, [])
+  }, [briefing, selected, onExit])
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if ((e.target as HTMLElement).closest('.arena-card, .arena-exit')) return
+    if ((e.target as HTMLElement).closest('.arena-card, .arena-exit, .holo')) return
     drag.current = { active: true, moved: false, sx: e.clientX, sy: e.clientY, px: pan.current.x, py: pan.current.y, id: e.pointerId }
   }
   const onPointerMove = (e: React.PointerEvent) => {
@@ -449,7 +477,7 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
     const dy = e.clientY - d.sy
     if (!d.moved && Math.hypot(dx, dy) > 6) {
       d.moved = true
-      setHint(false)
+      if (toastRef.current?.tone === 'hint') dismissToast()
     }
     if (d.moved) {
       pan.current.x = d.px + dx
@@ -475,20 +503,43 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
   }, [])
 
   // one small toast at a time: a new one replaces the old, and it leaves quickly
-  const showToast = (title: string, sub: string | undefined, tone: Toast['tone']) => {
+  const showToast = (title: string, sub: string | undefined, tone: Toast['tone'], ms = 2600) => {
     window.clearTimeout(toastTimer.current)
-    setToast({ id: ++toastId.current, title, sub, tone })
-    toastTimer.current = window.setTimeout(() => setToast(null), 2600)
+    const t = { id: ++toastId.current, title, sub, tone, ms }
+    toastRef.current = t
+    setToast(t)
+    toastTimer.current = window.setTimeout(dismissToast, ms)
   }
+  function dismissToast() {
+    window.clearTimeout(toastTimer.current)
+    toastRef.current = null
+    setToast(null)
+  }
+
+  // the jump to lightspeed on the way in
+  useEffect(() => { play('jump') }, [])
+
+  // on landing, one line of guidance that depends on how far along the pilot is
+  useEffect(() => {
+    const n = visited.length
+    const rank = rankFor(n).name
+    if (n === 0) showToast('Drag to explore. Tap a stop to land.', undefined, 'hint', 6000)
+    else if (n === bodies.length) showToast(`Welcome back, ${rank}.`, 'Every stop found', 'hint', 4500)
+    else showToast(`Welcome back, ${rank}.`, `${bodies.length - n} stops left`, 'hint', 4500)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const pick = (b: Body) => {
     if (drag.current.moved) return
     setSelected(b)
+    try { sessionStorage.setItem(LAST_STOP_KEY, b.id) } catch { /* fine */ }
     if (visited.includes(b.id)) return
     const next = [...visited, b.id]
     setVisited(next)
     try { localStorage.setItem(STORE_KEY, JSON.stringify(next)) } catch { /* private mode: progress just won't stick */ }
+    play('ping')
     const rankUp = rankFor(next.length).name !== rankFor(visited.length).name
+    if (rankUp) say('rank', rankFor(next.length).name)
     const done = next.length === bodies.length
     // rewards, rank-ups and the final stop all fold into this one line
     showToast(`${b.reward ?? 'Found it'} · +${XP_PER_STOP} XP`, done ? 'Every stop found. Grand Master!' : rankUp ? `Rank up: ${rankFor(next.length).name}` : undefined, rankUp || done ? 'rank' : 'xp')
@@ -502,14 +553,9 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
   const rank = rankFor(visited.length)
   const xp = visited.length * XP_PER_STOP
 
-  const goScroll = (id: string) => {
-    onExit()
-    window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 80)
-  }
-
   return (
     <div
-      className="arena"
+      className={`arena${briefing ? ' is-briefing' : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label="Play mode: explore Fatima's work as a galaxy"
@@ -564,17 +610,22 @@ export default function GalaxyArena({ onExit }: { onExit: () => void }) {
 
       <div className="arena-toasts" aria-live="polite">
         {toast && (
-          <div className={`arena-toast arena-toast--${toast.tone}`} key={toast.id}>
+          <div className={`arena-toast arena-toast--${toast.tone}`} key={toast.id} style={{ animationDelay: `0s, ${toast.ms - 400}ms` }}>
             <strong>{toast.title}</strong>
             {toast.sub && <small>{toast.sub}</small>}
           </div>
         )}
       </div>
 
-      <p className={`arena-hint${hint ? '' : ' is-hidden'}`}>Drag to explore. Tap a planet to land.</p>
+      {selected && <ArenaCard body={selected} onClose={() => setSelected(null)} onOpen={(b) => {
+        setSelected(null)
+        setBriefing(b)
+      }} />}
 
-      {selected && <ArenaCard body={selected} onClose={() => setSelected(null)} onScroll={goScroll} />}
+      {briefing && <HoloBriefing body={briefing} droid={<Prop theme="copilot" />} onClose={() => setBriefing(null)} />}
 
+
+      <SoundToggle />
       <Ship />
     </div>
   )

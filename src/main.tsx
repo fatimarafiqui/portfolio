@@ -9,12 +9,15 @@ import CloverDesigner from './pages/projects/CloverDesigner'
 import ARAnchorCards from './pages/projects/ARAnchorCards'
 import Deck from './pages/Deck'
 import ScrollManager from './components/ScrollManager'
+import ReturnChip from './components/ReturnChip'
+import ExternalLinks from './components/ExternalLinks'
 import './styles/global.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollManager />
+      <ExternalLinks />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/beyond-ux" element={<BeyondUX />} />
@@ -25,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/deck" element={<Deck />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <ReturnChip />
     </BrowserRouter>
   </React.StrictMode>,
 )
