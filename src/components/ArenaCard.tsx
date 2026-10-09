@@ -122,6 +122,7 @@ export function SlideContent({ b, onZoom }: { b: Body; onZoom?: (m: Media) => vo
                 autoPlay
                 loop
                 muted
+                ref={(v) => { if (v) { v.defaultMuted = true; v.muted = true } }} // iOS needs the muted attribute, not just the property
                 playsInline
                 preload="metadata"
                 onClick={(e) => { const v = e.currentTarget; if (v.paused) void v.play(); else v.pause() }}
