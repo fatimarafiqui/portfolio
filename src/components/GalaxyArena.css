@@ -90,7 +90,8 @@
 
 /* one palette for every prop, taken from the site: cream, pale sage, sage, forest, the soft gold of the headings and the
    mint glow used in the mission cards */
-.planet {
+.planet,
+.holo-droid {
   --pr-cream: #f0ebe4;
   --pr-pale: #c8dbc9;
   --pr-sage: #7a9e7e;
@@ -316,6 +317,59 @@
 }
 
 .hud-close:hover { background: rgba(141, 255, 168, 0.14); }
+
+.hud-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(141, 255, 168, 0.25);
+}
+
+.hud-arrow {
+  width: 30px;
+  height: 26px;
+  border: 1px solid rgba(141, 255, 168, 0.35);
+  border-radius: 6px;
+  background: transparent;
+  color: #8dffa8;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: var(--cursor-link, pointer);
+}
+
+.hud-arrow:hover:not(:disabled) { background: rgba(141, 255, 168, 0.14); }
+.hud-arrow:disabled { opacity: 0.3; cursor: default; }
+
+.hud-dots { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: center; }
+
+.hud-dots button {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: var(--cursor-link, pointer);
+  position: relative;
+}
+
+.hud-dots button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: rgba(141, 255, 168, 0.3);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hud-dots button.is-on::after { background: #e8d5b0; transform: scale(1.4); }
 
 .hud-body {
   position: relative;
@@ -657,9 +711,10 @@
 .arena-xp {
   position: absolute;
   top: max(16px, env(safe-area-inset-top));
-  right: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
-  width: 190px;
+  width: 224px;
   padding: 10px 12px;
   border: 1px solid rgba(141, 255, 168, 0.35);
   border-radius: 10px;
@@ -678,7 +733,12 @@
   gap: 8px;
 }
 
+.arena-xp-top span { white-space: nowrap; }
+
 .arena-xp-top strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -754,7 +814,8 @@
 /* --- Achievement toast: one small, quiet line that fades away --- */
 .arena-toasts {
   position: absolute;
-  top: max(20px, env(safe-area-inset-top));
+  /* sits just under the centred rank box */
+  top: calc(max(16px, env(safe-area-inset-top)) + 76px);
   left: 50%;
   z-index: 6;
   transform: translateX(-50%);
@@ -789,6 +850,7 @@
 }
 
 .arena-toast--rank { border-color: rgba(232, 213, 176, 0.5); }
+.arena-toast--hint { border-color: rgba(255, 255, 255, 0.18); }
 
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(-8px); }
@@ -801,7 +863,7 @@
 
 @media (max-width: 720px) {
   /* the exit button owns the top left, so the XP meter sits under it and the toasts drop below that */
-  .arena-xp { top: calc(max(16px, env(safe-area-inset-top)) + 46px); right: auto; left: 16px; width: 200px; }
+  .arena-xp { top: calc(max(16px, env(safe-area-inset-top)) + 46px); left: 16px; transform: none; width: 224px; }
   .arena-toasts { top: calc(max(16px, env(safe-area-inset-top)) + 150px); }
   .arena-toast { max-width: calc(100vw - 32px); white-space: normal; flex-wrap: wrap; border-radius: 14px; }
   .arena-hint { top: calc(max(16px, env(safe-area-inset-top)) + 46px + 96px) !important; }
@@ -830,3 +892,34 @@
   .planet-orb { animation: none; transition: none; }
   .arena-card { animation: none; }
 }
+
+/* Bigger screens get a bigger briefing card */
+@media (min-width: 1400px) and (min-height: 780px) {
+  .arena-card { width: 460px; top: 112px; max-height: calc(100vh - 112px - 22vh); }
+  .arena-card h2 { font-size: 1.75rem; }
+  .arena-card .hud-text { font-size: 1rem; }
+}
+
+/* --- Sound toggle: a small speaker in the top right --- */
+.arena-sound {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(44, 62, 45, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: var(--cursor-link, pointer);
+}
+
+.arena-sound svg { width: 18px; height: 18px; }
+.arena-sound[aria-pressed='true'] { color: #8dffa8; border-color: rgba(141, 255, 168, 0.5); }
+.arena-sound:hover, .arena-sound:focus-visible { background: rgba(44, 62, 45, 0.95); border-color: rgba(255, 255, 255, 0.55); }

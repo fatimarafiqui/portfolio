@@ -60,7 +60,21 @@ export default function ProjectPageLayout({ content }: ProjectPageLayoutProps) {
         </div>
       )}
       <section className="project-content">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            a: ({ node: _node, href, children, ...rest }) => {
+              const external = /^https?:/.test(href ?? '')
+              return (
+                <a href={href} {...rest} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  {children}
+                </a>
+              )
+            },
+          }}
+        >
+          {body}
+        </ReactMarkdown>
       </section>
     </div>
   )
