@@ -1,0 +1,428 @@
+/* A droid projects the mission as a hologram: dimmed map behind, a beam rising from the droid to a flickering panel. */
+.holo {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 96px 16px max(14px, env(safe-area-inset-bottom));
+  user-select: text;
+}
+
+.holo-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 65%, rgba(7, 20, 14, 0.3), rgba(5, 12, 8, 0.6));
+  animation: holo-fade 0.5s ease both;
+}
+
+.holo-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: min(600px, 100%);
+  border: 1px solid rgba(141, 255, 168, 0.5);
+  border-radius: 14px;
+  background:
+    repeating-linear-gradient(0deg, rgba(141, 255, 168, 0.06) 0 1px, transparent 1px 3px),
+    rgba(7, 20, 14, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 46px rgba(141, 255, 168, 0.2), 0 20px 50px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transform-origin: bottom center;
+  animation: holo-on 0.7s steps(1, end) both;
+}
+
+/* every new chapter flickers into place, like a signal locking on */
+.holo-body { animation: holo-flick 0.38s steps(1, end) both; }
+
+.holo-panel h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+/* the beam: rises from the droid's dome to the bottom of the panel */
+.holo-cone {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: min(420px, 80vw);
+  height: 84px;
+  margin-top: -1px;
+  clip-path: polygon(46% 100%, 54% 100%, 100% 0, 0 0);
+  background:
+    repeating-linear-gradient(0deg, rgba(141, 255, 168, 0.22) 0 1px, transparent 1px 4px),
+    linear-gradient(to top, rgba(141, 255, 168, 0.4), rgba(141, 255, 168, 0.04));
+  animation: holo-beam 2.4s ease-in-out infinite, holo-fade 0.6s ease 0.2s both;
+}
+
+.holo-droid {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 104px;
+  height: 104px;
+  margin-top: -14px;
+}
+
+.holo-droid .prop { filter: drop-shadow(0 0 12px rgba(141, 255, 168, 0.35)); }
+
+.holo-end {
+  padding: 0 14px;
+  height: 26px;
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #b8e6be, #e8d5b0);
+  color: #14231a;
+  font: 800 0.6875rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: var(--cursor-link, pointer);
+}
+
+/* while the droid is transmitting, everything behind it goes quiet: the map fades, the scenery blurs, darkens and freezes,
+   the stars dim and the cursor ship and corner controls step back */
+.arena .arena-sky,
+.arena .atat-scene,
+.arena .arena-stars,
+.arena .arena-exit,
+.arena .arena-xp { transition: opacity 0.5s ease, filter 0.6s ease; }
+
+.arena.is-briefing .arena-sky { opacity: 0.28; pointer-events: none; }
+.arena.is-briefing .atat-scene { filter: blur(6px) brightness(0.55) saturate(0.8); }
+.arena.is-briefing .atat-scene,
+.arena.is-briefing .atat-scene * { animation-play-state: paused !important; }
+.arena.is-briefing .arena-stars { opacity: 0.55; }
+.arena.is-briefing .arena-ship { display: none; }
+.arena.is-briefing .arena-exit,
+.arena.is-briefing .arena-xp { opacity: 0.5; }
+
+@keyframes holo-on {
+  0% { opacity: 0; transform: scaleY(0.03); }
+  20% { opacity: 1; transform: scaleY(0.03); }
+  40% { opacity: 0.35; transform: scaleY(1.03); }
+  55% { opacity: 1; }
+  68% { opacity: 0.5; }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes holo-flick {
+  0% { opacity: 0.15; transform: translateX(-3px); }
+  25% { opacity: 0.9; transform: translateX(2px); }
+  50% { opacity: 0.4; transform: translateX(0); }
+  75% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes holo-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes holo-beam { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+
+@media (max-width: 720px) {
+  .holo { padding-top: calc(max(16px, env(safe-area-inset-top)) + 150px); }
+  .holo-cone { height: 60px; }
+  .holo-droid { width: 84px; height: 84px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-panel, .holo-body, .holo-cone, .holo-scrim { animation: none; }
+}
+
+/* Bigger screens: a wider panel, picture on the left and the words on the right, with a larger droid and beam */
+@media (min-width: 1000px) and (min-height: 640px) {
+  .holo { padding-top: 88px; }
+  .holo-panel { width: min(1040px, 100%); }
+  .holo-panel .hud-bar { padding: 14px 18px 14px 22px; }
+  .holo-panel .hud-body { padding: 24px 28px 26px; }
+  .holo-panel h2 { font-size: 2rem; margin-bottom: 14px; }
+  .holo-panel .hud-text { font-size: 1.0625rem; line-height: 1.65; }
+  .holo-panel .hud-nav { padding: 12px 20px; }
+  .holo-cone { width: min(560px, 60vw); height: 96px; }
+  .holo-droid { width: 128px; height: 128px; margin-top: -16px; }
+
+  .holo-body:has(> .hud-figure) {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+    grid-auto-rows: min-content;
+    align-content: start;
+    column-gap: 32px;
+  }
+  .holo-body:has(> .hud-figure) > :not(.hud-figure) { grid-column: 2; }
+  .holo-body:has(> .hud-figure) > .hud-figure {
+    grid-column: 1;
+    grid-row: 1 / span 20;
+    position: relative;
+    aspect-ratio: auto;
+    min-height: 300px;
+    margin: 0;
+  }
+  .holo-body:has(> .hud-figure) > .hud-figure img { position: absolute; inset: 0; width: 100%; height: 100%; }
+}
+
+@media (min-width: 1500px) and (min-height: 820px) {
+  .holo-panel { width: min(1180px, 100%); }
+  .holo-panel h2 { font-size: 2.25rem; }
+  .holo-panel .hud-text { font-size: 1.1875rem; }
+  .holo-cone { width: min(640px, 60vw); height: 110px; }
+  .holo-droid { width: 148px; height: 148px; }
+}
+
+/* --- The vault: a classified transmission, locked until you enter the access code --- */
+.vault { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6px 0 2px; }
+
+.vault-seal { width: 132px; height: 132px; margin-bottom: 14px; }
+.vault-seal svg { width: 100%; height: 100%; overflow: visible; }
+
+.vault-ring { fill: none; stroke: rgba(141, 255, 168, 0.5); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.vault-ring--out { stroke-dasharray: 3 7; animation: vault-spin 24s linear infinite; }
+.vault-ring--mid { stroke-dasharray: 22 8 4 8; animation: vault-spin 16s linear infinite reverse; }
+.vault-ring--in { stroke: rgba(232, 213, 176, 0.55); }
+.vault-ticks { stroke: rgba(141, 255, 168, 0.55); stroke-width: 1.6; stroke-linecap: round; }
+.vault-shackle { fill: none; stroke: #e8d5b0; stroke-width: 4.5; stroke-linecap: round; transform-box: fill-box; transform-origin: 100% 100%; transition: transform 0.5s ease; }
+.vault-body { fill: #e8d5b0; }
+.vault-key { fill: #14231a; }
+.vault-lock { filter: drop-shadow(0 0 8px rgba(232, 213, 176, 0.35)); }
+
+.vault-tag {
+  font: 700 0.6875rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e8d5b0;
+}
+
+.vault h2 { margin: 10px 0 8px; }
+.vault-text { max-width: 36ch; margin: 0 0 18px; font-size: 0.9375rem; line-height: 1.55; color: rgba(255, 255, 255, 0.75); }
+
+.vault-form { display: flex; gap: 8px; width: min(380px, 100%); }
+.vault-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid rgba(141, 255, 168, 0.45);
+  border-radius: 8px;
+  background: rgba(7, 20, 14, 0.7);
+  color: #fff;
+  font: 600 0.875rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.2em;
+  text-align: center;
+  outline: none;
+}
+.vault-form input::placeholder { color: rgba(141, 255, 168, 0.4); letter-spacing: 0.16em; }
+.vault-form input:focus { border-color: #8dffa8; box-shadow: 0 0 0 3px rgba(141, 255, 168, 0.15); }
+.vault-form button {
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #b8e6be, #e8d5b0);
+  color: #14231a;
+  font: 800 0.75rem/1 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: var(--cursor-link, pointer);
+}
+.vault-form button:disabled { opacity: 0.45; cursor: default; }
+.vault-form.is-denied { animation: vault-shake 0.4s ease; }
+.vault-form.is-denied input { border-color: #e8a08a; }
+
+.vault-status { min-height: 1.4em; margin: 10px 0 0; font: 600 0.6875rem/1.4 ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: 0.08em; color: #e8a08a; }
+
+.vault.is-opening .vault-shackle { transform: translateY(-9px) rotate(-18deg); }
+.vault.is-opening .vault-ring--in { stroke: #8dffa8; }
+.vault.is-opening .vault-text { color: #8dffa8; }
+
+@keyframes vault-spin { to { transform: rotate(360deg); } }
+@keyframes vault-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  45% { transform: translateX(7px); }
+  70% { transform: translateX(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-ring, .vault-form.is-denied { animation: none; }
+}
+
+/* --- Small touches: the droid reacts to each chapter, visited chapters earn a star, the last one finishes with a flourish --- */
+.holo-droid-in { width: 100%; height: 100%; transform-origin: 50% 90%; animation: droid-chirp 0.6s ease both; }
+.holo-droid-in.is-done { animation: droid-done 0.9s ease both; }
+.holo-droid-in .pr-eye { animation: droid-eye 0.6s steps(1, end) both; }
+
+.holo-pulse {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(184, 255, 200, 0.5), rgba(141, 255, 168, 0));
+  opacity: 0;
+  animation: beam-pulse 0.7s ease-out both;
+}
+
+.holo-panel .hud-dots button.is-seen::after {
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 0;
+  background: #e8d5b0;
+  opacity: 0.85;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.holo-panel .hud-class.is-complete { color: #e8d5b0; font-weight: 700; }
+
+@keyframes droid-chirp {
+  0% { transform: none; }
+  30% { transform: translateY(-5px) rotate(-4deg); }
+  60% { transform: translateY(0) rotate(3deg); }
+  100% { transform: none; }
+}
+
+@keyframes droid-done {
+  0% { transform: none; }
+  25% { transform: translateY(-10px) scaleX(1); }
+  50% { transform: translateY(-10px) scaleX(-1); }
+  75% { transform: translateY(-4px) scaleX(1); }
+  100% { transform: none; }
+}
+
+@keyframes droid-eye {
+  0%, 40% { opacity: 1; }
+  15%, 55% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+@keyframes beam-pulse {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-droid-in, .holo-droid-in.is-done, .holo-droid-in .pr-eye, .holo-pulse { animation: none; }
+}
+
+/* --- Pictures and prototype videos: shown whole, never cropped. Tap a picture to expand it; tap a video to pause. --- */
+.hud-media {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  margin: 4px 0 16px;
+}
+
+.hud-media-item { grid-column: span 6; margin: 0; min-width: 0; }
+.hud-media-item.span-2 { grid-column: span 2; }
+.hud-media-item.span-3 { grid-column: span 3; }
+.hud-media-item.span-4 { grid-column: span 4; }
+
+.hud-media-item img,
+.hud-media-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 52vh;
+  object-fit: contain;
+  border: 1px solid rgba(141, 255, 168, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hud-media-item video { cursor: pointer; }
+
+.hud-media-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.hud-media-zoom:hover img,
+.hud-media-zoom:focus-visible img { border-color: rgba(232, 213, 176, 0.7); }
+
+.hud-media-item figcaption {
+  margin-top: 6px;
+  font: 600 0.6875rem/1.3 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.holo-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(4, 10, 6, 0.94);
+  cursor: zoom-out;
+  animation: holo-fade 0.25s ease both;
+}
+
+.holo-zoom-scroll { max-width: 100%; max-height: 100%; overflow: auto; }
+.holo-zoom-scroll img { display: block; max-width: 100%; max-height: calc(100vh - 32px); width: auto; height: auto; margin: 0 auto; cursor: default; border-radius: 8px; background: #fff; }
+
+.holo-zoom-close {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: 14px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(141, 255, 168, 0.5);
+  border-radius: 999px;
+  background: rgba(7, 20, 14, 0.9);
+  color: #8dffa8;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  /* on a phone a wide diagram opens big and scrolls sideways */
+  .holo-zoom-scroll img { max-width: none; width: max(100%, 900px); max-height: none; }
+}
+
+@media (min-width: 1000px) and (min-height: 640px) {
+  /* chapters with media: the words on the left, the media on the right */
+  .holo-body:has(> .hud-media) {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-auto-rows: min-content;
+    align-content: start;
+    column-gap: 32px;
+  }
+  .holo-body:has(> .hud-media) > :not(.hud-media) { grid-column: 1; }
+  .holo-body:has(> .hud-media) > .hud-media { grid-column: 2; grid-row: 1 / span 20; margin: 0; }
+  .hud-media-item img, .hud-media-item video { max-height: 58vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-zoom { animation: none; }
+}
+
+@media (max-width: 720px) {
+  /* a dozen chapters still fit on one row */
+  .holo-panel .hud-dots { gap: 0; flex-wrap: nowrap; }
+  .holo-panel .hud-dots button { width: 15px; }
+}
+
+/* Phones: give the transmission the room. The rank box steps out of the way, the beam and droid shrink, and the header
+   drops the mission name so the chapter counter never wraps. */
+@media (max-width: 720px) {
+  .holo { padding-top: calc(max(16px, env(safe-area-inset-top)) + 56px); }
+  .arena.is-briefing .arena-xp { visibility: hidden; }
+  .holo-cone { height: 40px; }
+  .holo-droid { width: 68px; height: 68px; margin-top: -10px; }
+}
+
+@media (max-width: 380px) {
+  .holo-panel .hud-class { display: none; }
+}
+
+/* diagrams drawn for a white page sit on a white card, so their dark text stays readable */
+.hud-media-item.is-card img { background: #fff; padding: 6px; border-color: rgba(255, 255, 255, 0.5); }
